@@ -67,7 +67,7 @@ set backspace=eol,start,indent
 set backspace=2
 
 " Syntax highlighting and colors
-set t_Co=256
+" set t_Co=256
 syntax enable
 set background=dark
 colorscheme base16-eighties
