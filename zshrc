@@ -18,6 +18,7 @@ alias testprep="be rake db:test:prepare"
 alias sandbox="rails c --sandbox"
 alias pubkey="pbcopy < ~/.ssh/id_rsa.pub"
 alias p="cd ~/Development/"
+alias tea="tc start 3 --growl --beep"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
