@@ -1,0 +1,116 @@
+# Your snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+# '.source.coffee':
+#   'Console log':
+#     'prefix': 'log'
+#     'body': 'console.log $1'
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it here:
+# https://github.com/bevry/cson#what-is-cson
+'.source.js':
+  'D3 Components':
+    'prefix': 'd3'
+    'body': """
+      var ${1:Graph} = (function() {
+        var margin = {top: 20, right: 20, bottom: 30, left: 40}
+          , width  = 0
+          , height = 0
+
+        function create(el, props, state) {
+          width  = props.width - margin.left - margin.right
+          height = props.height - margin.top - margin.bottom
+
+          var svg = d3.select(el).append('svg')
+              .attr('class', 'd3')
+              .attr('width', props.width + margin.right + margin.left)
+              .attr('height', props.height + margin.top + margin.bottom)
+            .append('g')
+              .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+
+          update(svg, props, state)
+        }
+
+        function update(svg, props, state) {
+          var data = _munge(state.data)
+          var scales = _scales(props, state)
+          _drawAxis(svg, scales, data)
+        }
+
+        function _munge(data) {
+          // Do some data manipulation
+          return data;
+        }
+
+        function _scales(props, state) {
+          // Build your scales
+          var x = null
+          var y = null
+
+          return {
+            x: x,
+            y: y
+          }
+        }
+
+        function _drawAxis(scales, data) {
+          // Draw some axis
+        }
+
+        return {
+          create: create,
+          update: update
+        }
+      })()
+    """
+
+# SCSS
+'.source.scss':
+  'class selector':
+    'prefix': '.'
+    'body': """
+      .${1:selector} {
+        /* positioning */
+        /* box model */
+        /* typographic */
+        /* visual */
+        /* misc */
+      }
+    """
+  'id selector':
+    'prefix': '#'
+    'body': """
+      #${1:selector} {
+        /* positioning */
+        /* box model */
+        /* typographic */
+        /* visual */
+        /* misc */
+      }
+    """
+  'element selector':
+    'prefix': '{'
+    'body': """
+      ${1:selector} {
+        /* positioning */
+        /* box model */
+        /* typographic */
+        /* visual */
+        /* misc */
+
+    """
+  'min-width media query':
+    'prefix': 'min'
+    'body': """
+      @media (min-width: ${1:$breakpoint}) {
+        ${2}
+      }
+    """

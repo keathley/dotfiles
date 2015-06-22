@@ -1,0 +1,63 @@
+"*":
+  editor:
+    invisibles: {}
+    fontFamily: "'Menlo'"
+    showIndentGuide: true
+    fontSize: 15
+  core:
+    disabledPackages: [
+      "language-haskell"
+      "achievements"
+      "go-plus"
+      "incremental-search"
+    ]
+    themes: [
+      "one-dark-ui"
+      "atom-dark-syntax"
+    ]
+  linter:
+    ignoredLinterErrors: [
+      "scss-lint"
+    ]
+    lintOnChange: false
+    lintOnEditorFocus: false
+    showErrorInline: false
+  "exception-reporting":
+    userId: "e61f6830-23ef-e75c-9b6a-0332363e4385"
+  welcome:
+    showOnStartup: false
+  "haskell-ghc-mod": {}
+  "base16-syntax":
+    scheme: "Harmonic"
+  "vim-mode": {}
+  "relative-line-numbers":
+    showNormalLineNumbers: false
+  "one-dark-ui": {}
+  "go-plus":
+    lintOnSave: false
+    goPath: "~/Development/Gocode"
+  "autocomplete-plus": {}
+  "language-babel":
+    transpileOnSave: false
+  "linter-jsxhint":
+    harmony: true
+  react: {}
+  rspec:
+    command: "bundle exec bin/rspec"
+  "ruby-test":
+    shell: "zsh"
+    testAllCommand: "bundle exec rake"
+    rspecAllCommand: "bundle exec bin/rspec spec"
+    rspecSingleCommand: "bundle exec bin/rspec --tty {relative_path}:{line_number}"
+    rspecFileCommand: "bundle exec bin/rspec --tty {relative_path}"
+    cucumberAllCommand: "bundle exec cucumber features"
+  tabs: {}
+  "circle-ci": {}
+  "linter-jshint": {}
+  achievements: {}
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  "isotope-ui": {}
+".go.source":
+  editor:
+    tabLength: 8
