@@ -54,6 +54,7 @@ alias pubkey="pbcopy < ~/.ssh/id_rsa.pub"
 alias p="cd ~/Development/"
 alias gaa="git add -A"
 alias tea="tc start 3 --growl --beep"
+alias reload=". ~/.zshrc && echo 'ZSH config reloaded"
 
 # Move these to git
 alias ggpush='git push origin $(current_branch)'
