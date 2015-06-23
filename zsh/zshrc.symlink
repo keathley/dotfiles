@@ -32,14 +32,3 @@ for file in ${(M)config_files:#*/completion.zsh}; do
 done
 
 unset config_files
-
-alias migrate="be rake db:migrate"
-alias rollback="be rake db:rollback"
-alias testprep="be rake db:test:prepare"
-alias sandbox="rails c --sandbox"
-alias p="cd ~/Development/"
-alias tea="tc start 3 --growl --beep"
-alias reload=". ~/.zshrc && echo 'ZSH config reloaded"
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
