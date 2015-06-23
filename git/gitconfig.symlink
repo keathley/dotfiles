@@ -5,6 +5,8 @@
         user = keathley
 [core]
 	editor = /usr/local/bin/vim
+[pull]
+  default = simple
 [push]
 	default = simple
 [alias]
