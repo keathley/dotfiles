@@ -1,10 +1,5 @@
-alias be="bundle exec"
-alias bl="bundle list"
-alias bp="bundle package"
-alias bo="bundle open"
-alias bu="bundle update"
-alias bi="bundle_install"
-alias bcn="bundle clean"
+# Stolen from
+# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/bundler/bundler.plugin.zsh
 
 bundled_commands=(
   annotate
@@ -48,27 +43,6 @@ done
 for cmd in $BUNDLED_COMMANDS; do
   bundled_commands+=($cmd);
 done
-
-## Functions
-
-bundle_install() {
-  if _bundler-installed && _within-bundled-project; then
-    local bundler_version=`bundle version | cut -d' ' -f3`
-    if [[ $bundler_version > '1.4.0' || $bundler_version = '1.4.0' ]]; then
-      if [[ "$OSTYPE" = darwin* ]]
-      then
-        local cores_num="$(sysctl hw.ncpu | awk '{print $2}')"
-      else
-        local cores_num="$(nproc)"
-      fi
-      bundle install --jobs=$cores_num $@
-    else
-      bundle install $@
-    fi
-  else
-    echo "Can't 'bundle install' outside a bundled project"
-  fi
-}
 
 _bundler-installed() {
   which bundle > /dev/null 2>&1

@@ -1,3 +1,5 @@
+# Stolen from:
+# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/bundler/bundler.plugin.zsh
 #compdef bundle
 
 local curcontext="$curcontext" state line _gems _opts ret=1

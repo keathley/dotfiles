@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 ############################
 # install.sh
 # This script creates symlinks from the home directory to any
@@ -9,9 +9,6 @@ set -e
 
 dir=~/dotfiles
 olddir=~/dotfiles_old
-files=find -r . -name "*.symlink"
-
-##########
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
@@ -25,10 +22,12 @@ echo "...done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory,
 # then create symlinks
-for file in $files; do
-  echo "Moving any existing dotfiles from ~ to $olddir"
-  mv ~/.$file ~/dotfiles_old/
-  echo "Creating symlink to $file in home directory."
-  ln -s $dir/$file ~/.$file
-done
+for file in $(find . -name "*.symlink"); do
+  local filename=${file##*/}
 
+  echo "Moving existing dotfile $filename from ~ to $olddir"
+  mv -n -v ~/.${filename%.*} ~/dotfiles_old/
+
+  echo "Creating symlink to $file in home directory."
+  ln -shf $dir/${file#'./'} ~/.${filename%.*}
+done

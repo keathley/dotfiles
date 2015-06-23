@@ -1,0 +1,16 @@
+#!/usr/bin/ruby
+require 'irb/completion'
+require 'irb/ext/history'
+
+IRB.conf[:SAVE_HISTORY]  = 1000
+IRB.conf[:HISTORY_FILE]  = "#{ENV['HOME']}/.irb_history"
+IRB.conf[:SIMPLE_PROMPT] = true
+IRB.conf[:AUTO_INDENT]   = true
+
+def me(email='chrisk@carbonfive.com')
+  User.find_by(email: email)
+end
+
+def clear
+  system('clear')
+end
