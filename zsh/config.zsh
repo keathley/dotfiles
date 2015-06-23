@@ -4,10 +4,10 @@ else
   export PS1='%3~$(git_info_for_prompt)%# '
 fi
 
-# export LSCOLORS="exfxcxdxbxegedabagacad"
-autoload -U colors && colors
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
+export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
+autoload -U colors && colors
+#export LSCOLORS="Gxfxcxdxbxegedabagacad"
 
 #fpath=($ZSH/functions $fpath)
 #autoload -U $ZSH/functions/*(:t)
@@ -46,4 +46,3 @@ bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
-
