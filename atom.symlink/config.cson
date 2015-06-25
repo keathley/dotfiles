@@ -10,6 +10,7 @@
       "achievements"
       "go-plus"
       "incremental-search"
+      "linter-jsxhint"
     ]
     themes: [
       "one-dark-ui"
@@ -22,6 +23,7 @@
     lintOnChange: false
     lintOnEditorFocus: false
     showErrorInline: false
+    lintOnFly: false
   "exception-reporting":
     userId: "e61f6830-23ef-e75c-9b6a-0332363e4385"
   welcome:
@@ -56,8 +58,9 @@
   "linter-jshint": {}
   achievements: {}
   "tree-view":
-    hideVcsIgnoredFiles: true
+    hideIgnoredNames: true
   "isotope-ui": {}
+  "fuzzy-finder": {}
 ".go.source":
   editor:
     tabLength: 8
