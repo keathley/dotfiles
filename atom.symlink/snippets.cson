@@ -114,3 +114,36 @@
         ${2}
       }
     """
+
+'.source.jsx':
+  'prop type':
+    'prefix': 'rpt'
+    'body': 'React.PropTypes.${1:any}.${2:isRequired}'
+
+  'react private function':
+    'prefix': '_'
+    'body': """
+      _${1:function}(${2:args}) {
+        ${3:return} ${4}
+      },
+    """
+
+  'react function':
+    'prefix': 'fn'
+    'body': """
+      ${1:function}(${2:args}) {
+        ${3:return} ${4}
+      },
+    """
+
+  'div':
+    'prefix': 'div'
+    'body': """
+      <div ${1:className=${2:'${3:class}'}}>
+        ${4}
+      </div>
+    """
+
+  'className':
+    'prefix': 'cn'
+    'body': "className=${1:'${2:class}'}"

@@ -61,6 +61,9 @@
     hideIgnoredNames: true
   "isotope-ui": {}
   "fuzzy-finder": {}
+".js.jsx.source":
+  editor:
+    autoIndent: true
 ".go.source":
   editor:
     tabLength: 8
