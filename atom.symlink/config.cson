@@ -11,15 +11,13 @@
       "go-plus"
       "incremental-search"
       "linter-jsxhint"
+      "minimap"
     ]
     themes: [
       "one-dark-ui"
       "atom-dark-syntax"
     ]
   linter:
-    ignoredLinterErrors: [
-      "scss-lint"
-    ]
     lintOnChange: false
     lintOnEditorFocus: false
     showErrorInline: false
@@ -61,6 +59,12 @@
     hideIgnoredNames: true
   "isotope-ui": {}
   "fuzzy-finder": {}
+  minimap:
+    plugins:
+      "git-diff": true
+      bookmarks: true
+  "linter-scss-lint": {}
+  "linter-rubocop": {}
 ".js.jsx.source":
   editor:
     autoIndent: true
