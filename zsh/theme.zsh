@@ -52,17 +52,19 @@ ruby_version() {
   then
     echo "$(rbenv version | awk '{print $1}')"
   fi
-
-  if (( $+commands[rvm-prompt] ))
-  then
-    echo "$(rvm-prompt | awk '{print $1}')"
-  fi
 }
 
-rb_prompt() {
-  if ! [[ -z "$(ruby_version)" ]]
+node_version() {
+  echo "$(node --version)"
+}
+
+version_prompt() {
+  if [[ -e "package.json" && ! ( -e "Gemfile" ) ]]
   then
-    echo "%{$fg[yellow]%}$(ruby_version)%{$reset_color%} "
+    echo "%{$fg[yellow]%}$(node_version)%{$reset_color%} "
+  elif ! [[ ( -z "$(ruby_version)" ) ]]
+  then
+    echo "%{$fg_bold[red]%}$(ruby_version)%{$reset_color%} "
   else
     echo ""
   fi
@@ -77,7 +79,7 @@ current_user() {
 }
 
 export PROMPT=$'
-$(current_user) at $(rb_prompt)in $(directory_name) $(git_dirty)$(need_push)\n$(prompt_char) '
+$(current_user) at $(version_prompt)in $(directory_name) $(git_dirty)$(need_push)\n$(prompt_char) '
 
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
