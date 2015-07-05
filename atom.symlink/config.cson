@@ -12,11 +12,14 @@
       "incremental-search"
       "linter-jsxhint"
       "minimap"
+      "linter-rubocop"
     ]
     themes: [
-      "one-dark-ui"
-      "atom-dark-syntax"
+      "seti-ui"
+      "seti-syntax"
     ]
+    destroyEmptyPanes: false
+    audioBeep: false
   linter:
     lintOnChange: false
     lintOnEditorFocus: false
@@ -57,14 +60,31 @@
   achievements: {}
   "tree-view":
     hideIgnoredNames: true
-  "isotope-ui": {}
+  "isotope-ui":
+    fontFamily: "Roboto"
+    minimalMode: true
   "fuzzy-finder": {}
   minimap:
     plugins:
       "git-diff": true
       bookmarks: true
-  "linter-scss-lint": {}
+  "linter-scss-lint":
+    executablePath: "/Users/chris/.rbenv/shims/scss-lint"
   "linter-rubocop": {}
+  "merge-conflicts": {}
+  "rails-rspec": {}
+  "atom-material-ui":
+    altCmdPalette: true
+    depth: true
+    panelContrast: true
+    slimScrollbar: true
+    disableAnimations: true
+  Zen:
+    fullscreen: false
+    tabs: "multiple"
+    showWordCount: "Left"
+  tasks: {}
+  pigments: {}
 ".js.jsx.source":
   editor:
     autoIndent: true
