@@ -150,6 +150,50 @@
         ${4}
       </div>
     """
+  'aside':
+    'prefix': 'aside'
+    'body': """
+      <aside>
+        ${1}
+      </aside>
+    """
+
+  'h1':
+    'prefix': 'h1'
+    'body': '<h1>${1:stuff}</h1>'
+  'h2':
+    'prefix': 'h2'
+    'body': '<h2>${1:stuff}</h2>'
+  'h3':
+    'prefix': 'h3'
+    'body': '<h3>${1:stuff}</h3>'
+  'h4':
+    'prefix': 'h4'
+    'body': '<h4>${1:stuff}</h4>'
+
+  'ul':
+    'prefix': 'ul'
+    'body': """
+      <ul>
+        ${1}
+      </ul>
+    """
+  'li':
+    'prefix': 'li'
+    'body': '<li>${1}</li>'
+
+  'select':
+    'prefix': 'select'
+    'body': """
+      <select>
+        ${1}
+      </select>
+    """
+  'option':
+    'prefix': 'option'
+    'body': """
+      <option value='${1}'>${2}</option>
+    """
 
   'className':
     'prefix': 'cn'
