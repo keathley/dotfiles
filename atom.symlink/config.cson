@@ -8,7 +8,6 @@
     disabledPackages: [
       "language-haskell"
       "achievements"
-      "go-plus"
       "incremental-search"
       "linter-jsxhint"
       "minimap"
