@@ -28,7 +28,7 @@ for file in $(find . -name "*.symlink"); do
   echo "Moving existing dotfile $filename from ~ to $olddir"
   if [ -f ~/.${filename%.*} ]
   then
-    mv -n -v ~/.${filename%.*} ~/dotfiles_old/
+    mv -v ~/.${filename%.*} ~/dotfiles_old/${filename%.*}-$(date '+%FT%T')
   fi
 
   echo "Creating symlink to $file in home directory."
