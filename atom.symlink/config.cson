@@ -9,9 +9,12 @@
       "language-haskell"
       "achievements"
       "incremental-search"
-      "linter-jsxhint"
       "minimap"
       "linter-rubocop"
+      "linter-eslint"
+      "linter-jsxhint"
+      "linter-less"
+      "linter-jshint"
     ]
     themes: [
       "seti-ui"
@@ -84,6 +87,9 @@
   tasks: {}
   pigments:
     sortPaletteColors: "by color"
+  "find-and-replace":
+    scrollToResultOnLiveSearch: true
+  "linter-eslint": {}
 ".js.jsx.source":
   editor:
     autoIndent: true
