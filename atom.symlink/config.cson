@@ -11,10 +11,8 @@
       "incremental-search"
       "minimap"
       "linter-rubocop"
-      "linter-eslint"
       "linter-jsxhint"
       "linter-less"
-      "linter-jshint"
     ]
     themes: [
       "seti-ui"
@@ -89,7 +87,10 @@
     sortPaletteColors: "by color"
   "find-and-replace":
     scrollToResultOnLiveSearch: true
-  "linter-eslint": {}
+  "linter-eslint":
+    globalNodePath: "/usr/local"
+    eslintRulesDir: "~/"
+    useGlobalEslint: true
 ".js.jsx.source":
   editor:
     autoIndent: true
