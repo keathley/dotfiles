@@ -38,6 +38,7 @@ Plugin 'wting/rust.vim'
 Plugin 'raichoo/haskell-vim'
 Plugin 'moll/vim-node'
 Plugin 'slim-template/vim-slim'
+Plugin 'elzr/vim-json'
 
 call vundle#end()
 filetype on
@@ -120,6 +121,11 @@ map <leader>vs :AV<CR>
 map <leader>va :AV<CR>
 map <leader>vr :RV<CR>
 map <leader>cs <c-w><c-d>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Javascript
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:vim_json_syntax_conceal = 0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
