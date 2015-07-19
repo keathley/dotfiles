@@ -38,3 +38,6 @@
   'ctrl-h': 'window:focus-pane-on-left'
   'ctrl-k': 'window:focus-pane-above'
   'ctrl-j': 'window:focus-pane-below'
+
+'atom-text-editor':
+  'alt-t': 'open-tasks'
