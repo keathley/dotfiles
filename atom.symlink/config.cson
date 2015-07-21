@@ -13,6 +13,7 @@
       "linter-rubocop"
       "linter-jsxhint"
       "linter-less"
+      "linter-eslint"
     ]
     themes: [
       "seti-ui"
