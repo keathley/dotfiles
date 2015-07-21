@@ -9,6 +9,8 @@
     "eol-last": [0],
     "semi": [2, "never"],
     "no-mixed-requires": [0],
+    "no-multi-spaces": 2,
+    "curly": 2,
     "no-underscore-dangle": [0]
   }
 }
