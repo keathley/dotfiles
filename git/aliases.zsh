@@ -26,3 +26,4 @@ alias gl='git log'
 alias gm='git merge --no-ff'
 alias grm='git rebase master'
 alias grc='git rebase --continue'
+
