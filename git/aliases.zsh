@@ -9,6 +9,7 @@ function current_branch() {
   echo ${ref#refs/heads/}
 }
 
+alias g='git'
 alias gco='git checkout'
 alias gb='git branch'
 alias gst='git status'

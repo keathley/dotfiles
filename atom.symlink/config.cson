@@ -3,7 +3,6 @@
     invisibles: {}
     fontFamily: "'Menlo'"
     showIndentGuide: true
-    fontSize: 15
   core:
     disabledPackages: [
       "language-haskell"
@@ -13,7 +12,6 @@
       "linter-rubocop"
       "linter-jsxhint"
       "linter-less"
-      "linter-eslint"
     ]
     themes: [
       "seti-ui"

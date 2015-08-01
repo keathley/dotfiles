@@ -28,10 +28,7 @@
 # Escape insert mode quickly
 #................................................
 'atom-text-editor.vim-mode.insert-mode':
-  'j': 'exit-insert-mode-if-proceeded-by-k'
-
-'atom-text-editor.vim-mode.visual-mode:not(.mini)':
-  'v': 'vim-mode:activate-command-mode'
+  'k j': 'vim-mode:activate-normal-mode'
 
 'atom-text-editor.vim-mode:not(.insert-mode)':
   'ctrl-l': 'window:focus-pane-on-right'

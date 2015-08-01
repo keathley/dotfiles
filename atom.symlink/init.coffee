@@ -11,16 +11,6 @@
 #     console.log "Saved! #{editor.getPath()}"
 
 #init.coffee
-atom.commands.add 'atom-text-editor', 'exit-insert-mode-if-proceeded-by-k': (e) ->
-  editor = @getModel()
-  pos = editor.getCursorBufferPosition()
-  range = [pos.traverse([0,-1]), pos]
-  lastChar = editor.getTextInBufferRange(range)
-  if lastChar != "k"
-    e.abortKeyBinding()
-  else
-    editor.backspace()
-    atom.commands.dispatch(e.currentTarget, 'vim-mode:activate-command-mode')
 
 atom.commands.add 'atom-text-editor', 'ruby:extract-method', ->
   return unless editor = atom.workspace.getActiveTextEditor()
