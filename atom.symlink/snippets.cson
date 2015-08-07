@@ -198,3 +198,7 @@
   'className':
     'prefix': 'cn'
     'body': "className=${1:'${2:class}'}"
+
+  'span':
+    'prefix': 'span'
+    'body': "<span>${1}</span>"
