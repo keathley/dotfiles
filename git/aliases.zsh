@@ -26,5 +26,4 @@ alias gc!='git commit -v --amend'
 alias gl='git log'
 alias gm='git merge --no-ff'
 alias grm='git rebase master'
-alias grc='git rebase --continue'
-
+alias gr='git rebase'
