@@ -86,7 +86,7 @@ current_user() {
 }
 
 export PROMPT=$'
-$(current_user) runs $(version_prompt)in $(directory_name) $(git_dirty)$(need_push)\n$(prompt_char) '
+$(current_user) at $(version_prompt)in $(directory_name) $(git_dirty)$(need_push)\n$(prompt_char) '
 
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
