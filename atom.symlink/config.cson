@@ -9,7 +9,6 @@
       "achievements"
       "incremental-search"
       "minimap"
-      "linter-rubocop"
       "linter-jsxhint"
       "linter-less"
       "linter-eslint"
@@ -91,6 +90,8 @@
     globalNodePath: "/usr/local"
     eslintRulesDir: "~/"
     useGlobalEslint: true
+  fonts:
+    fontFamily: "Fira Mono"
 ".js.jsx.source":
   editor:
     autoIndent: true
