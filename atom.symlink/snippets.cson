@@ -202,3 +202,8 @@
   'span':
     'prefix': 'span'
     'body': "<span>${1}</span>"
+
+'.source.elixir':
+  'ok tuple':
+    'prefix': 'ok'
+    'body': '{:ok, ${1:response}}'
