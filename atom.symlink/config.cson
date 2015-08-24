@@ -92,6 +92,8 @@
     useGlobalEslint: true
   fonts:
     fontFamily: "Fira Mono"
+  "markdown-preview":
+    useGitHubStyle: true
 ".js.jsx.source":
   editor:
     autoIndent: true

@@ -1,6 +1,6 @@
 stty -ixon
 
-# Path to your oh-my-zsh installation.
+# Path to your zsh installation.
 export ZSH=$HOME/dotfiles
 
 export PROJECTS=~/Development
