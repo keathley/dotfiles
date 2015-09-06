@@ -25,12 +25,28 @@ echo "...done"
 for file in $(find . -name "*.symlink"); do
   local filename=${file##*/}
 
-  echo "Moving existing dotfile $filename from ~ to $olddir"
+  # echo "Moving existing dotfile $filename from ~ to $olddir"
   if [ -f ~/.${filename%.*} ]
   then
-    mv -v ~/.${filename%.*} ~/dotfiles_old/${filename%.*}-$(date '+%FT%T')
+    mv ~/.${filename%.*} ~/dotfiles_old/${filename%.*}-$(date '+%FT%T')
   fi
 
   echo "Creating symlink to $file in home directory."
   ln -shf $dir/${file#'./'} ~/.${filename%.*}
 done
+
+# Install brew and brew bundle if we don't already have it
+if test ! $(which brew)
+then
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  brew tap Homebrew/bundle
+fi
+
+for file in $(find . -name "install.sh"); do
+  sh -c "${file}"
+done
+
+for file in $(find . -name "Brewfile"); do
+  brew bundle --file="${file}"
+done
+
