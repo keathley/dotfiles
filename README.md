@@ -5,7 +5,7 @@ I :heart: dotfiles.  You should as well.
 ## About
 
 Dotfiles are what power your system. These are mine. They're mostly for OS X
-since that's what I primary use. Everything is organized by topic which allows
+since that's what I use. Everything is organized by topic which allows
 each topic to load its own path variables, aliases, and so forth.
 
 ## Install
