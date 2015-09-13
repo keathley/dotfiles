@@ -35,18 +35,14 @@ for file in $(find . -name "*.symlink"); do
   ln -shf $dir/${file#'./'} ~/.${filename%.*}
 done
 
-# Install brew and brew bundle if we don't already have it
+# Install brew if we don't already have it
 if test ! $(which brew)
 then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew tap Homebrew/bundle
 fi
 
+# Run all of the install files
 for file in $(find . -name "install.sh"); do
   sh -c "${file}"
-done
-
-for file in $(find . -name "Brewfile"); do
-  brew bundle --file="${file}"
 done
 
