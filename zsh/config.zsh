@@ -36,6 +36,8 @@ setopt INC_APPEND_HISTORY SHARE_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 
+unsetopt MULTIOS
+
 zle -N newtab
 
 bindkey '^[^[[D' backward-word
