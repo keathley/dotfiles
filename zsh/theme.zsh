@@ -63,12 +63,12 @@ elixir_version() {
 }
 
 version_prompt() {
-  if [[ -e "package.json" && ! ( -e "Gemfile" ) ]]
-  then
-    echo "%{$fg_bold[yellow]%}$(node_version)%{$reset_color%} "
-  elif [[ -e "mix.exs" ]]
+  if [[ -e "mix.exs" ]]
   then
     echo "%{$fg_bold[magenta]%}$(elixir_version)%{$reset_color%} "
+  elif [[ -e "package.json" && ! ( -e "Gemfile" ) ]]
+  then
+    echo "%{$fg_bold[yellow]%}$(node_version)%{$reset_color%} "
   elif ! [[ ( -z "$(ruby_version)" ) ]]
   then
     echo "%{$fg_bold[red]%}$(ruby_version)%{$reset_color%} "
