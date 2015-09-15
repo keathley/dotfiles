@@ -12,3 +12,8 @@ then
   brew install hub > /tmp/hub-install.log
 fi
 
+if test ! $(which selecta)
+then
+  echo "  Installing Selecta."
+  brew install selecta > /tmp/selecta-install.log
+fi
