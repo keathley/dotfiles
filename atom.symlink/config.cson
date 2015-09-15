@@ -1,7 +1,7 @@
 "*":
   editor:
     invisibles: {}
-    fontFamily: "'FiraMono'"
+    fontFamily: "\"FiraMono-Regular\""
     showIndentGuide: true
   core:
     disabledPackages: [
