@@ -17,3 +17,10 @@ then
   echo "  Installing Selecta."
   brew install selecta > /tmp/selecta-install.log
 fi
+
+if test ! $(which postgres)
+then
+  echo "  Installing Postgres."
+  brew install postgresql > /tmp/postgres-install.log
+  createuser -s postgres
+fi
