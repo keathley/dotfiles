@@ -5,3 +5,4 @@ then
   exit 1
 fi
 git subtree push --prefix $1 origin gh-pages
+
