@@ -14,7 +14,7 @@
       "linter-eslint"
     ]
     themes: [
-      "seti-ui"
+      "nucleus-dark-ui"
       "seti-syntax"
     ]
     audioBeep: false
@@ -29,7 +29,8 @@
     showOnStartup: false
   "haskell-ghc-mod": {}
   "base16-syntax":
-    scheme: "Harmonic"
+    scheme: "Tube"
+    style: "Light"
   "vim-mode": {}
   "relative-line-numbers":
     showNormalLineNumbers: false
@@ -94,6 +95,8 @@
     fontFamily: "Fira Mono"
   "markdown-preview":
     useGitHubStyle: true
+  "one-light-ui": {}
+  "vim-surround": {}
 ".js.jsx.source":
   editor:
     autoIndent: true

@@ -9,7 +9,8 @@ function current_branch() {
   echo ${ref#refs/heads/}
 }
 
-alias git='hub'
+eval "$(hub alias -s)"
+
 alias g='git'
 alias gco='git checkout'
 alias gb='git branch'

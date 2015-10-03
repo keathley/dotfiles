@@ -7,9 +7,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Colors and styles
-" Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
-" Plugin 'flazz/vim-colorschemes'
+Plugin 'flazz/vim-colorschemes'
 " Plugin 'gosukiwi/vim-atom-dark'
 Plugin 'trusktr/seti.vim'
 
@@ -99,10 +98,11 @@ set backspace=eol,start,indent
 set backspace=2
 
 " Syntax highlighting and colors
-" set t_Co=256
+set t_Co=256
 syntax enable
 set background=dark
 colorscheme seti
+" colorscheme tomorrow
 
 " Airline settings
 " Enable the list of buffers
