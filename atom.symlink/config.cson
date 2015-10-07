@@ -97,6 +97,7 @@
     useGitHubStyle: true
   "one-light-ui": {}
   "vim-surround": {}
+  "imdone-atom": {}
 ".js.jsx.source":
   editor:
     autoIndent: true
