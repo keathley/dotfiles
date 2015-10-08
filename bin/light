@@ -4,6 +4,9 @@
 #
 # Put this anywhere on your $PATH (~/bin is recommended).
 #
+# Hightlight is required for this script to work. Install with your favorite
+# package manager
+#
 # Highlight file with specific language
 #   $ light ruby example_file.rb
 
