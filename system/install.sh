@@ -18,6 +18,12 @@ then
   brew install selecta > /tmp/selecta-install.log
 fi
 
+if test ! $(which highlight)
+then
+  echo "  Installing Highlight."
+  brew install highlight > /tmp/highlight-install.log
+fi
+
 if test ! $(which postgres)
 then
   echo "  Installing Postgres."

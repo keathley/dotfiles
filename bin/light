@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# light - Highlight files for pasting into keynote and other places
+#
+# Put this anywhere on your $PATH (~/bin is recommended).
+#
+# Highlight file with specific language
+#   $ light ruby example_file.rb
+
+set -e
+
+if [ -z "$2" ]
+  then src="pbpaste"
+else
+  src="cat $2"
+fi
+
+# --style solarized-light
+
+$src | highlight -O rtf --syntax $1 --font "Fira Mono" --font-size 24 | pbcopy
