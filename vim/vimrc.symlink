@@ -212,6 +212,7 @@ inoremap <Down> <NOP>
 
 " Searching
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+nnoremap gr :grep <cword> **/*(.)<cr>`
 
 "Autocommands
 "autocmd BufWritePre * :%s/\s\+$//e " Strip Trailing Whitespace
