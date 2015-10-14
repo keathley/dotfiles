@@ -23,6 +23,9 @@
         l = "!. $ZSH/git/helpers.zsh && pretty_git_log"
         la = !git l --all
 
+        co = checkout
+        cl = clone
+
 [color]
         ui = auto
 
