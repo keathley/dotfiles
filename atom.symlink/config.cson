@@ -1,7 +1,6 @@
 "*":
   editor:
     invisibles: {}
-    fontFamily: "\"FiraMono-Regular\""
     showIndentGuide: true
   core:
     disabledPackages: [
@@ -15,7 +14,7 @@
     ]
     themes: [
       "nucleus-dark-ui"
-      "seti-syntax"
+      "one-dark-syntax"
     ]
     audioBeep: false
   linter:
@@ -67,8 +66,7 @@
     plugins:
       "git-diff": true
       bookmarks: true
-  "linter-scss-lint":
-    executablePath: "/Users/chris/.rbenv/shims/scss-lint"
+  "linter-scss-lint": {}
   "linter-rubocop": {}
   "merge-conflicts": {}
   "rails-rspec": {}
@@ -92,7 +90,7 @@
     eslintRulesDir: "~/"
     useGlobalEslint: true
   fonts:
-    fontFamily: "Fira Mono"
+    fontFamily: "FiraCode"
   "markdown-preview":
     useGitHubStyle: true
   "one-light-ui": {}
