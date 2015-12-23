@@ -1,13 +1,10 @@
 #!/bin/sh
 
-if test ! $(which chruby)
-then
-  echo "  Installing chruby for you."
-  brew install chruby > /tmp/chruby-install.log
-fi
+# We need to make sure that this is loaded otherwise we can't use chruby
+source /usr/local/opt/chruby/share/chruby/chruby.sh
 
-if test ! $(which ruby-build)
+if test ! $(chruby | grep 2.2.2)
 then
-  echo "  Installing ruby-install for you."
-  brew install ruby-install > /tmp/ruby-install-install.log
+  echo "  Installing ruby for you."
+  ruby-install ruby
 fi

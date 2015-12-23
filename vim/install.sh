@@ -1,9 +1,7 @@
 #!/bin/sh
 
-if test ! $(brew list | grep vim)
+if ! [ -e ~/.vim/bundle/Vundle.vim ]
 then
-  echo "  Installing vim for you."
-  brew install vim --with-lua --with-luajit > /tmp/vim-install.log
+  echo "  Installing vundler for you."
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
-
