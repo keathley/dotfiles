@@ -36,5 +36,6 @@
   'ctrl-k': 'window:focus-pane-above'
   'ctrl-j': 'window:focus-pane-below'
 
-'atom-text-editor':
+'atom-text-editor:not([mini])':
   'alt-t': 'open-tasks'
+  'ctrl-i': 'elixir-docs:finddoc'

@@ -14,7 +14,7 @@
     ]
     themes: [
       "nucleus-dark-ui"
-      "one-dark-syntax"
+      "atom-gooey-syntax"
     ]
     audioBeep: false
   linter:
@@ -96,6 +96,10 @@
   "one-light-ui": {}
   "vim-surround": {}
   "imdone-atom": {}
+  "tool-bar":
+    position: "Left"
+    visible: false
+  "flex-tool-bar": {}
 ".js.jsx.source":
   editor:
     autoIndent: true
