@@ -6,7 +6,6 @@ fi
 
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
-autoload -U colors && colors
 
 fpath=($ZSH/functions $fpath)
 

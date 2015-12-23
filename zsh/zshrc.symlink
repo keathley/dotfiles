@@ -1,3 +1,11 @@
+PROFILE_STARTUP=true
+if [[ "$PROFILE_STARTUP" == true ]]; then
+    # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+    PS4=$'%D{%M%S%.} %N:%i> '
+    exec 3>&2 2>$HOME/tmp/startlog.$$
+    setopt xtrace prompt_subst
+fi
+
 stty -ixon
 
 # Path to your zsh installation.
@@ -12,24 +20,26 @@ fi
 
 # zsh files
 typeset -U config_files
-config_files=($ZSH/**/*.zsh)
+config_files=($ZSH/(**)/*(.)zsh)
 
-# load path files
-for file in ${(M)config_files:#*/path.zsh}; do
+for file in ${(M)config_files:#*/_path.zsh}; do
   source $file
 done
 
-# load everything but the path and completion files
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
+for file in ${${config_files:#*/_path.zsh}:#*/completion.zsh}; do
   source $file
 done
+
+autoload -Uz compinit
+compinit -i
 
 for file in ${(M)config_files:#*/completion.zsh}; do
   source $file
 done
 
-autoload -U compinit
-compinit
-
 unset config_files
 
+if [[ "$PROFILE_STARTUP" == true ]]; then
+    unsetopt xtrace
+    exec 2>&3 3>&-
+fi

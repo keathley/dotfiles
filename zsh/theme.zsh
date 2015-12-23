@@ -1,3 +1,5 @@
+autoload -U colors && colors
+
 if (( $+commands[git] ))
 then
   git="$commands[git]"
@@ -48,10 +50,7 @@ need_push () {
 }
 
 ruby_version() {
-  if (( $+commands[rbenv] ))
-  then
-    echo "$(rbenv version | awk '{print $1}')"
-  fi
+  echo "$(ruby --version | awk '{print $2}')"
 }
 
 node_version() {
@@ -59,7 +58,7 @@ node_version() {
 }
 
 elixir_version() {
-  echo "$(elixir --version | awk '{print $2}')"
+  echo "$(kiex list | grep = | head -1 | awk '{print $2}')"
 }
 
 version_prompt() {

@@ -9,7 +9,9 @@ function current_branch() {
   echo ${ref#refs/heads/}
 }
 
-eval "$(hub alias -s)"
+# eval "$(hub alias -s)"
+# This takes ~50ms to run so we just alias it directly
+alias git=hub
 
 alias g='git'
 alias gco='git checkout'

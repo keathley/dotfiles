@@ -25,6 +25,11 @@
 
         co = checkout
         cl = clone
+        c  = commit
+        aa = add -A
+        addup = remote add upstream
+        f = fetch
+        fu = fetch upstream
 
 [color]
         ui = auto

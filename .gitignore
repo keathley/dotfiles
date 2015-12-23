@@ -5,4 +5,5 @@ atom.symlink/compile-cache/
 atom.symlink/packages
 atom.symlink/storage
 atom.symlink/themes
+atom.symlink/blob-store
 lists/*.todo
