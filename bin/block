@@ -1,0 +1,29 @@
+#!/usr/bin/ruby
+#
+# Written by Chris Keathley
+#
+# Put this in your $PATH to block annoying sites
+#
+# Block specific site
+#   $ sudo block twitter.com
+#
+# Block common social sites
+#   $ sudo block
+
+HOSTS_FILE = '/etc/hosts'
+
+input     = ARGV.empty? ? DATA.readlines : ARGV
+blacklist = ["# Blocked\n"] + input.map { |line| "127.0.0.1\t#{line}"}
+hosts     = File.readlines('/etc/hosts').push("\n")
+new_hosts = (hosts | blacklist).join
+
+File.open('/etc/hosts', 'w').write(new_hosts)
+
+__END__
+www.twitter.com
+twitter.com
+www.facebook.com
+facebook.com
+www.reddit.com
+reddit.com
+news.ycombinator.com
