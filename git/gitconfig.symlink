@@ -31,6 +31,8 @@
         addup = remote add upstream
         f = fetch
         fu = fetch upstream
+        d  = diff
+        ds = diff --staged
 
 [color]
         ui = auto
