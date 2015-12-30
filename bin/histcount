@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Written by Chris Keathley
+#
+# Counts up history commands. I use this to find commands that I would like to
+# alias.
+#   $ histcount
+
+set -e
+
+HISTFILE=~/.zsh_history
+
+tail -n 1000 $HISTFILE | sed 's/^: [0-9]*:[0-9];//' | awk 'length($0)>4' | while read command; do echo `grep "\b$command\b" $HISTFILE | wc -l` $command; done | sort -n | uniq
