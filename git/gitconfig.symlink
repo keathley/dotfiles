@@ -26,6 +26,7 @@
         co = checkout
         cl = clone
         c  = commit
+        a  = add
         aa = add -A
         addup = remote add upstream
         f = fetch
