@@ -4,7 +4,6 @@
     showIndentGuide: true
   core:
     disabledPackages: [
-      "language-haskell"
       "achievements"
       "incremental-search"
       "minimap"
@@ -100,6 +99,7 @@
     position: "Left"
     visible: false
   "flex-tool-bar": {}
+  "ide-haskell": {}
 ".js.jsx.source":
   editor:
     autoIndent: true
