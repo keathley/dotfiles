@@ -1,1 +1,1 @@
-export PATH=$HOME/.cabal/bin:$PATH
+export PATH=$HOME/.cabal/bin:$HOME/.local/bin:$PATH
