@@ -100,6 +100,9 @@
     visible: false
   "flex-tool-bar": {}
   "ide-haskell": {}
+  "autocomplete-elixir":
+    erlangHome: "/usr/local/bin"
+    elixirPath: "/usr/local/bin"
 ".js.jsx.source":
   editor:
     autoIndent: true
