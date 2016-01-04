@@ -27,6 +27,7 @@ brew 'tmux'
 brew 'vim', args: ['with-lua', 'with-luajit']
 brew 'zsh'
 
+cask 'adium'
 cask 'atom'
 cask 'google-chrome'
 cask 'mojibar'
