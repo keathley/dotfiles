@@ -12,8 +12,8 @@
       "linter-eslint"
     ]
     themes: [
-      "nucleus-dark-ui"
-      "atom-gooey-syntax"
+      "atom-light-ui"
+      "atom-light-syntax"
     ]
     audioBeep: false
   linter:
