@@ -33,6 +33,7 @@
         fu = fetch upstream
         d  = diff
         ds = diff --staged
+        wip = commit -m 'WIP'
 
 [color]
         ui = auto
