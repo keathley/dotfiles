@@ -39,3 +39,16 @@
 'atom-text-editor:not([mini])':
   'alt-t': 'open-tasks'
   'ctrl-i': 'elixir-docs:finddoc'
+
+'atom-text-editor[data-grammar="source gfm"]:not([mini])':
+  'tab':        'markdown-folder:dwim-toggle'
+  'alt-c':      'markdown-folder:cycle'
+  'ctrl-alt-c': 'markdown-folder:cycleall'
+  'alt-x':      'markdown-folder:togglefenced'
+  'ctrl-alt-x': 'markdown-folder:toggleallfenced'
+  'alt-t':      'markdown-folder:toggle'
+  'ctrl-alt-1': 'markdown-folder:foldall-h1'
+  'ctrl-alt-2': 'markdown-folder:foldall-h2'
+  'ctrl-alt-3': 'markdown-folder:foldall-h3'
+  'ctrl-alt-4': 'markdown-folder:foldall-h4'
+  'ctrl-alt-5': 'markdown-folder:foldall-h5'
