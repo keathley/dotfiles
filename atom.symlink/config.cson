@@ -30,11 +30,8 @@
       "linter-eslint"
       "elixir-docs"
     ]
-    themes: [
-      "nucleus-dark-ui"
-      "oceanic-next"
-    ]
   editor:
+    fontFamily: "\"FiraCode-Retina\""
     invisibles: {}
     showIndentGuide: true
   "exception-reporting":
