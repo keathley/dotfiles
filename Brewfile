@@ -17,7 +17,7 @@ brew 'highlight'
 brew 'hub'
 brew 'imagemagick'
 brew 'node'
-# brew 'phantomjs' This is currently broken in el cap.
+brew 'phantomjs'
 brew 'postgresql'
 brew 'redis'
 brew 'ruby-install'
