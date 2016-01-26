@@ -90,10 +90,11 @@
     command: "bundle exec bin/rspec"
   "ruby-test":
     cucumberAllCommand: "bundle exec cucumber features"
-    rspecAllCommand: "bundle exec bin/rspec spec"
-    rspecFileCommand: "bundle exec bin/rspec --tty {relative_path}"
-    rspecSingleCommand: "bundle exec bin/rspec --tty {relative_path}:{line_number}"
-    shell: "zsh"
+    rspecAllCommand: "source ~/.zshrc && bundle exec bin/rspec spec"
+    rspecFileCommand: "source ~/.zshrc && bundle exec bin/rspec --tty {relative_path}"
+    rspecSingleCommand: "source ~/.zshrc && bundle exec bin/rspec --tty {relative_path}:{line_number}"
+    shell: "/usr/local/bin/zsh"
+    specFramework: "rspec"
     testAllCommand: "bundle exec rake"
   tabs: {}
   tasks: {}
