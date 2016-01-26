@@ -34,6 +34,7 @@
         d  = diff
         ds = diff --staged
         wip = commit -m 'WIP'
+        graft = merge --no-ff
 
 [color]
         ui = auto
