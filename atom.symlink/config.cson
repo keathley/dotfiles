@@ -32,6 +32,7 @@
     ]
   editor:
     fontFamily: "\"FiraCode-Retina\""
+    fontSize: 15
     invisibles: {}
     showIndentGuide: true
   "exception-reporting":
@@ -45,7 +46,8 @@
   "go-plus":
     goPath: "~/Development/Gocode"
     lintOnSave: false
-  "haskell-ghc-mod": {}
+  "haskell-ghc-mod":
+    onChangeLint: true
   "ide-haskell": {}
   "ide-haskell-repl": {}
   "imdone-atom":
@@ -70,6 +72,7 @@
   "linter-jsxhint":
     harmony: true
   "linter-rubocop": {}
+  "linter-rust": {}
   "linter-scss-lint": {}
   "markdown-preview":
     useGitHubStyle: true
