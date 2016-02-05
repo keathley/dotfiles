@@ -30,6 +30,10 @@
       "linter-eslint"
       "elixir-docs"
     ]
+    themes: [
+      "one-dark-ui"
+      "oceanic-next"
+    ]
   editor:
     fontFamily: "\"FiraCode-Retina\""
     fontSize: 15
