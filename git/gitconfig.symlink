@@ -33,8 +33,9 @@
         fu = fetch upstream
         d  = diff
         ds = diff --staged
-        wip = commit -m 'WIP'
+        wip = add -A && git commit -m "WIP"
         graft = merge --no-ff
+        rb = rebase
 
 [color]
         ui = auto
