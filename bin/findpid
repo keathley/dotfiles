@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Find and replace in a list of files
+#
+# replace foo bar **/*.ex
+
+ps axww -o pid,user,%cpu,%mem,start,time,command | selecta | sed 's/^ *//' | cut -f1 -d' '
