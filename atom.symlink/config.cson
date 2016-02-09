@@ -31,12 +31,11 @@
       "elixir-docs"
     ]
     themes: [
-      "one-dark-ui"
-      "oceanic-next"
+      "nucleus-dark-ui"
+      "one-dark-syntax"
     ]
   editor:
     fontFamily: "\"FiraCode-Retina\""
-    fontSize: 15
     invisibles: {}
     showIndentGuide: true
   "exception-reporting":
