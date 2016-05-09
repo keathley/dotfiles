@@ -21,4 +21,4 @@ fi
 # --style solarized-light
 # --style tabula
 
-$src | highlight -O rtf --syntax $1 --font "Fira Mono" --font-size 32  | pbcopy
+$src | highlight -O rtf --syntax $1 --font "Fira Mono" --font-size 32 | pbcopy
