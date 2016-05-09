@@ -28,7 +28,6 @@
       "linter-jsxhint"
       "linter-less"
       "linter-eslint"
-      "elixir-docs"
     ]
     themes: [
       "nucleus-dark-ui"
@@ -36,6 +35,7 @@
     ]
   editor:
     fontFamily: "\"FiraCode-Retina\""
+    fontSize: 15
     invisibles: {}
     showIndentGuide: true
   "exception-reporting":
@@ -46,6 +46,7 @@
   fonts:
     fontFamily: "FiraCode"
   "fuzzy-finder": {}
+  "git-log": {}
   "go-plus":
     goPath: "~/Development/Gocode"
     lintOnSave: false
@@ -62,7 +63,10 @@
     minimalMode: true
   "language-babel":
     transpileOnSave: false
+  "latex-completions": {}
+  "less-than-slash": {}
   linter:
+    errorPanelHeight: 26
     lintOnChange: false
     lintOnEditorFocus: false
     lintOnFly: false
@@ -79,13 +83,15 @@
   "linter-scss-lint": {}
   "markdown-preview":
     useGitHubStyle: true
+  "markdown-writer": {}
   "merge-conflicts": {}
   minimap:
     plugins:
       bookmarks: true
       "git-diff": true
   "one-dark-ui": {}
-  "one-light-ui": {}
+  "one-light-ui":
+    layoutMode: "Compact"
   pigments:
     sortPaletteColors: "by color"
   "rails-rspec": {}
