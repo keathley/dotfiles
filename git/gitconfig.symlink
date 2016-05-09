@@ -1,6 +1,7 @@
 [user]
         name = Chris Keathley
         email = c@keathley.io
+	signingkey = AAA80662
 [github]
         user = keathley
 [core]
@@ -51,6 +52,7 @@
         untracked = cyan
 [commit]
   template = ~/.gitmessage
+	gpgsign = true
 
 [filter "media"]
 	required = true
