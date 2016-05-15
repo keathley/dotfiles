@@ -36,6 +36,12 @@
   'ctrl-k': 'window:focus-pane-above'
   'ctrl-j': 'window:focus-pane-below'
 
+'atom-text-editor.ide-haskell-repl':
+  'ctrl-l': 'window:focus-pane-on-right'
+  'ctrl-h': 'window:focus-pane-on-left'
+  'ctrl-k': 'window:focus-pane-above'
+  'ctrl-j': 'window:focus-pane-below'
+
 'atom-text-editor:not([mini])':
   'alt-t': 'open-tasks'
   'ctrl-i': 'elixir-docs:finddoc'

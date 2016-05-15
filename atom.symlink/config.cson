@@ -29,9 +29,12 @@
       "linter-less"
       "linter-eslint"
     ]
+    packagesWithKeymapsDisabled: [
+      "dash"
+    ]
     themes: [
-      "nucleus-dark-ui"
-      "one-dark-syntax"
+      "one-dark-ui"
+      "seti-syntax"
     ]
   editor:
     fontFamily: "\"FiraCode-Retina\""
