@@ -37,3 +37,5 @@ alias gm='git merge --no-ff'
 alias grm='git rebase master'
 alias gr='git rebase'
 alias gci="checkout_branch_interactive"
+alias gpr="git pull-request -o"
+
