@@ -20,7 +20,6 @@
     scheme: "Flat"
   "circle-ci": {}
   core:
-    audioBeep: false
     disabledPackages: [
       "achievements"
       "incremental-search"
@@ -28,12 +27,13 @@
       "linter-jsxhint"
       "linter-less"
       "linter-eslint"
+      "racer"
     ]
     packagesWithKeymapsDisabled: [
       "dash"
     ]
     themes: [
-      "one-dark-ui"
+      "nucleus-dark-ui"
       "seti-syntax"
     ]
   editor:
@@ -70,6 +70,7 @@
   "less-than-slash": {}
   linter:
     errorPanelHeight: 26
+    gutterEnabled: false
     lintOnChange: false
     lintOnEditorFocus: false
     lintOnFly: false
@@ -92,7 +93,8 @@
     plugins:
       bookmarks: true
       "git-diff": true
-  "one-dark-ui": {}
+  "one-dark-ui":
+    layoutMode: "Compact"
   "one-light-ui":
     layoutMode: "Compact"
   pigments:
