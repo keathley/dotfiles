@@ -207,3 +207,11 @@
   'ok tuple':
     'prefix': 'ok'
     'body': '{:ok, ${1:response}}'
+
+  'focus module':
+    'prefix': 'mfocus'
+    'body': '@moduletag :focus'
+
+  'focus tag':
+    'prefix': 'focus'
+    'body': '@tag :focus'
