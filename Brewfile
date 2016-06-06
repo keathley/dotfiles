@@ -25,12 +25,15 @@ brew 'selecta'
 brew 'the_silver_searcher'
 brew 'tmux'
 brew 'vim', args: ['with-lua', 'with-luajit']
+brew 'wget'
 brew 'zsh'
 
 cask 'adium'
 cask 'atom'
 cask 'google-chrome'
+cask 'gpgtools'
+cask 'licecap'
 cask 'mojibar'
 cask 'slack'
 cask 'virtualbox'
-cask 'mojibar'
+
