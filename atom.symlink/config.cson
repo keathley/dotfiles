@@ -31,6 +31,7 @@
     ]
     packagesWithKeymapsDisabled: [
       "dash"
+      "atom-elixir"
     ]
     themes: [
       "nucleus-dark-ui"
