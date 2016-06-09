@@ -13,6 +13,10 @@ function checkout_branch_interactive() {
   git branch | cut -c 3- | selecta | xargs git checkout
 }
 
+function delete_commit() {
+  git rebase -p --onto $1\^ $1
+}
+
 # eval "$(hub alias -s)"
 # This takes ~50ms to run so we just alias it directly
 alias git=hub
@@ -38,4 +42,5 @@ alias grm='git rebase master'
 alias gr='git rebase'
 alias gci="checkout_branch_interactive"
 alias gpr="git pull-request -o"
+alias gdc="delete_commit"
 
