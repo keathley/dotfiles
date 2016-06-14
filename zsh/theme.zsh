@@ -58,7 +58,7 @@ node_version() {
 }
 
 elixir_version() {
-  echo "$(kiex list | grep = | head -1 | awk '{print $2}')"
+  echo "$(asdf which elixir)"
 }
 
 version_prompt() {

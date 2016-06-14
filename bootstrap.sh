@@ -43,6 +43,11 @@ fi
 
 brew bundle
 
+if test ! $(which asdf)
+then
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+fi
+
 # Run all of the install files
 for file in $(find . -name "install.sh"); do
   sh -c "${file}"

@@ -1,4 +1,4 @@
-PROFILE_STARTUP=false
+PROFILE_STARTUP=true
 if [[ "$PROFILE_STARTUP" == true ]]; then
     # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
     PS4=$'%D{%M%S%.} %N:%i> '
@@ -39,10 +39,9 @@ done
 
 unset config_files
 
-chruby $(< ~/.ruby-version)
-
+# . $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/completions/_asdf
 if [[ "$PROFILE_STARTUP" == true ]]; then
     unsetopt xtrace
     exec 2>&3 3>&-
 fi
-
