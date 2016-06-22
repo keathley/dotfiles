@@ -39,6 +39,8 @@ done
 
 unset config_files
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 # . $HOME/.asdf/asdf.sh
 # . $HOME/.asdf/completions/_asdf
 if [[ "$PROFILE_STARTUP" == true ]]; then
