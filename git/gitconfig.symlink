@@ -1,7 +1,7 @@
 [user]
         name = Chris Keathley
         email = c@keathley.io
-	signingkey = AAA80662
+	      signingkey = AAA80662
 [github]
         user = keathley
 [core]
@@ -53,6 +53,9 @@
 [commit]
   template = ~/.gitmessage
 	gpgsign = true
+  
+[diff]
+	compactionHeuristic = true
 
 [filter "media"]
 	required = true
@@ -66,3 +69,9 @@
 	clean = git lfs clean %f
 	smudge = git lfs smudge %f
 	required = true
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
+[interactive]
+	diffFilter = diff-highlight
