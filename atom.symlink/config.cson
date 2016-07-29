@@ -29,7 +29,6 @@
       "linter-jsxhint"
       "linter-less"
       "linter-eslint"
-      "racer"
       "atom-elixir"
     ]
     packagesWithKeymapsDisabled: [
@@ -58,6 +57,7 @@
     goPath: "~/Development/Gocode"
     lintOnSave: false
   "haskell-ghc-mod":
+    debug: true
     onChangeLint: true
   "ide-haskell": {}
   "ide-haskell-repl": {}
@@ -73,7 +73,7 @@
   "latex-completions": {}
   "less-than-slash": {}
   linter:
-    errorPanelHeight: 26
+    errorPanelHeight: 92
     gutterEnabled: false
     lintOnChange: false
     lintOnEditorFocus: false
@@ -103,6 +103,9 @@
     layoutMode: "Compact"
   pigments:
     sortPaletteColors: "by color"
+  racer:
+    racerBinPath: "/Users/keathley/.cargo/bin/racer"
+    rustSrcPath: "/Users/keathley/Development/rust/src"
   "rails-rspec": {}
   react: {}
   "relative-line-numbers":

@@ -35,6 +35,9 @@
   'ctrl-h': 'window:focus-pane-on-left'
   'ctrl-k': 'window:focus-pane-above'
   'ctrl-j': 'window:focus-pane-below'
+  'shift-cmd-g': 'git-plus:menu'
+  'cmd-shift-h': 'dash:shortcut'
+  'ctrl-shift-cmd-h': 'dash:shortcut-background'
 
 'atom-text-editor.ide-haskell-repl':
   'ctrl-l': 'window:focus-pane-on-right'
