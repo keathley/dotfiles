@@ -60,7 +60,4 @@ bind x kill-pane
 bind r source-file ~/.tmux.conf \; display "Reloaded!"
 
 # Mouse mode
-setw -g mode-mouse on
-set -g mouse-select-pane off
-set -g mouse-resize-pane on
-set -g mouse-select-window off
+set -g mouse on
