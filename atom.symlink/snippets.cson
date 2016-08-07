@@ -215,3 +215,15 @@
   'focus tag':
     'prefix': 'focus'
     'body': '@tag :focus'
+
+  'pending tag':
+    'prefix': 'pending'
+    'body': '@tag :pending'
+
+  'puts':
+    'prefix': 'puts'
+    'body': 'IO.puts $1'
+
+  'inspect':
+    'prefix': 'pp'
+    'body': 'IO.inspect $1'
