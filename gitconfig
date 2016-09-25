@@ -1,49 +1,28 @@
-[user]
-        name = Chris Keathley
-        email = c@keathley.io
-	      signingkey = AAA80662
-[github]
-        user = keathley
+[include]
+  path = ~/.gitconfig.local
+[init]
+  templatedir = ~/.git_template
 [core]
 	editor = /usr/local/bin/vim
 	pager = diff-so-fancy | less --tabs=4 -RFX
-[pull]
-  default = simple
-[push]
-	default = simple
 [alias]
-        # logging
-        r = !GIT_NO_PAGER=1 git l -30
-        ra = !git r --all
-        l = "!. $ZSH/git/helpers.zsh && pretty_git_log"
-        la = !git l --all
-
-        co = checkout
-        cl = clone
-        c  = commit
-        a  = add
-        aa = add -A
-        addup = remote add upstream
-        f = fetch
-        fu = fetch upstream
-        d  = diff
-        ds = diff --staged
-        wip = commit -m "WIP"
-        graft = merge --no-ff
-        rb = rebase
-
-; [color]
-;         ui = auto
-
-; [color "branch"]
-;         current = yellow reverse
-;         local = yellow
-;         remote = green
-
-; [color "status"]
-;         added = yellow
-;         changed = green
-;         untracked = cyan
+  r = !GIT_NO_PAGER=1 git l -30
+  ra = !git r --all
+  l = !git pretty-log
+  la = !git l --all
+  co = checkout
+  cl = clone
+  c  = commit
+  a  = add
+  aa = add -A
+  addup = remote add upstream
+  f = fetch
+  fu = fetch upstream
+  d  = diff
+  ds = diff --staged
+  wip = commit -m "WIP"
+  graft = merge --no-ff
+  rb = rebase
 [color]
   ui = always
 [color "diff"]
@@ -69,26 +48,12 @@
 [commit]
   template = ~/.gitmessage
 	gpgsign = true
-
 [diff]
 	compactionHeuristic = true
-
-[filter "media"]
-	required = true
-	clean = git media clean %f
-	smudge = git media smudge %f
-[filter "hawser"]
-	clean = git hawser clean %f
-	smudge = git hawser smudge %f
-	required = true
-[filter "lfs"]
-	clean = git lfs clean %f
-	smudge = git lfs smudge %f
-	required = true
 [pager]
 	log  = diff-highlight | less
-        diff = diff-so-fancy | less --tabs=4 -RFX
-        show = diff-so-fancy | less --tabs=4 -RFX
+  diff = diff-so-fancy | less --tabs=4 -RFX
+  show = diff-so-fancy | less --tabs=4 -RFX
 [interactive]
 	diffFilter = "diff-so-fancy"
 [color "diff-highlight"]
