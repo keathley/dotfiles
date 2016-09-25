@@ -39,6 +39,7 @@ Plugin 'raichoo/haskell-vim'
 Plugin 'moll/vim-node'
 Plugin 'slim-template/vim-slim'
 Plugin 'elzr/vim-json'
+Plugin 'elmcast/elm-vim'
 
 call vundle#end()
 filetype on

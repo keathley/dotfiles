@@ -3,7 +3,7 @@ unbind C-b
 set -g prefix C-a
 
 # Shell
-set-option -g default-shell /bin/zsh
+set-option -g default-shell /usr/local/bin/fish
 
 # Make vim fast
 set -sg escape-time 0
