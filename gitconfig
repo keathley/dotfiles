@@ -1,0 +1,66 @@
+[include]
+  path = ~/.gitconfig.local
+[init]
+  templatedir = ~/.git_template
+[core]
+	editor = /usr/local/bin/vim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[alias]
+  r = !GIT_NO_PAGER=1 git l -30
+  ra = !git r --all
+  l = !git pretty-log
+  la = !git l --all
+  co = checkout
+  cl = clone
+  c  = commit
+  a  = add
+  aa = add -A
+  ap = add --patch
+  addup = remote add upstream
+  f = fetch
+  fu = fetch upstream
+  d  = diff
+  ds = diff --staged
+  wip = commit -m "WIP"
+  graft = merge --no-ff
+  rb = rebase
+[color]
+  ui = always
+[color "diff"]
+  meta = yellow bold
+  commit = green bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = "red bold 52"
+  newNormal = "green bold"
+  newHighlight = "green bold 22"
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[commit]
+  template = ~/.gitmessage
+	gpgsign = true
+[diff]
+	compactionHeuristic = true
+[rebase]
+  autosquash = true
+[pager]
+	log  = diff-highlight | less
+  diff = diff-so-fancy | less --tabs=4 -RFX
+  show = diff-so-fancy | less --tabs=4 -RFX
+[interactive]
+	diffFilter = "diff-so-fancy"
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22

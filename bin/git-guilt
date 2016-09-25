@@ -1,1 +1,3 @@
+#!/bin/sh
+
 git commit --amend --author "$1 <$2>" -C HEAD
