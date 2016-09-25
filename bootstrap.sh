@@ -17,17 +17,12 @@ fancy_echo() {
 }
 
 install_latest() {
-  if ! [ -d "~/.asdf/installs/$1" ]
+  if [ ! -d "~/.asdf/installs/$1" ]
   then
     fancy_echo "Installing $1..."
     asdf list-all $1 | head -1 | xargs asdf install $1
   fi
 }
-
-if [ ! -d "$HOME/$olddir" ]; then
-  fancy_echo "Creating $olddir for backup of any existing dotfiles"
-  mkdir "$HOME/$olddir"
-fi
 
 if ! command -v brew >/dev/null; then
   fancy_echo "Installing Homebrew..."
@@ -39,18 +34,18 @@ fancy_echo "Updating Homebrew..."
 brew update
 brew bundle
 
-if ! command asdf; then
+if [ ! -d "$HOME/.asdf" ]; then
   fancy_echo "Installing asdf..."
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf
 fi
 
-if [ ! -d "$HOME/$dir" ]; then
+if [ ! -d "$dir" ]; then
   fancy_echo "Cloning dotfiles..."
   git clone git://github.com/keathley/dotfiles.git ~/dotfiles
 fi
 
-fancy_echo "Setting MacOs defaults..."
-./osx/set-defaults.sh
+# fancy_echo "Setting MacOs defaults..."
+# source ~/dotfiles/set-defaults.sh
 
 fancy_echo "Linking dotfiles..."
 env RCRC=$HOME/dotfiles/rcrc rcup
@@ -61,6 +56,8 @@ then
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   vim +PluginInstall +qall
 fi
+
+. $HOME/.asdf/asdf.sh
 
 if ! asdf plugin-list | grep elixir > /dev/null
 then
@@ -86,10 +83,10 @@ then
   asdf plugin-add elm https://github.com/obmarg/asdf-elm.git
 fi
 
-install_latest("elixir")
-install_latest("nodejs")
-install_latest("ruby")
-install_latest("elm")
+install_latest elixir
+install_latest nodejs
+install_latest ruby
+install_latest elm
 
 if test ! $(which vtop)
 then
@@ -104,7 +101,7 @@ then
 fi
 
 case "$SHELL" in
-  */fish : ;;
+  */fish) : ;;
   *)
     fancy_echo "Changing your shell to fish..."
       chsh -s "$(which fish)"
