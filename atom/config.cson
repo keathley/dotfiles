@@ -120,6 +120,8 @@
     shell: "/usr/local/bin/zsh"
     specFramework: "rspec"
     testAllCommand: "bundle exec rake"
+  "seti-syntax":
+    themeColor: "Red"
   tabs: {}
   tasks: {}
   "tool-bar":
