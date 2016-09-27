@@ -47,7 +47,7 @@ alias mc='mix compile'
 # alias gci="checkout_branch_interactive"
 # alias gpr="git pull-request -o"
 # alias gdc="delete_commit"
-# alias gcm="git remote show origin | awk '/HEAD branch:/ {print \$3}' | xargs git checkout"
+alias gcm="git remote show origin | awk '/HEAD branch:/ {print \$3}' | xargs git checkout"
 
 alias migrate="be rake db:migrate"
 alias rollback="be rake db:rollback"
