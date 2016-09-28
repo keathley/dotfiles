@@ -1,3 +1,3 @@
 function wip
-  git add -A && git commit -m "WIP"
+  git add -A; and git commit -m "WIP"
 end
