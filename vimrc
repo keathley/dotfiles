@@ -51,7 +51,7 @@ set number
 set ruler
 set encoding=utf8
 set colorcolumn=80
-set relativenumber
+" set relativenumber
 
 " #justneckbeardthings
 set list
