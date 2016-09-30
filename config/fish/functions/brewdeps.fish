@@ -1,4 +1,4 @@
-function brewdeps
+function brewdeps --description 'Lists all homebrew packages and their dependencies'
   brew list | \
   while read cask
     set_color blue

@@ -1,4 +1,4 @@
-function gco
+function gco -d 'Checkout a git branch'
   git checkout $argv
 end
 
