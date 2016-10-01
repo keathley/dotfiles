@@ -3,8 +3,8 @@
 [init]
   templatedir = ~/.git_template
 [core]
-	editor = /usr/local/bin/vim
-	pager = diff-so-fancy | less --tabs=4 -RFX
+  editor = /usr/local/bin/vim
+  pager = diff-so-fancy | less --tabs=4 -RFX
 [alias]
   r = !GIT_NO_PAGER=1 git l -30
   ra = !git r --all
@@ -48,19 +48,19 @@
   untracked = cyan
 [commit]
   template = ~/.gitmessage
-	gpgsign = true
+  gpgsign = true
 [diff]
-	compactionHeuristic = true
+  compactionHeuristic = true
 [rebase]
   autosquash = true
 [pager]
-	log  = diff-highlight | less
+  log  = diff-highlight | less
   diff = diff-so-fancy | less --tabs=4 -RFX
   show = diff-so-fancy | less --tabs=4 -RFX
 [interactive]
-	diffFilter = "diff-so-fancy"
+  diffFilter = "diff-so-fancy"
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
