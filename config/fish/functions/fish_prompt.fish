@@ -77,6 +77,7 @@ function directory_name
 end
 
 function prompt_char
-  git branch >/dev/null ^/dev/null; and echo '[±]'; and return
-  echo '○'
+  # git branch >/dev/null ^/dev/null; and echo '[±]'; and return
+  # echo '○'
+  echo 'λ'
 end
