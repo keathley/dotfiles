@@ -1,29 +1,34 @@
-# dotfiles
+# Chris Keathley's Dotfiles
 
-I :heart: dotfiles.  You should as well.
+I :heart: dotfiles.
 
 ## About
 
 Dotfiles are what power your system. These are mine. They're mostly for OS X
-since that's what I use. Everything is organized by topic which allows
-each topic to load its own path variables, aliases, and so forth.
+since that's what I use. My default shell these days is fish so everything is
+designed to work around fish functions and completions. All of the dotfile
+management is done with [rcm](https://github.com/thoughtbot/rcm) and packages
+are managed with homebrew.
+
+## Whats in it?
+
+All of the things that I use on a daily basis. Most of it is based on the
+highly opinionated way that I work. Most of the fun stuff is in [bin](https://github.com/keathley/dotfiles/tree/master/bin) and [config/fish/functions](https://github.com/keathley/dotfiles/tree/master/config/fish/functions).
+
+Other highlights include:
+
+* Defaults for vim, tmux, git, and fish shell.
+* Version management for ruby, node, elixir, and elm (via. asdf)
+* Lots of aliases for common commands.
 
 ## Install
 
-Running `./bootstrap.sh` will archive all of the your existing files to `~/old_dotiles` 
-and symlink in the new ones. If you need to update your system then you can
-simply run `./bootstrap.sh` again and it'll install your changes.
+Running `./bootstrap.sh` will install all dependencies and create symlinks to
+all of the dotfiles. If you want to set up your mac with the same defaults that
+I do you can also run `./set-defaults.sh`. If you need to add new dotfiles or
+symlinks in the future then you can simply run `rcup` in the dotfiles dir.
 
-## Files
+## Thanks
 
-There are some specific files and extensions that the install script and initilization
-will look for:
+I originally created my dotfiles based on [Zach Holman's](https://github.com/holman/dotfiles) fantastic dotfile repo. Since then things have changed a lot but I owe the original inspiration to him. I've pulled in scripts from other folks such as [Gary Bernhardt](https://github.com/garybernhardt/dotfiles) and [Paul Irish](https://github.com/paulirish/dotfiles).
 
-* `*.symlink` files will be symlinked into your home directory when the install script runs.
-* `install.sh` will run when the the bootstrap script runs and can be used to install topic specific things.
-* `*.zsh` files will be loaded into the shell when the shell loads.
-* `_path.zsh` will be loaded first and include any path variables that you need.
-
-# Attributions
-
-The initial ideas for my repo come from [Holman's fantastic dotfiles repo](https://github.com/holman/dotfiles) and grew from there.  Check 'em out if you get a chance.
