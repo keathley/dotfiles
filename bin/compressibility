@@ -1,0 +1,68 @@
+#!/usr/bin/env python
+
+# Show the size of files (or directories, or stdin) along with their sizes when
+# compressed with gzip and bz2. Everything is done in-memory, which means
+# there's no risk of cluttering your disk, but it also means that asking for
+# the compressibility of a 10 GB file will load all 10 GB into RAM.
+#
+# By Gary Bernhardt.
+# Dotfiles at: https://github.com/garybernhardt/dotfiles
+#
+# Example invocations:
+#
+# $ compressibility .vimrc
+# file size 18,888
+# gzip size 6,250 (33%)
+# bz2 size 6,182 (32%)
+#
+# $ compressibility bin
+# Automatically tarring contents of bin
+# file size 993,280
+# gzip size 307,261 (30%)
+# bz2 size 310,495 (31%)
+#
+# $ cat .vimrc | compressibility
+# file size 18,888
+# gzip size 6,250 (33%)
+# bz2 size 6,182 (32%)
+
+import sys
+import zlib
+import bz2
+import os.path
+import subprocess
+
+
+def main():
+    paths = sys.argv[1:]
+    data = read_all_data(paths)
+    size = len(data)
+    print 'file size', format(size, ",d")
+    gzip_size = len(zlib.compress(data))
+    print 'gzip size %s (%d%%)' % (format(gzip_size, ",d"), percent(gzip_size, size))
+    bz2_size = len(bz2.compress(data))
+    print 'bz2 size %s (%d%%)' % (format(bz2_size, ",d"), percent(bz2_size, size))
+
+
+def read_all_data(paths):
+    path_data = map(read_path, paths)
+    if not path_data:
+        path_data = [sys.stdin.read()]
+    return ''.join(path_data)
+
+
+def read_path(path):
+    # If the path is a directory, tar it up; otherwise, just read it
+    if os.path.isdir(path):
+        sys.stderr.write("Automatically tarring contents of " + path + "\n")
+        return subprocess.check_output(["tar", "-c", "-f", "-", path])
+    else:
+        return open(path, "r").read()
+
+
+def percent(part, whole):
+    return int(100.0 * part / whole)
+
+
+if __name__ == '__main__':
+    main()
