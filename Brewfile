@@ -34,5 +34,4 @@ cask 'imageoptim'
 cask 'licecap'
 cask 'ngrok'
 cask 'slack'
-cask 'virtualbox'
 
