@@ -41,7 +41,6 @@
     ]
   editor:
     fontFamily: "\"FiraCode-Regular\""
-    fontSize: 16
     invisibles: {}
     showIndentGuide: true
   "exception-reporting":
