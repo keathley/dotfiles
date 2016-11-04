@@ -44,11 +44,10 @@ filetype indent on
 filetype plugin on
 
 " Ruler and display
-set number
+" set number
 set ruler
 set encoding=utf8
 set colorcolumn=80
-" set relativenumber
 
 " #justneckbeardthings
 set list
