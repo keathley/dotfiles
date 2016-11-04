@@ -10,7 +10,6 @@ Plugin 'gmarik/Vundle.vim'
 " Colors and styles
 Plugin 'bling/vim-airline'
 Plugin 'flazz/vim-colorschemes'
-" Plugin 'gosukiwi/vim-atom-dark'
 Plugin 'trusktr/seti.vim'
 
 " Productivity
@@ -19,15 +18,12 @@ Plugin 'tpope/vim-commentary'
 
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-eunuch'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-cucumber'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 
 " Languages and syntax
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'tpope/vim-cucumber'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'nono/vim-handlebars'
