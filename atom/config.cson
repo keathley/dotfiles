@@ -35,6 +35,7 @@
       "dash"
       "atom-elixir"
     ]
+    telemetryConsent: "no"
     themes: [
       "nucleus-dark-ui"
       "seti-syntax"
@@ -43,6 +44,7 @@
     fontFamily: "\"FiraCode-Regular\""
     invisibles: {}
     showIndentGuide: true
+    showLineNumbers: false
   "exception-reporting":
     userId: "e61f6830-23ef-e75c-9b6a-0332363e4385"
   "find-and-replace":
