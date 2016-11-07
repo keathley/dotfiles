@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+git fetch ${remote}
+git reset --hard ${remote tracking branch}
+
