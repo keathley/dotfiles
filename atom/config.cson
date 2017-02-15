@@ -30,6 +30,7 @@
       "linter-less"
       "linter-eslint"
       "atom-elixir"
+      "linter-write-good"
     ]
     packagesWithKeymapsDisabled: [
       "dash"
@@ -42,10 +43,9 @@
     ]
   editor:
     fontFamily: "\"FiraCode-Regular\""
-    fontSize: 13
+    fontSize: 12
     invisibles: {}
     showIndentGuide: true
-    showLineNumbers: false
   "exception-reporting":
     userId: "e61f6830-23ef-e75c-9b6a-0332363e4385"
   "find-and-replace":
@@ -55,6 +55,9 @@
     fontFamily: "FiraCode"
   "fuzzy-finder": {}
   "git-log": {}
+  "git-plus":
+    general:
+      _analyticsUserId: "ac327ffa-b1a3-474d-8719-473a12e6890d"
   "go-plus":
     goPath: "~/Development/Gocode"
     lintOnSave: false
