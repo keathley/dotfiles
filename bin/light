@@ -21,4 +21,8 @@ fi
 # --style solarized-light
 # --style tabula
 
-$src | highlight -O rtf --syntax $1 --font "Fira Mono" --font-size 32 | pbcopy
+# $src | pygmentize -g -l $1 -f rtf -O fontface="Fira Mono",fontsize=128,style=vs | pbcopy
+# $src | pygmentize -g -l $1 -f rtf -O fontface="Fira Mono",fontsize=128,style=lovelace | pbcopy
+# $src | pygmentize -g -l $1 -f rtf -O fontface="Fira Mono",fontsize=128,style=xcode | pbcopy
+$src | pygmentize -g -l $1 -f rtf -O fontface="Fira Mono",fontsize=128,style=trac | pbcopy
+
