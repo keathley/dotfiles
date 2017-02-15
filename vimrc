@@ -191,12 +191,12 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
   exec a:vim_command . " " . selection
 endfunction
 
-nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
-nnoremap <leader>t :call SelectaCommand("find * -type f", "", ":tabe")<cr>
-nnoremap <leader>v :call SelectaCommand("find * -type f", "", ":vsp")<cr>
-au FileType javascript nnoremap <leader>f :call SelectaCommand("find * -type d -name node_modules -prune -o -print", "", ":e")<cr>
-au FileType javascript nnoremap <leader>t :call SelectaCommand("find * -type d -name node_modules -prune -o -print", "", ":tabe")<cr>
-au FileType javascript nnoremap <leader>v :call SelectaCommand("find * -type d -name node_modules -prune -o -print", "", ":vsp")<cr>
+nnoremap <leader>f :call SelectaCommand("git ls-files", "", ":e")<cr>
+nnoremap <leader>t :call SelectaCommand("git ls-files", "", ":tabe")<cr>
+nnoremap <leader>v :call SelectaCommand("git ls-files", "", ":vsp")<cr>
+" au FileType javascript nnoremap <leader>f :call SelectaCommand("find * -type d -name node_modules -prune -o -print", "", ":e")<cr>
+" au FileType javascript nnoremap <leader>t :call SelectaCommand("find * -type d -name node_modules -prune -o -print", "", ":tabe")<cr>
+" au FileType javascript nnoremap <leader>v :call SelectaCommand("find * -type d -name node_modules -prune -o -print", "", ":vsp")<cr>
 
 " Hard mode
 inoremap <Left> <NOP>
