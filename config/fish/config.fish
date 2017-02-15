@@ -1,6 +1,8 @@
 source ~/.asdf/asdf.fish
 source ~/.config/fish/path.fish
 source ~/.config/fish/aliases.fish
+# source ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+# eval (opam config env)
 
 set -e fish_greeting
 
