@@ -61,3 +61,6 @@
   'ctrl-alt-3': 'markdown-folder:foldall-h3'
   'ctrl-alt-4': 'markdown-folder:foldall-h4'
   'ctrl-alt-5': 'markdown-folder:foldall-h5'
+
+'atom-text-editor[data-grammar="text html elixir"]:not([mini])':
+    'tab': 'emmet:expand-abbreviation-with-tab'
