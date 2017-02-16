@@ -4,11 +4,6 @@
 
 (package-initialize)
 
-(unless (package-installed-p 'alchemist)
-  (package-install 'alchemist))
-
-(projectile-mode)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -22,7 +17,7 @@
     ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(package-selected-packages
    (quote
-    (evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
+    (emmet-mode tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -31,32 +26,75 @@
  ;; If there is more than one, they won't work right.
  )
 
+(projectile-mode)
+
+;; Evil mode
+
 (require 'evil)
+(setq-default evil-escape-key-sequence "kj")
 (evil-mode 1)
 (evil-escape-mode 1)
-(setq-default evil-escape-key-sequence "kj")
+
+;; Elixir setup
 
 (require 'elixir-mode)
 (require 'alchemist)
+
+;; Custom keys
 
 (global-set-key (kbd "C-x <up>") 'windmove-up)
 (global-set-key (kbd "C-x <down>") 'windmove-down)
 (global-set-key (kbd "C-x <left>") 'windmove-left)
 (global-set-key (kbd "C-x <right>") 'windmove-right)
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+;; org-mode config
+(require 'org)
+
+;; Editing in general
+
+(show-paren-mode 1)
+
+(defun toggle-comment-on-line ()
+  "comment or uncomment current line"
+  (interactive)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+(global-set-key (kbd "C-;") 'toggle-comment-on-line)
+
+(require 'rainbow-delimiters)
+
+(add-hook 'elixir-mode-hook 'rainbow-delimiters-mode)
+
+;; Elisp mode stuffs
+
+(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+
+
+;; Make things look kinda nice
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'load-path "~/.emacs.d/themes")
+(load-theme 'tomorrow-night-bright t)
+
+(setq inhibit-splash-screen t)
 
 (global-linum-mode t)
-
-;;(load-theme 'ample t t)
-;;(load-theme 'ample-flat t t)
-;;(load-theme 'ample-light t t)
-;; choose one to enable
-;;(enable-theme 'ample)
-;; (enable-theme 'ample-flat)
-;; (enable-theme 'ample-light)
 
 (require 'color-theme-sanityinc-tomorrow)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
+(scroll-bar-mode -1)
 
 (add-to-list 'default-frame-alist '(font . "Fira Code Light-12" ))
 (set-face-attribute 'default t :font "Fira Code Light-12" )
