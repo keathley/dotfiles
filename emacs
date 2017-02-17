@@ -17,7 +17,7 @@
     ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(package-selected-packages
    (quote
-    (emmet-mode tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
+    (company emmet-mode tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -52,6 +52,9 @@
 
 ;; org-mode config
 (require 'org)
+
+;; Company-mode
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; Editing in general
 
