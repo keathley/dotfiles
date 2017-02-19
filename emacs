@@ -48,13 +48,20 @@
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 
+(defun smart-comment ()
+  "comment things the way that I like"
+  (interactive)
+  (if (use-region-p)
+      (comment-dwim nil)
+    (toggle-comment-on-line)))
+
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-;") 'toggle-comment-on-line)
 (global-set-key (kbd "s-p") 'projectile-find-file)
 (global-set-key (kbd "s-t") 'projectile-find-file)
 (global-set-key (kbd "s-r") 'projectile-find-tag)
 (global-set-key (kbd "s-S-F") 'projectile-ag)
-(global-set-key (kbd "s-\/") 'comment-dwim)
+(global-set-key (kbd "s-\/") 'smart-comment)
 (global-set-key (kbd "C-x <up>") 'windmove-up)
 (global-set-key (kbd "C-x <down>") 'windmove-down)
 (global-set-key (kbd "C-x <left>") 'windmove-left)
