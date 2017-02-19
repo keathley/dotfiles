@@ -17,7 +17,7 @@
     ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(package-selected-packages
    (quote
-    (ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
+    (magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -48,6 +48,7 @@
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 
+(global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-;") 'toggle-comment-on-line)
 (global-set-key (kbd "s-p") 'projectile-find-file)
 (global-set-key (kbd "s-t") 'projectile-find-file)
