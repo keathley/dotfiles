@@ -49,6 +49,13 @@
 ;; Elm setup
 (require 'elm-mode)
 
+;; Flycheck setup
+(require 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-elm-setup))
+
 ;; Custom keys
 (defun toggle-comment-on-line ()
   "comment or uncomment current line"
