@@ -56,6 +56,10 @@
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-elm-setup))
 
+;; Yasnippet
+(require 'yasnippet)
+(yas-global-mode 1)
+
 ;; Custom keys
 (defun toggle-comment-on-line ()
   "comment or uncomment current line"
