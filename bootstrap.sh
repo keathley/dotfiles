@@ -20,9 +20,12 @@ install_latest() {
   if [ ! -d "~/.asdf/installs/$1" ]
   then
     fancy_echo "Installing $1..."
-    asdf list-all $1 | head -1 | xargs asdf install $1
+    asdf list-all $1 | tail -1 | xargs asdf install $1
   fi
 }
+
+# fancy_echo "Setting MacOs defaults..."
+# source ~/dotfiles/set-defaults.sh
 
 if ! command -v brew >/dev/null; then
   fancy_echo "Installing Homebrew..."
@@ -30,9 +33,9 @@ if ! command -v brew >/dev/null; then
   brew tap homebrew/bundle
 fi
 
-fancy_echo "Updating Homebrew..."
-brew update
-brew bundle
+if ! command -v git >/dev/null; then
+  brew install git
+fi
 
 if [ ! -d "$HOME/.asdf" ]; then
   fancy_echo "Installing asdf..."
@@ -44,11 +47,12 @@ if [ ! -d "$dir" ]; then
   git clone git://github.com/keathley/dotfiles.git ~/dotfiles
 fi
 
-# fancy_echo "Setting MacOs defaults..."
-# source ~/dotfiles/set-defaults.sh
-
 fancy_echo "Linking dotfiles..."
 env RCRC=$HOME/dotfiles/rcrc rcup
+
+fancy_echo "Updating Homebrew..."
+brew update
+brew bundle --file=$HOME/dotfiles/Brewfile
 
 if ! [ -e ~/.vim/bundle/Vundle.vim ]
 then
@@ -63,6 +67,24 @@ if ! asdf plugin-list | grep elixir > /dev/null
 then
   fancy_echo "Installing elixir asdf plugin..."
   asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+fi
+
+if ! asdf plugin-list | grep erlang > /dev/null
+then
+    fancy_echo "Installing erlang asdf plugin..."
+    asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
+fi
+
+if ! asdf plugin-list | grep haskell > /dev/null
+then
+    fancy_echo "Installing haskell asdf plugin..."
+    asdf plugin-add haskell https://github.com/vic/asdf-haskell.git
+fi
+
+if ! asdf plugin-list | grep rust > /dev/null
+then
+    fancy_echo "Installing rust asdf plugin..."
+    asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
 fi
 
 if ! asdf plugin-list | grep node > /dev/null
@@ -84,9 +106,12 @@ then
 fi
 
 install_latest elixir
+install_latest erlang
 install_latest nodejs
 install_latest ruby
 install_latest elm
+install_latest haskell
+install_latest rust
 
 if test ! $(which vtop)
 then
@@ -98,6 +123,14 @@ if [[ ! $(psql -U postgres -c '\du' | grep 'postgres') ]]
 then
   fancy_echo "Setting up postgres"
   createuser -s postgres
+fi
+
+if grep -Fxq "/usr/local/bin/fish" /etc/shells
+then
+    fancy_echo "Already set up fish shell"
+else
+    fancy_echo "Adding fish to shell list"
+    sudo echo "/usr/local/bin/fish" >> /etc/shells
 fi
 
 case "$SHELL" in
