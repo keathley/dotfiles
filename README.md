@@ -17,16 +17,19 @@ highly opinionated way that I work. Most of the fun stuff is in [bin](https://gi
 
 Other highlights include:
 
+* Emacs as a default editor.
 * Defaults for vim, tmux, git, and fish shell.
-* Version management for ruby, node, elixir, and elm (via. asdf)
+* Version management for elixir, erlang, ruby, node, and elm (via. asdf)
 * Lots of aliases for common commands.
 
 ## Install
 
 Running `./bootstrap.sh` will install all dependencies and create symlinks to
-all of the dotfiles. If you want to set up your mac with the same defaults that
-I do you can also run `./set-defaults.sh`. If you need to add new dotfiles or
-symlinks in the future then you can simply run `rcup` in the dotfiles dir.
+all of the dotfiles. I try to make sure its up to date but every now and then
+there is a missing dependency. If you want to set up your mac with the same
+defaults that I do you can also run `./set-defaults.sh`. If you need to add 
+new dotfiles or symlinks in the future then you can simply run `rcup` in the 
+dotfiles dir.
 
 ## Thanks
 
