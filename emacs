@@ -42,6 +42,11 @@
 (evil-mode 1)
 (evil-escape-mode 1)
 
+(delete 'term-mode evil-insert-state-modes)
+(add-to-list 'evil-emacs-state-modes 'term-mode)
+(delete 'alchemist-iex-mode evil-insert-state-modes)
+(add-to-list 'evil-emacs-state-modes 'alchemist-iex-mode)
+
 ;; Elixir setup
 
 (require 'elixir-mode)
