@@ -98,7 +98,7 @@
 ;; Editing in general
 
 (show-paren-mode 1)
-
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (require 'rainbow-delimiters)
 
