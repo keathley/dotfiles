@@ -41,7 +41,7 @@
     telemetryConsent: "no"
     themes: [
       "nucleus-dark-ui"
-      "seti-syntax"
+      "one-dark-syntax"
     ]
   editor:
     fontFamily: "\"FiraCode-Regular\""
@@ -134,6 +134,9 @@
   "tree-view":
     hideIgnoredNames: true
   "vim-mode": {}
+  "vim-mode-plus":
+    highlightSearch: true
+    incrementalSearch: true
   "vim-surround": {}
   welcome:
     showOnStartup: false
