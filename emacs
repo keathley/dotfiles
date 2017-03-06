@@ -17,7 +17,7 @@
     ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(package-selected-packages
    (quote
-    (yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
+    (all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -31,13 +31,24 @@
 (setq auto-save-file-name-transforms
                 `((".*" ,temporary-file-directory t)))
 
+;; Icons
+(require 'all-the-icons)
+
+;; Neotree
+(require 'neotree)
+(global-set-key (kbd "s-\\") 'neotree-toggle)
+(setq neo-smart-open t)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
 ;; Exec path from shell
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
 ;; Projectile
+(require 'projectile)
 (projectile-mode)
 (setq projectile-completion-system 'grizzl)
+(setq projectile-switch-project-action 'neotree-projectile-action)
 
 ;; Evil mode
 
