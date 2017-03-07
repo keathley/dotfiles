@@ -48,7 +48,6 @@
 (require 'projectile)
 (projectile-mode)
 (setq projectile-completion-system 'grizzl)
-(setq projectile-switch-project-action 'neotree-projectile-action)
 
 ;; Evil mode
 
