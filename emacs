@@ -1,6 +1,6 @@
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/"))
 
 (package-initialize)
 
@@ -26,6 +26,10 @@
  ;; If there is more than one, they won't work right.
  )
 
+(setq backup-directory-alist
+                `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+                `((".*" ,temporary-file-directory t)))
 
 ;; Exec path from shell
 (when (memq window-system '(mac ns))
