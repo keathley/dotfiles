@@ -93,6 +93,15 @@
       (comment-dwim nil)
     (toggle-comment-on-line)))
 
+;; org-mode config
+(require 'org)
+(setq org-directory "~/org")
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-capture-templates
+      '(("j" "Journal" entry (file+datetree "~/org/journal.org")
+             "* %?\nEntered on %U\n  %i\n  %a")))
+
+;; Keyboard configurations.
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-;") 'toggle-comment-on-line)
 (global-set-key (kbd "s-p") 'projectile-find-file)
@@ -107,9 +116,8 @@
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
-
-;; org-mode config
-(require 'org)
+(global-set-key (kbd "C-c o")
+		(lambda () (interactive) (find-file "~/org/journal.org")))
 
 ;; Company-mode
 (add-hook 'after-init-hook 'global-company-mode)
