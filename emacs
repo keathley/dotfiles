@@ -1,4 +1,12 @@
+;;; package --- Summary
+
+;;; Commentary:
+
+;; These are all of my configurations for Emacs.
+
 (require 'package)
+
+;;; Code:
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
@@ -14,10 +22,10 @@
  '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
  '(custom-safe-themes
    (quote
-    ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
+    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(package-selected-packages
    (quote
-    (all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
+    (evil-paredit spacemacs-theme eyebrowse info+ powerline-evil spaceline all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -37,7 +45,7 @@
 ;; Neotree
 (require 'neotree)
 (global-set-key (kbd "s-\\") 'neotree-toggle)
-(setq neo-smart-open t)
+;; (setq neo-smart-open t)
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 ;; Exec path from shell
@@ -50,7 +58,6 @@
 (setq projectile-completion-system 'grizzl)
 
 ;; Evil mode
-
 (require 'evil)
 (setq-default evil-escape-key-sequence "kj")
 (evil-mode 1)
@@ -61,8 +68,14 @@
 (delete 'alchemist-iex-mode evil-insert-state-modes)
 (add-to-list 'evil-emacs-state-modes 'alchemist-iex-mode)
 
-;; Elixir setup
+;; Eyebrowse
+(require 'eyebrowse)
+(eyebrowse-mode t)
+(eyebrowse-setup-opinionated-keys)
+(setq eyebrowse-wrap-around t)
+;; (setq eyebrowse-new-workspace t)
 
+;; Elixir setup
 (require 'elixir-mode)
 (require 'alchemist)
 
@@ -82,12 +95,12 @@
 
 ;; Custom keys
 (defun toggle-comment-on-line ()
-  "comment or uncomment current line"
+  "Comment or uncomment current line."
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 
 (defun smart-comment ()
-  "comment things the way that I like"
+  "Comment things the way that I like."
   (interactive)
   (if (use-region-p)
       (comment-dwim nil)
@@ -97,9 +110,28 @@
 (require 'org)
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-preview-latex-default-process 'imagemagick)
 (setq org-capture-templates
       '(("j" "Journal" entry (file+datetree "~/org/journal.org")
              "* %?\nEntered on %U\n  %i\n  %a")))
+
+;; Spaceline config
+(require 'spaceline-config)
+(setq ns-use-srgb-colorspace nil)
+(setq powerline-default-separator 'wave)
+(setq powerline-height '22)
+(setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+(setq spaceline-window-numbers-unicode t)
+(spaceline-spacemacs-theme)
+(spaceline-toggle-workspace-number-on)
+(spaceline-toggle-remote-host-off)
+(spaceline-toggle-minor-modes-off)
+(spaceline-toggle-remote-host-off)
+(spaceline-toggle-version-control-on)
+(spaceline-toggle-battery-off)
+(spaceline-toggle-buffer-size-off)
+(spaceline-toggle-buffer-position-off)
+(spaceline-toggle-hud-off)
 
 ;; Keyboard configurations.
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -118,8 +150,12 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key (kbd "C-c o")
 		(lambda () (interactive) (find-file "~/org/journal.org")))
+(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
 
-;; Company-mode
+;;; Company-mode
 (add-hook 'after-init-hook 'global-company-mode)
 
 ;; Editing in general
@@ -134,7 +170,7 @@
 ;; Elisp mode stuffs
 
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+(add-hook 'emacs-lisp-mode-hook       'evil-paredit-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
 (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
@@ -144,21 +180,22 @@
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 
-
 ;; Make things look kinda nice
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'load-path "~/.emacs.d/themes")
 (load-theme 'tomorrow-night-bright t)
+(require 'color-theme-sanityinc-tomorrow)
+;; (load-theme 'spacemacs-dark)
 
 (setq inhibit-splash-screen t)
 
 (global-linum-mode t)
-
-(require 'color-theme-sanityinc-tomorrow)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
 (add-to-list 'default-frame-alist '(font . "Fira Code Light-12" ))
 (set-face-attribute 'default t :font "Fira Code Light-12" )
+
+;;; .emacs ends here
