@@ -67,6 +67,8 @@
 (add-to-list 'evil-emacs-state-modes 'term-mode)
 (delete 'alchemist-iex-mode evil-insert-state-modes)
 (add-to-list 'evil-emacs-state-modes 'alchemist-iex-mode)
+(delete 'alchemist-help-minor-mode evil-insert-state-modes)
+(add-to-list 'evil-emacs-state-modes 'alchemist-help-minor-mode)
 
 ;; Eyebrowse
 (require 'eyebrowse)
