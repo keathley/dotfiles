@@ -108,6 +108,11 @@
       (comment-dwim nil)
     (toggle-comment-on-line)))
 
+(defun backward-kill-line (arg)
+  "Kill ARG lines backwards."
+  (interactive "p")
+  (kill-line (- 1 arg)))
+
 ;; org-mode config
 (require 'org)
 (setq org-directory "~/org")
@@ -152,6 +157,7 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key (kbd "C-c o")
 		(lambda () (interactive) (find-file "~/org/journal.org")))
+(global-set-key [s-backspace] 'backward-kill-line)
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
