@@ -25,7 +25,7 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(package-selected-packages
    (quote
-    (ob-elixir graphviz-dot-mode evil-paredit spacemacs-theme eyebrowse info+ powerline-evil spaceline all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
+    (js2-mode web-mode ob-elixir graphviz-dot-mode evil-paredit spacemacs-theme eyebrowse info+ powerline-evil spaceline all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
