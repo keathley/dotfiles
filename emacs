@@ -176,9 +176,9 @@
 (add-hook 'after-init-hook 'global-company-mode)
 
 ;; Editing in general
-
 (show-paren-mode 1)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(setq-default indent-tabs-mode nil)
 
 (require 'rainbow-delimiters)
 
