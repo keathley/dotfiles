@@ -215,4 +215,5 @@
 (add-to-list 'default-frame-alist '(font . "Fira Code Light-12" ))
 (set-face-attribute 'default t :font "Fira Code Light-12" )
 
+(provide '.emacs)
 ;;; .emacs ends here
