@@ -4,6 +4,10 @@ source ~/.config/fish/aliases.fish
 # source ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 # eval (opam config env)
 
+if test -e ~/.localenv
+  source ~/.localenv
+end
+
 set -e fish_greeting
 
 # set -g fish_color_autosuggestion 555 yellow
