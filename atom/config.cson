@@ -28,11 +28,13 @@
       "minimap"
       "linter-jsxhint"
       "linter-less"
-      "linter-eslint"
       "atom-elixir"
       "linter-write-good"
       "build-elixir"
       "autocomplete-elixir"
+      "linter"
+      "linter-eslint"
+      "linter-ui-default"
     ]
     packagesWithKeymapsDisabled: [
       "dash"
@@ -45,7 +47,6 @@
     ]
   editor:
     fontFamily: "\"FiraCode-Regular\""
-    fontSize: 12
     invisibles: {}
     showIndentGuide: true
   "exception-reporting":
@@ -86,13 +87,14 @@
   "linter-eslint":
     eslintRulesDir: "~/"
     globalNodePath: "/usr/local"
-    useGlobalEslint: true
   "linter-jshint": {}
   "linter-jsxhint":
     harmony: true
   "linter-rubocop": {}
   "linter-rust": {}
   "linter-scss-lint": {}
+  "linter-ui-default":
+    showStatusBar: false
   "markdown-preview":
     useGitHubStyle: true
   "markdown-writer": {}
