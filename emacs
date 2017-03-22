@@ -91,6 +91,10 @@
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-elm-setup))
 
+;; Web Mode
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" .web-mode))
+
 ;; Yasnippet
 (require 'yasnippet)
 (yas-global-mode 1)
