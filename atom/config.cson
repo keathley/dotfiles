@@ -32,9 +32,6 @@
       "linter-write-good"
       "build-elixir"
       "autocomplete-elixir"
-      "linter"
-      "linter-eslint"
-      "linter-ui-default"
     ]
     packagesWithKeymapsDisabled: [
       "dash"
