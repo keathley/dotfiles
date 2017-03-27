@@ -126,6 +126,11 @@
       '(("j" "Journal" entry (file+datetree "~/org/journal.org")
              "* %?\nEntered on %U\n  %i\n  %a")))
 
+(add-to-list 'org-structure-template-alist
+             '("dot"
+               "#+BEGIN_SRC dot :file image.png :cmdline -Kdot -Tpng ? \n\n#+END_SRC"
+               "<src lang=\"?\">\n\n</src>"))
+
 (org-babel-do-load-languages 'org-babel-load-languages
 			     '((dot . t)
 			       (haskell . t)
