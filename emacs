@@ -22,10 +22,10 @@
  '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
  '(custom-safe-themes
    (quote
-    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(package-selected-packages
    (quote
-    (terraform-mode fish-mode js2-mode web-mode ob-elixir graphviz-dot-mode evil-paredit spacemacs-theme eyebrowse info+ powerline-evil spaceline all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
+    (solarized-theme terraform-mode fish-mode js2-mode web-mode ob-elixir graphviz-dot-mode evil-paredit spacemacs-theme eyebrowse info+ powerline-evil spaceline all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -69,6 +69,9 @@
 (add-to-list 'evil-emacs-state-modes 'alchemist-iex-mode)
 (delete 'alchemist-help-minor-mode evil-insert-state-modes)
 (add-to-list 'evil-emacs-state-modes 'alchemist-help-minor-mode)
+
+(delete 'elm-interactive-mode evil-insert-state-modes)
+(add-to-list 'evil-emacs-state-modes 'elm-interactive-mode)
 
 ;; Eyebrowse
 (require 'eyebrowse)
@@ -140,6 +143,10 @@
 			       (R . t)
 			       (ruby . t)))
 
+(add-hook 'text-mode-hook '(lambda()
+                             (turn-on-auto-fill)
+                             (set-fill-column 80)))
+
 ;; Spaceline config
 (require 'spaceline-config)
 (setq ns-use-srgb-colorspace nil)
@@ -183,6 +190,7 @@
 
 ;;; Company-mode
 (add-hook 'after-init-hook 'global-company-mode)
+(add-to-list 'company-backends 'company-elm)
 
 ;; Editing in general
 (show-paren-mode 1)
@@ -214,6 +222,17 @@
 (require 'color-theme-sanityinc-tomorrow)
 ;; (load-theme 'spacemacs-dark)
 
+;; Solarized theme for when I'm feeling weird
+;; (require 'solarized-theme)
+;; (setq solarized-scale-org-headlines nil)
+;; (setq solarized-height-minus-1 1.0)
+;; (setq solarized-height-plus-1 1.0)
+;; (setq solarized-height-plus-2 1.0)
+;; (setq solarized-height-plus-3 1.0)
+;; (setq solarized-height-plus-4 1.0)
+;; (setq solarized-use-variable-pitch nil)
+;; (load-theme 'solarized-light)
+
 (setq inhibit-splash-screen t)
 
 (global-linum-mode t)
@@ -221,8 +240,8 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-(add-to-list 'default-frame-alist '(font . "Fira Code Light-12" ))
-(set-face-attribute 'default t :font "Fira Code Light-12" )
+(add-to-list 'default-frame-alist '(font . "Fira Code Light-14" ))
+(set-face-attribute 'default t :font "Fira Code Light-14" )
 
 (provide '.emacs)
 ;;; .emacs ends here
