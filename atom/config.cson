@@ -32,6 +32,7 @@
       "linter-write-good"
       "build-elixir"
       "autocomplete-elixir"
+      "linter"
     ]
     packagesWithKeymapsDisabled: [
       "dash"
@@ -40,7 +41,7 @@
     telemetryConsent: "no"
     themes: [
       "nucleus-dark-ui"
-      "one-dark-syntax"
+      "base16-tomorrow-dark-theme"
     ]
   editor:
     fontFamily: "\"FiraCode-Regular\""
@@ -75,12 +76,8 @@
   "latex-completions": {}
   "less-than-slash": {}
   linter:
-    errorPanelHeight: 92
-    gutterEnabled: false
     lintOnChange: false
     lintOnEditorFocus: false
-    lintOnFly: false
-    showErrorInline: false
   "linter-eslint":
     eslintRulesDir: "~/"
     globalNodePath: "/usr/local"
@@ -91,6 +88,8 @@
   "linter-rust": {}
   "linter-scss-lint": {}
   "linter-ui-default":
+    panelHeight: 285
+    showPanel: true
     showStatusBar: false
   "markdown-preview":
     useGitHubStyle: true
