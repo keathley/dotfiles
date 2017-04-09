@@ -181,7 +181,7 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key (kbd "C-c o")
-		(lambda () (interactive) (find-file "~/org/journal.org")))
+		(lambda () (interactive) (find-file "~/Desktop/org/journal.org")))
 (global-set-key [s-backspace] 'backward-kill-line)
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-enter)
