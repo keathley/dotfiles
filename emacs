@@ -106,6 +106,10 @@
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
 
+(require 'emmet-mode)
+;; (setq emmet-move-cursor-between-quotes t)
+;; (setq emmet-expand-jsx-className? t)
+
 ;; Yasnippet
 (require 'yasnippet)
 (yas-global-mode 1)
