@@ -134,11 +134,11 @@
 
 ;; org-mode config
 (require 'org)
-(setq org-directory "~/org")
+(setq org-directory "~/Desktop/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-preview-latex-default-process 'imagemagick)
 (setq org-capture-templates
-      '(("j" "Journal" entry (file+datetree "~/org/journal.org")
+      '(("j" "Journal" entry (file+datetree "~/Desktop/org/journal.org")
              "* %?\nEntered on %U\n  %i\n  %a")))
 
 (add-to-list 'org-structure-template-alist
