@@ -1,3 +1,3 @@
-function k -d "kubectl wrapper" -w kubectl
-  kubectl
+function k -d "kubectl wrapper" --wraps kubectl
+  kubectl $argv
 end
