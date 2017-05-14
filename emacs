@@ -1,8 +1,8 @@
 ;;; package --- Summary
-
+;;;
 ;;; Commentary:
-
-;; These are all of my configurations for Emacs.
+;;;
+;;; These are all of my configurations for Emacs.
 
 (require 'package)
 
@@ -25,7 +25,7 @@
     ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(package-selected-packages
    (quote
-    (writegood-mode ace-jump-mode helm-ag helm-projectile helm dockerfile-mode cargo flycheck-flow flycheck-haskell flycheck-rust rust-mode toml-mode solarized-theme terraform-mode fish-mode js2-mode web-mode ob-elixir graphviz-dot-mode evil-paredit spacemacs-theme eyebrowse info+ powerline-evil spaceline all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
+    (evil-surround writegood-mode ace-jump-mode helm-ag helm-projectile helm dockerfile-mode cargo flycheck-flow flycheck-haskell flycheck-rust rust-mode toml-mode solarized-theme terraform-mode fish-mode js2-mode web-mode ob-elixir graphviz-dot-mode evil-paredit spacemacs-theme eyebrowse info+ powerline-evil spaceline all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -67,6 +67,8 @@
 (setq-default evil-escape-key-sequence "kj")
 (evil-mode 1)
 (evil-escape-mode 1)
+(require 'evil-surround)
+(global-evil-surround-mode 1)
 
 (delete 'term-mode evil-insert-state-modes)
 (add-to-list 'evil-emacs-state-modes 'term-mode)
@@ -215,6 +217,7 @@
 (global-set-key (kbd "s-t") 'projectile-find-file)
 (global-set-key (kbd "s-r") 'projectile-find-tag)
 (global-set-key (kbd "s-S-F") 'projectile-ag)
+(global-set-key (kbd "C-x a") 'align-regexp)
 (global-set-key (kbd "s-\/") 'smart-comment)
 (global-set-key (kbd "C-x <up>") 'windmove-up)
 (global-set-key (kbd "C-x <down>") 'windmove-down)
