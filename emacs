@@ -123,7 +123,9 @@
 (add-to-list 'flycheck-checkers 'proselint)
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
-(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-elm-setup))
