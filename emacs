@@ -172,6 +172,7 @@
 (setq org-directory "~/Desktop/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-preview-latex-default-process 'imagemagick)
+(setq org-log-done t)
 (setq org-capture-templates
       '(("j" "Journal" entry (file+datetree "~/Desktop/org/journal.org")
              "* %?\nEntered on %U\n  %i\n  %a")))
@@ -249,6 +250,7 @@
 (require 'rainbow-delimiters)
 
 (add-hook 'elixir-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 
 ;;; Rust stuff
 (require 'toml-mode)
@@ -259,8 +261,8 @@
 
 ;; Elisp mode stuffs
 
-(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook       'evil-paredit-mode)
+(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
 (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
