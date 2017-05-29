@@ -1,7 +1,8 @@
 "*":
   Zen:
-    fullscreen: false
+    gutter: true
     showWordCount: "Left"
+    softWrap: true
     tabs: "multiple"
   achievements: {}
   "atom-beautify":
