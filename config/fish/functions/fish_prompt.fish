@@ -60,7 +60,7 @@ function git_info
 end
 
 function git_prompt_info
-  git symbolic-ref --quiet --short HEAD
+  git symbolic-ref --quiet --short HEAD; or git show --oneline -s | awk '{print $1}'
 end
 
 function current_user
