@@ -5,6 +5,10 @@ function ..... ; cd ../../../.. ; end
 
 function grep     ; command grep --color=auto $argv ; end
 
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
+alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
+
 alias i='iex'
 alias im='iex -S mix'
 alias m='mix'
