@@ -80,6 +80,8 @@
 (delete 'elm-interactive-mode evil-insert-state-modes)
 (add-to-list 'evil-emacs-state-modes 'elm-interactive-mode)
 
+(evil-set-initial-state 'term-mode 'emacs)
+
 ;;
 ;; Ace-Jump Mode
 ;;
@@ -171,6 +173,7 @@
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-preview-latex-default-process 'imagemagick)
 (setq org-log-done t)
+(setq org-export-backends '(ascii html icalendar latex md))
 (setq org-capture-templates
       '(("j" "Journal" entry (file+datetree "~/Desktop/org/journal.org")
              "* %?\nEntered on %U\n  %i\n  %a")))
