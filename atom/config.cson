@@ -21,6 +21,7 @@
   "autocomplete-plus": {}
   "base16-syntax":
     scheme: "Flat"
+  "bracket-matcher": {}
   "circle-ci": {}
   core:
     disabledPackages: [
@@ -46,7 +47,6 @@
     ]
   editor:
     fontFamily: "\"FiraCode-Regular\""
-    fontSize: 13
     invisibles: {}
     showIndentGuide: true
   "exception-reporting":
@@ -90,7 +90,7 @@
   "linter-rust": {}
   "linter-scss-lint": {}
   "linter-ui-default":
-    panelHeight: 285
+    panelHeight: 245
     showPanel: true
     showStatusBar: false
   "markdown-preview":
@@ -137,6 +137,8 @@
   "vim-mode-plus":
     highlightSearch: true
     incrementalSearch: true
+  "vim-mode-plus-ex-mode":
+    notifiedUseExMode: true
   "vim-surround": {}
   welcome:
     showOnStartup: false

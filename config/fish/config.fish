@@ -49,3 +49,6 @@ set -gx LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 
 # export EDITOR="atom"
 set -g fish_user_paths "/usr/local/opt/gettext/bin" $fish_user_paths
+set -g XDG_CONFIG_HOME "~/.config"
+# set fish_function_path $fish_function_path "/usr/local/lib/python2.7/site-packages/powerline/bindings/fish"
+# powerline-setup

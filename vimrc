@@ -1,5 +1,5 @@
 set nocompatible
-set shell=/bin/bash
+" set shell=/bin/bash
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -8,7 +8,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Colors and styles
-Plugin 'bling/vim-airline'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'trusktr/seti.vim'
 
@@ -37,6 +36,7 @@ Plugin 'moll/vim-node'
 Plugin 'slim-template/vim-slim'
 Plugin 'elzr/vim-json'
 Plugin 'elmcast/elm-vim'
+Plugin 'dag/vim-fish'
 
 call vundle#end()
 filetype on
@@ -70,9 +70,6 @@ set history=50
 " Copy to clipboard
 " set clipboard=unnamed
 
-" Status bar
-set laststatus=2
-
 " Omnicomplete
 set omnifunc=syntaxcomplete#Complete
 let g:neocomplete#enable_at_startup = 1
@@ -98,13 +95,22 @@ set backspace=2
 set t_Co=256
 syntax enable
 set background=dark
-colorscheme seti
+colorscheme solarized
+
+" Status bar
+" set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+" python from powerline.vim import setup as powerline_setup
+" python powerline_setup()
+" python del powerline_setup
+set laststatus=2
+
+" colorscheme seti
 " colorscheme tomorrow
 
 " Airline settings
 " Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Keymappings
 let mapleader=","
