@@ -1,19 +1,21 @@
 set nocompatible
-" set shell=/bin/bash
+set shell=/bin/bash
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " Colors and styles
 Plugin 'flazz/vim-colorschemes'
-Plugin 'trusktr/seti.vim'
+Plugin 'itchyny/lightline.vim'
 
 " Productivity
 Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-commentary'
+
+Plugin 'vimwiki/vimwiki'
 
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -98,19 +100,11 @@ set background=dark
 colorscheme solarized
 
 " Status bar
-" set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
-" python from powerline.vim import setup as powerline_setup
-" python powerline_setup()
-" python del powerline_setup
 set laststatus=2
-
-" colorscheme seti
-" colorscheme tomorrow
-
-" Airline settings
-" Enable the list of buffers
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#fnamemod = ':t'
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
 
 " Keymappings
 let mapleader=","
