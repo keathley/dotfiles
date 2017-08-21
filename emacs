@@ -18,14 +18,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
-   ["#454545" "#cd5542" "#6aaf50" "#baba36" "#5180b3" "#ab75c3" "#68a5e9" "#bdbdb3"])
+   (vector "#c5c8c6" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#8abeb7" "#373b41"))
  '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
  '(custom-safe-themes
    (quote
     ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(package-selected-packages
    (quote
-    (go-mode company-distel erlang evil-surround writegood-mode ace-jump-mode helm-ag helm-projectile helm dockerfile-mode cargo flycheck-flow flycheck-haskell flycheck-rust rust-mode toml-mode solarized-theme terraform-mode fish-mode js2-mode web-mode ob-elixir graphviz-dot-mode evil-paredit spacemacs-theme eyebrowse info+ powerline-evil spaceline all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
+    (elixir-mode color-theme-sanityinc-solarized go-mode company-distel erlang evil-surround writegood-mode ace-jump-mode helm-ag helm-projectile helm dockerfile-mode cargo flycheck-flow flycheck-haskell flycheck-rust rust-mode toml-mode solarized-theme terraform-mode fish-mode js2-mode web-mode ob-elixir graphviz-dot-mode evil-paredit spacemacs-theme eyebrowse info+ powerline-evil spaceline all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -128,12 +128,6 @@
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-elm-setup))
-
 ;; Web Mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
@@ -201,7 +195,7 @@
 ;; Spaceline config
 (require 'spaceline-config)
 (setq ns-use-srgb-colorspace nil)
-(setq powerline-default-separator 'wave)
+;; (setq powerline-default-separator 'wave)
 (setq powerline-height '20)
 (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
 (setq spaceline-window-numbers-unicode t)
@@ -279,8 +273,9 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'load-path "~/.emacs.d/themes")
-(load-theme 'tomorrow-night-bright t)
-(require 'color-theme-sanityinc-tomorrow)
+(load-theme 'solarized t)
+;; (load-theme 'tomorrow-night-bright t)
+;; (require 'color-theme-sanityinc-tomorrow)
 ;; (load-theme 'spacemacs-dark)
 
 ;; Solarized theme for when I'm feeling weird
