@@ -91,7 +91,6 @@
   "linter-scss-lint": {}
   "linter-ui-default":
     panelHeight: 245
-    showPanel: true
     showStatusBar: false
   "markdown-preview":
     useGitHubStyle: true
