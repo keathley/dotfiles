@@ -12,22 +12,16 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'itchyny/lightline.vim'
 
 " Productivity
-Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-surround'
 
 Plugin 'vimwiki/vimwiki'
 
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
 
 " Languages and syntax
-Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-cucumber'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'elixir-lang/vim-elixir'
-Plugin 'nono/vim-handlebars'
 Plugin 'pangloss/vim-javascript'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mxw/vim-jsx'
@@ -39,6 +33,7 @@ Plugin 'slim-template/vim-slim'
 Plugin 'elzr/vim-json'
 Plugin 'elmcast/elm-vim'
 Plugin 'dag/vim-fish'
+Plugin 'b4b4r07/vim-hcl'
 
 call vundle#end()
 filetype on
@@ -73,8 +68,11 @@ set history=50
 " set clipboard=unnamed
 
 " Omnicomplete
-set omnifunc=syntaxcomplete#Complete
-let g:neocomplete#enable_at_startup = 1
+set wildmode=longest,list
+set wildmenu
+
+" Editing stuff
+set autoread
 
 " Splits
 set splitbelow
@@ -100,6 +98,8 @@ set background=dark
 colorscheme solarized
 
 " Status bar
+" set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+set showtabline=2
 set laststatus=2
 set noshowmode
 let g:lightline = {
