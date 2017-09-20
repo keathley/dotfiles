@@ -42,11 +42,12 @@
     ]
     telemetryConsent: "no"
     themes: [
-      "nucleus-dark-ui"
-      "base16-tomorrow-dark-theme"
+      "one-dark-ui"
+      "solarized-dark-syntax"
     ]
   editor:
     fontFamily: "\"FiraCode-Regular\""
+    fontSize: 16
     invisibles: {}
     showIndentGuide: true
   "exception-reporting":
@@ -100,10 +101,8 @@
     plugins:
       bookmarks: true
       "git-diff": true
-  "one-dark-ui":
-    layoutMode: "Compact"
-  "one-light-ui":
-    layoutMode: "Compact"
+  "one-dark-ui": {}
+  "one-light-ui": {}
   pigments:
     sortPaletteColors: "by color"
   racer:
@@ -132,6 +131,7 @@
     visible: false
   "tree-view":
     hideIgnoredNames: true
+    hideVcsIgnoredFiles: true
   "vim-mode": {}
   "vim-mode-plus":
     highlightSearch: true
