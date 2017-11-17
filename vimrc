@@ -14,9 +14,10 @@ Plugin 'itchyny/lightline.vim'
 " Productivity
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 
 Plugin 'vimwiki/vimwiki'
-
 
 " Languages and syntax
 Plugin 'tpope/vim-cucumber'
@@ -191,9 +192,15 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
   exec a:vim_command . " " . selection
 endfunction
 
-nnoremap <leader>f :call SelectaCommand("git ls-files", "", ":e")<cr>
-nnoremap <leader>t :call SelectaCommand("git ls-files", "", ":tabe")<cr>
-nnoremap <leader>v :call SelectaCommand("git ls-files", "", ":vsp")<cr>
+" FZF
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+map <C-p> :FZF<CR>
+nnoremap <leader>f :FZF<CR>
+
+" nnoremap <leader>f :call SelectaCommand("git ls-files", "", ":e")<cr>
+" nnoremap <leader>t :call SelectaCommand("git ls-files", "", ":tabe")<cr>
+" nnoremap <leader>v :call SelectaCommand("git ls-files", "", ":vsp")<cr>
 " au FileType javascript nnoremap <leader>f :call SelectaCommand("find * -type d -name node_modules -prune -o -print", "", ":e")<cr>
 " au FileType javascript nnoremap <leader>t :call SelectaCommand("find * -type d -name node_modules -prune -o -print", "", ":tabe")<cr>
 " au FileType javascript nnoremap <leader>v :call SelectaCommand("find * -type d -name node_modules -prune -o -print", "", ":vsp")<cr>

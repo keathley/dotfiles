@@ -42,7 +42,6 @@
     ]
     telemetryConsent: "no"
     themes: [
-      "one-dark-ui"
       "solarized-dark-syntax"
     ]
   editor:
