@@ -18,13 +18,14 @@ brew 'hub'
 brew 'imagemagick'
 brew 'phantomjs'
 brew 'postgres'
+brew 'python3'
 brew 'rcm'
 brew 'selecta'
 brew 'the_silver_searcher'
 brew 'tmux'
 brew 'vim', args: ['with-lua', 'with-luajit']
+brew 'neovim'
 brew 'wget'
-
 
 cask '1password'
 cask 'atom'
