@@ -25,7 +25,8 @@
     ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(package-selected-packages
    (quote
-    (elixir-mode color-theme-sanityinc-solarized go-mode company-distel erlang evil-surround writegood-mode ace-jump-mode helm-ag helm-projectile helm dockerfile-mode cargo flycheck-flow flycheck-haskell flycheck-rust rust-mode toml-mode solarized-theme terraform-mode fish-mode js2-mode web-mode ob-elixir graphviz-dot-mode evil-paredit spacemacs-theme eyebrowse info+ powerline-evil spaceline all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil))))
+    (rainbow-mode tabbar racer elixir-mode color-theme-sanityinc-solarized go-mode company-distel erlang evil-surround writegood-mode ace-jump-mode helm-ag helm-projectile helm dockerfile-mode cargo flycheck-flow flycheck-haskell flycheck-rust rust-mode toml-mode solarized-theme terraform-mode fish-mode js2-mode web-mode ob-elixir graphviz-dot-mode evil-paredit spacemacs-theme eyebrowse info+ powerline-evil spaceline all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil)))
+ '(tabbar-separator (quote (0.5))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -127,6 +128,7 @@
 (add-to-list 'flycheck-checkers 'proselint)
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
 ;; Web Mode
 (require 'web-mode)
@@ -229,10 +231,64 @@
 (global-set-key (kbd "C-c o")
 		(lambda () (interactive) (find-file "~/Desktop/org/journal.org")))
 (global-set-key [s-backspace] 'backward-kill-line)
+(global-set-key (kbd "s-{") 'tabbar-backward-tab)
+(global-set-key (kbd "s-}") 'tabbar-forward-tab)
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
 (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+
+
+;;; Tabbar mode
+;; Tabbar
+;; (require 'tabbar)
+;; (setq tabbar-background-color "#001f27")
+;; ;; Tabbar settings
+;; (set-face-attribute
+;;  'tabbar-default nil
+;;  :background "#001f27"
+;;  :foreground "#001f27")
+;; (set-face-attribute
+;;  'tabbar-unselected nil
+;;  :background "#001f27"
+;;  :foreground "#gray69")
+;; (set-face-attribute
+;;  'tabbar-selected nil
+;;  :background "#002b36"
+;;  :foreground "gray100")
+;; (set-face-attribute
+;;  'tabbar-highlight nil
+;;  :background "white"
+;;  :foreground "black"
+;;  :underline nil)
+;; (set-face-attribute
+;;  'tabbar-button nil)
+;; (set-face-attribute
+;;  'tabbar-separator nil
+;;  :background "gray20"
+;;  :height 0.8)
+
+;; ;; Change padding of the tabs
+;; ;; we also need to set separator to avoid overlapping tabs by highlighted tabs
+
+;; ;; adding spaces
+;; (defun tabbar-buffer-tab-label (tab)
+;;   "Return a label for TAB.
+;; That is, a string used to represent it on the tab bar."
+;;   (let ((label  (if tabbar--buffer-show-groups
+;;                     (format "[%s]  " (tabbar-tab-tabset tab))
+;;                   (format "%s  " (tabbar-tab-value tab)))))
+;;     ;; Unless the tab bar auto scrolls to keep the selected tab
+;;     ;; visible, shorten the tab label to keep as many tabs as possible
+;;     ;; in the visible area of the tab bar.
+;;     (if tabbar-auto-scroll-flag
+;;         label
+;;       (tabbar-shorten
+;;        label (max 1 (/ (window-width)
+;;                        (length (tabbar-view
+;;                                 (tabbar-current-tabset)))))))))
+
+;; (tabbar-mode 1)
 
 ;;; Company-mode
 (add-hook 'after-init-hook 'global-company-mode)
@@ -251,6 +307,12 @@
 
 ;;; Rust stuff
 (require 'toml-mode)
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
+(add-hook 'racer-mode-hook #'company-mode)
+(require 'rust-mode)
+(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+(setq company-tooltip-align-annotations t)
 
 ;;; Writing and stuff
 (require 'writegood-mode)
@@ -291,7 +353,7 @@
 
 (setq inhibit-splash-screen t)
 
-(global-linum-mode t)
+; (global-linum-mode t)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
