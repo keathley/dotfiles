@@ -18,6 +18,9 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
 Plugin 'vimwiki/vimwiki'
+Plugin 'w0rp/ale'
+
+Plugin 'reedes/vim-pencil'
 
 " Languages and syntax
 Plugin 'tpope/vim-cucumber'
