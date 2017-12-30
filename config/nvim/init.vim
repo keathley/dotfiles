@@ -22,6 +22,7 @@ Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 " Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-endwise'
+Plug 'reedes/vim-pencil'
 
 " Languages and syntax
 Plug 'tpope/vim-cucumber'
