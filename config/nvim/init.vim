@@ -16,11 +16,9 @@ Plug 'scrooloose/nerdtree'
 
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
-" Plug 'ervandew/supertab'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
-" Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-endwise'
 Plug 'reedes/vim-pencil'
 
@@ -68,6 +66,9 @@ set softtabstop=2
 set ai
 set si
 
+" Tags
+set tags=tags,.git/tags,.tags
+
 " Files
 set nobackup
 set nowritebackup
@@ -75,7 +76,7 @@ set noswapfile
 set history=50
 
 " Copy to clipboard
-" set clipboard=unnamed
+set clipboard+=unnamedplus
 
 " Autocomplete / Omnicomplete
 set wildmode=longest,list
@@ -84,8 +85,21 @@ set wildmenu
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
+" Snippets
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" imap <expr><TAB>
+"  \ pumvisible() ? "\<C-n>" :
+"  \ neosnippet#expandable_or_jumpable() ?
+"  \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
 " Autopairs
-let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', 'do':'end'}
+" let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', 'do':'end'}
 
 " Editing stuff
 set autoread
@@ -195,26 +209,15 @@ nnoremap <silent> <Down> :resize +10<CR>
 nnoremap <silent> <Left> :vertical resize +10<CR>
 nnoremap <silent> <Right> :vertical resize -10<CR>
 
-" File Searching
-function! SelectaCommand(choice_command, selecta_args, vim_command)
-  try
-    let selection = system(a:choice_command . " | selecta " . a:selecta_args)
-  catch /Vim:Interrupt/
-    redraw!
-    return
-  endtry
-  redraw!
-  exec a:vim_command . " " . selection
-endfunction
-
 " FZF
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 
 map <C-p> :FZF<CR>
 nnoremap <leader>f :FZF<CR>
+nnoremap <leader>r :Tags<CR>
 
 " Better searching
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " NerdTree
 map <C-\> :NERDTreeToggle<CR>
@@ -244,4 +247,31 @@ nnoremap gr :grep <cword> **/*(.)<cr>`
 
 "Autocommands
 "autocmd BufWritePre * :%s/\s\+$//e " Strip Trailing Whitespace
+
+" Align Plugin
+command! -nargs=? -range Align <line1>,<line2>call AlignSection('<args>')
+vnoremap <silent> <Leader>a :Align<CR>
+function! AlignSection(regex) range
+  let extra = 1
+  let sep = empty(a:regex) ? '=' : a:regex
+  let maxpos = 0
+  let section = getline(a:firstline, a:lastline)
+  for line in section
+    let pos = match(line, ' *'.sep)
+    if maxpos < pos
+      let maxpos = pos
+    endif
+  endfor
+  call map(section, 'AlignLine(v:val, sep, maxpos, extra)')
+  call setline(a:firstline, section)
+endfunction
+
+function! AlignLine(line, sep, maxpos, extra)
+  let m = matchlist(a:line, '\(.\{-}\) \{-}\('.a:sep.'.*\)')
+  if empty(m)
+    return a:line
+  endif
+  let spaces = repeat(' ', a:maxpos - strlen(m[1]) + a:extra)
+  return m[1] . spaces . m[2]
+endfunction
 
