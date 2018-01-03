@@ -30,7 +30,6 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mxw/vim-jsx'
 Plugin 'fatih/vim-go'
-Plugin 'wting/rust.vim'
 Plugin 'raichoo/haskell-vim'
 Plugin 'moll/vim-node'
 Plugin 'slim-template/vim-slim'
@@ -38,6 +37,12 @@ Plugin 'elzr/vim-json'
 Plugin 'elmcast/elm-vim'
 Plugin 'dag/vim-fish'
 Plugin 'b4b4r07/vim-hcl'
+
+Plugin 'rust-lang/rust.vim'
+Plugin 'prabirshrestha/async.vim'
+Plugin 'prabirshrestha/vim-lsp'
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/asyncomplete-lsp.vim'
 
 call vundle#end()
 filetype on
@@ -150,6 +155,18 @@ au FileType go nmap <leader>va :GoDefVertical<CR>
 au FileType go nmap <Leader>e :GoRename<CR>
 au FileType go nmap <leader>dv :<C-u>call go#def#JumpMode("vsplit")<CR>
 " autocmd BufWritePost,FileWritePost *.go execute 'GoLint' | cwindow
+"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Rust
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Core
