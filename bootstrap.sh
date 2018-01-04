@@ -54,13 +54,6 @@ fancy_echo "Updating Homebrew..."
 brew update
 brew bundle --file=$HOME/dotfiles/Brewfile
 
-if ! [ -e ~/.vim/bundle/Vundle.vim ]
-then
-  fancy_echo "Installing vundler..."
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-  vim +PluginInstall +qall
-fi
-
 . $HOME/.asdf/asdf.sh
 
 if ! asdf plugin-list | grep elixir > /dev/null
@@ -73,18 +66,6 @@ if ! asdf plugin-list | grep erlang > /dev/null
 then
     fancy_echo "Installing erlang asdf plugin..."
     asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
-fi
-
-if ! asdf plugin-list | grep haskell > /dev/null
-then
-    fancy_echo "Installing haskell asdf plugin..."
-    asdf plugin-add haskell https://github.com/vic/asdf-haskell.git
-fi
-
-if ! asdf plugin-list | grep rust > /dev/null
-then
-    fancy_echo "Installing rust asdf plugin..."
-    asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
 fi
 
 if ! asdf plugin-list | grep node > /dev/null
@@ -110,8 +91,6 @@ install_latest erlang
 install_latest nodejs
 install_latest ruby
 install_latest elm
-install_latest haskell
-install_latest rust
 
 if test ! $(which vtop)
 then
