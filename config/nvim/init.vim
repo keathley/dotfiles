@@ -1,10 +1,10 @@
 set nocompatible
-set shell=/bin/bash
 
 call plug#begin("~/.nvim/plugged")
 
 " Colors and styles
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
+Plug 'altercation/vim-colors-solarized'
 Plug 'itchyny/lightline.vim'
 
 " Productivity
@@ -56,6 +56,9 @@ filetype plugin on
 set ruler
 set encoding=utf8
 set colorcolumn=80
+
+" Highlight commands
+set inccommand=nosplit
 
 " #justneckbeardthings
 set list
@@ -163,19 +166,16 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Snippets
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" imap <expr><TAB>
-"  \ pumvisible() ? "\<C-n>" :
-"  \ neosnippet#expandable_or_jumpable() ?
-"  \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><TAB>
+ \ pumvisible() ? "\<C-n>" :
+ \ neosnippet#expandable_or_jumpable() ?
+ \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
       \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
-
-" Autopairs
-" let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', 'do':'end'}
 
 " Editing stuff
 set autoread
@@ -198,9 +198,10 @@ set backspace=eol,start,indent
 set backspace=2
 
 " Syntax highlighting and colors
-set t_Co=256
 syntax enable
 set background=dark
+" let g:solarized_termtrans=1
+" let g:solarized_termcolors=256
 colorscheme solarized
 
 " Status bar
@@ -351,3 +352,31 @@ function! AlignLine(line, sep, maxpos, extra)
   return m[1] . spaces . m[2]
 endfunction
 
+" Terminal mode nonsense
+
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <M-[> <Esc>
+  tnoremap <C-v><Esc> <Esc>
+
+  " Terminal mode:
+  tnoremap <M-h> <c-\><c-n><c-w>h
+  tnoremap <M-j> <c-\><c-n><c-w>j
+  tnoremap <M-k> <c-\><c-n><c-w>k
+  tnoremap <M-l> <c-\><c-n><c-w>l
+  " Insert mode:
+  inoremap <M-h> <Esc><c-w>h
+  inoremap <M-j> <Esc><c-w>j
+  inoremap <M-k> <Esc><c-w>k
+  inoremap <M-l> <Esc><c-w>l
+  " Visual mode:
+  vnoremap <M-h> <Esc><c-w>h
+  vnoremap <M-j> <Esc><c-w>j
+  vnoremap <M-k> <Esc><c-w>k
+  vnoremap <M-l> <Esc><c-w>l
+  " Normal mode:
+  nnoremap <M-h> <c-w>h
+  nnoremap <M-j> <c-w>j
+  nnoremap <M-k> <c-w>k
+  nnoremap <M-l> <c-w>l
+endif
