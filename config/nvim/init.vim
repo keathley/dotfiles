@@ -5,6 +5,7 @@ call plug#begin("~/.nvim/plugged")
 " Colors and styles
 " Plug 'flazz/vim-colorschemes'
 Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
 
 " Productivity
@@ -13,20 +14,23 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
-
-Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'tpope/vim-endwise'
+
+" Writing
+Plug 'vimwiki/vimwiki'
 Plug 'reedes/vim-pencil'
+Plug 'junegunn/goyo.vim'
 
 " Tagbar
 Plug 'majutsushi/tagbar'
 
 " Languages and syntax
 Plug 'tpope/vim-cucumber'
+Plug 'tpope/vim-markdown'
 Plug 'vim-ruby/vim-ruby'
 Plug 'elixir-lang/vim-elixir'
 Plug 'pangloss/vim-javascript'
@@ -200,9 +204,16 @@ set backspace=2
 " Syntax highlighting and colors
 syntax enable
 set background=dark
+" set t_Co=256
+" set term=xterm-256color
 " let g:solarized_termtrans=1
 " let g:solarized_termcolors=256
-colorscheme solarized
+" let g:solarized_termcolors=16
+" let g:solarized_visibility = "high"
+" let g:solarized_contrast = "high"
+" colorscheme solarized
+" let base16colorspace=256
+colorscheme base16-solarized-dark
 
 " Status bar
 " set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
@@ -380,3 +391,10 @@ if has('nvim')
   nnoremap <M-k> <c-w>k
   nnoremap <M-l> <c-w>l
 endif
+
+" Vim Pencil
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,wiki call pencil#init()
+augroup END
+
