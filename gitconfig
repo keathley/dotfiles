@@ -29,16 +29,16 @@
   ui = auto
 [color "diff"]
   meta = yellow bold
-  commit = green bold
+  commit = green
   frag = magenta bold
   old = red bold
-  new = green bold
+  new = green
   whitespace = red reverse
 [color "diff-highlight"]
   oldNormal = red bold
   oldHighlight = "red bold 52"
-  newNormal = "green bold"
-  newHighlight = "green bold 22"
+  newNormal = "green"
+  newHighlight = "green 22"
 [color "branch"]
   current = yellow reverse
   local = yellow
@@ -63,8 +63,8 @@
 [color "diff-highlight"]
   oldNormal = red bold
   oldHighlight = red bold 52
-  newNormal = green bold
-  newHighlight = green bold 22
+  newNormal = green
+  newHighlight = green 22
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
