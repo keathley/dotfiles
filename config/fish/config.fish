@@ -8,7 +8,7 @@ if test -e ~/.localenv
   source ~/.localenv
 end
 
-set -e fish_greeting
+set fish_greeting ""
 
 # highlighting inside manpages and elsewhere
 set -gx LESS_TERMCAP_mb \e'[01;31m'       # begin blinking
