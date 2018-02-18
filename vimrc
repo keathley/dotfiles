@@ -5,7 +5,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 set nocompatible
-set shell=/bin/bash
+" set shell=/bin/bash
 filetype off
 
 call plug#begin('~/.vim/plugged')
@@ -76,6 +76,10 @@ set hlsearch
 "set magic
 "set showmatch
 "set mat=2
+
+if has('nvim')
+  set inccommand=nosplit
+endif
 
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
