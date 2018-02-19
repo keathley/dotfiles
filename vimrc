@@ -24,6 +24,7 @@ Plug 'tpope/vim-endwise'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'mtth/scratch.vim'
 
 " Writing
 Plug 'vimwiki/vimwiki'
