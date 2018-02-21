@@ -10,8 +10,6 @@ filetype off
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'VundleVim/Vundle.vim'
-
 " Colors and styles
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
@@ -23,12 +21,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
 " Writing
 Plug 'vimwiki/vimwiki'
 Plug 'reedes/vim-pencil'
+Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 
 " Languages and syntax
 Plug 'tpope/vim-cucumber'
