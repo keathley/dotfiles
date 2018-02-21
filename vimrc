@@ -129,8 +129,8 @@ set splitright
 " Ruler and display
 set colorcolumn=80
 
-"" Copy to clipboard
-"" set clipboard=unnamed
+" Copy to clipboard
+set clipboard=unnamed
 
 "" Make backspace not suck
 "set backspace=eol,start,indent
