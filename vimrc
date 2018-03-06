@@ -129,7 +129,9 @@ set splitright
 set colorcolumn=80
 
 " Copy to clipboard
-set clipboard=unnamed
+if has('nvim')
+  set clipboard=unnamed
+endif
 
 "" Make backspace not suck
 "set backspace=eol,start,indent
