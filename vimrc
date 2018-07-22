@@ -14,6 +14,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
+Plug 'crusoexia/vim-monokai'
 
 " Productivity
 Plug 'tpope/vim-commentary'
@@ -24,10 +25,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
+Plug 'tpope/vim-dadbod'
+
 " Writing
 Plug 'vimwiki/vimwiki'
 Plug 'reedes/vim-pencil'
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+" Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'wiki'] }
+Plug 'junegunn/goyo.vim'
 
 " Languages and syntax
 Plug 'tpope/vim-cucumber'
@@ -45,6 +49,9 @@ Plug 'elmcast/elm-vim'
 Plug 'dag/vim-fish'
 Plug 'b4b4r07/vim-hcl'
 Plug 'rust-lang/rust.vim'
+Plug 'hwayne/tla.vim'
+Plug 'dleonard0/pony-vim-syntax'
+Plug 'cespare/vim-toml'
 
 call plug#end()
 
@@ -142,6 +149,7 @@ syntax on
 set t_Co=256
 set background=dark
 colorscheme solarized
+" colorscheme monokai
 
 " Omnicomplete
 set wildmode=longest,list
@@ -237,6 +245,12 @@ augroup pencil
   autocmd!
   autocmd FileType markdown,wiki call pencil#init()
 augroup END
+
+" Vimwiki
+let g:vimwiki_list = [
+    \{'path': '~/notes',
+    \ 'syntax': 'markdown', 'ext': '.md'}
+  \]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
