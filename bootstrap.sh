@@ -47,12 +47,12 @@ if [ ! -d "$dir" ]; then
   git clone git://github.com/keathley/dotfiles.git ~/dotfiles
 fi
 
-fancy_echo "Linking dotfiles..."
-env RCRC=$HOME/dotfiles/rcrc rcup
-
 fancy_echo "Updating Homebrew..."
 brew update
 brew bundle --file=$HOME/dotfiles/Brewfile
+
+fancy_echo "Linking dotfiles..."
+env RCRC=$HOME/dotfiles/rcrc rcup
 
 . $HOME/.asdf/asdf.sh
 
@@ -68,34 +68,16 @@ then
     asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
 fi
 
-if ! asdf plugin-list | grep node > /dev/null
-then
-  fancy_echo "Installing node asdf plugin..."
-  asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-fi
-
 if ! asdf plugin-list | grep ruby > /dev/null
 then
   fancy_echo "Installing ruby asdf plugin..."
   asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 fi
 
-if ! asdf plugin-list | grep elm > /dev/null
+if ! command -v rustup > /dev/null
 then
-  fancy_echo "Installing elm asdf plugin..."
-  asdf plugin-add elm https://github.com/obmarg/asdf-elm.git
-fi
-
-install_latest elixir
-install_latest erlang
-install_latest nodejs
-install_latest ruby
-install_latest elm
-
-if test ! $(which vtop)
-then
-  fancy_echo "Installing vtop..."
-  npm install -g vtop
+  fancy_echo "Installing rustup..."
+  curl https://sh.rustup.rs -sSf | sh
 fi
 
 if [[ ! $(psql -U postgres -c '\du' | grep 'postgres') ]]
