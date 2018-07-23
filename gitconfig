@@ -49,7 +49,6 @@
   untracked = cyan
 [commit]
   template = ~/.gitmessage
-  gpgsign = true
 [diff]
   compactionHeuristic = true
 [rebase]
@@ -58,8 +57,8 @@
   log  = diff-highlight | less
   diff = diff-so-fancy | less --tabs=4 -RFX
   show = diff-so-fancy | less --tabs=4 -RFX
-[interactive]
-  diffFilter = "diff-so-fancy"
+; [interactive]
+;   diffFilter = "diff-so-fancy"
 [color "diff-highlight"]
   oldNormal = red bold
   oldHighlight = red bold 52
