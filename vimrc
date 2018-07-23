@@ -26,11 +26,11 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
 Plug 'tpope/vim-dadbod'
+" Plug 'w0rp/ale'
 
 " Writing
 Plug 'vimwiki/vimwiki'
 Plug 'reedes/vim-pencil'
-" Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'wiki'] }
 Plug 'junegunn/goyo.vim'
 
 " Languages and syntax
@@ -50,8 +50,8 @@ Plug 'dag/vim-fish'
 Plug 'b4b4r07/vim-hcl'
 Plug 'rust-lang/rust.vim'
 Plug 'hwayne/tla.vim'
-Plug 'dleonard0/pony-vim-syntax'
 Plug 'cespare/vim-toml'
+Plug 'dleonard0/pony-vim-syntax'
 
 call plug#end()
 
