@@ -14,7 +14,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
-Plug 'crusoexia/vim-monokai'
 
 " Productivity
 Plug 'tpope/vim-commentary'
@@ -26,7 +25,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
 Plug 'tpope/vim-dadbod'
-" Plug 'w0rp/ale'
+Plug 'w0rp/ale', { 'for': 'rust' }
 
 " Writing
 Plug 'vimwiki/vimwiki'
@@ -52,6 +51,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'hwayne/tla.vim'
 Plug 'cespare/vim-toml'
 Plug 'dleonard0/pony-vim-syntax'
+Plug 'mattn/emmet-vim'
 
 call plug#end()
 
@@ -149,7 +149,6 @@ syntax on
 set t_Co=256
 set background=dark
 colorscheme solarized
-" colorscheme monokai
 
 " Omnicomplete
 set wildmode=longest,list
