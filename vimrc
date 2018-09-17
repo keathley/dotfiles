@@ -254,7 +254,7 @@ augroup END
 
 " Vimwiki
 let g:vimwiki_list = [
-    \{'path': '~/notes',
+    \{'path': '~/Desktop/notes',
     \ 'syntax': 'markdown', 'ext': '.md'}
   \]
 
