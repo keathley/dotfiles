@@ -223,6 +223,13 @@ nnoremap <silent> <Down> :resize +10<CR>
 nnoremap <silent> <Left> :vertical resize +10<CR>
 nnoremap <silent> <Right> :vertical resize -10<CR>
 
+augroup vimrcEx
+  autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
+augroup END
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
