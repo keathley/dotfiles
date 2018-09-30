@@ -47,6 +47,16 @@ if [ ! -d "$dir" ]; then
   git clone git://github.com/keathley/dotfiles.git ~/dotfiles
 fi
 
+if [ ! -d "~/bin" ]; then
+  fancy_echo "Creating bin directory..."
+  mkdir ~/bin
+fi
+
+if [ ! -d "~/go" ]; then
+  fancy_echo "Creating go directory..."
+  mkdir ~/go
+fi
+
 fancy_echo "Updating Homebrew..."
 brew update
 brew bundle --file=$HOME/dotfiles/Brewfile
@@ -80,11 +90,11 @@ then
   curl https://sh.rustup.rs -sSf | sh
 fi
 
-if [[ ! $(psql -U postgres -c '\du' | grep 'postgres') ]]
-then
-  fancy_echo "Setting up postgres"
-  createuser -s postgres
-fi
+# if [[ ! $(psql -U postgres -c '\du' | grep 'postgres') ]]
+# then
+#   fancy_echo "Setting up postgres"
+#   createuser -s postgres
+# fi
 
 if grep -Fxq "/usr/local/bin/fish" /etc/shells
 then

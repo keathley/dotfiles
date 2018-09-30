@@ -28,7 +28,7 @@ brew 'neovim'
 brew 'wget'
 
 cask 'docker'
-cask 'gpgtools'
+# cask 'gpgtools'
 cask 'iterm2'
 cask 'imageoptim'
 cask 'licecap'
