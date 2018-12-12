@@ -24,7 +24,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
-Plug 'tpope/vim-dadbod'
 Plug 'w0rp/ale', { 'for': 'rust' }
 
 " Writing
@@ -52,6 +51,8 @@ Plug 'hwayne/tla.vim'
 Plug 'cespare/vim-toml'
 Plug 'dleonard0/pony-vim-syntax'
 Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-markdown'
+" Plug 'vim-latex/vim-latex'
 
 call plug#end()
 
@@ -193,6 +194,8 @@ let g:lightline = {
 let mapleader=","
 
 " Move around splits with <c-hjkl>
+" let g:BASH_Ctrl_j = 'off'
+" let g:C_Ctrl_j = 'off'
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
@@ -249,12 +252,13 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 " Vim Pencil
 augroup pencil
   autocmd!
-  autocmd FileType markdown,wiki call pencil#init()
+  " autocmd FileType markdown,wiki call pencil#init()
 augroup END
 
 " Vimwiki
+let g:vimwiki_global_ext=0
 let g:vimwiki_list = [
-    \{'path': '~/Desktop/notes',
+    \{'path': '~/Desktop/research/notes',
     \ 'syntax': 'markdown', 'ext': '.md'}
   \]
 
