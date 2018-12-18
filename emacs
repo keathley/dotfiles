@@ -186,7 +186,7 @@
 			       (haskell . t)
 			       (elixir . t)
 			       (python . t)
-			       (sh . t)
+			       (shell . t)
 			       (R . t)
 			       (ruby . t)))
 
@@ -335,7 +335,7 @@
 
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (add-to-list 'load-path "~/.emacs.d/themes")
-(load-theme 'solarized t)
+;; (load-theme 'solarized t)
 ;; (load-theme 'tomorrow-night-bright t)
 ;; (require 'color-theme-sanityinc-tomorrow)
 ;; (load-theme 'spacemacs-dark)
@@ -358,8 +358,8 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-(add-to-list 'default-frame-alist '(font . "Fira Code Light-14" ))
-(set-face-attribute 'default t :font "Fira Code Light-14" )
+(add-to-list 'default-frame-alist '(font . "Monaco-14" ))
+(set-face-attribute 'default t :font "Monaco-14" )
 
 (provide '.emacs)
 ;;; .emacs ends here
