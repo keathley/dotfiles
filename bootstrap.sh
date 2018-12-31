@@ -47,12 +47,12 @@ if [ ! -d "$dir" ]; then
   git clone git://github.com/keathley/dotfiles.git ~/dotfiles
 fi
 
-if [ ! -d "~/bin" ]; then
+if [ ! -d "$HOME/bin" ]; then
   fancy_echo "Creating bin directory..."
   mkdir ~/bin
 fi
 
-if [ ! -d "~/go" ]; then
+if [ ! -d "$HOME/go" ]; then
   fancy_echo "Creating go directory..."
   mkdir ~/go
 fi
@@ -101,7 +101,7 @@ then
     fancy_echo "Already set up fish shell"
 else
     fancy_echo "Adding fish to shell list"
-    sudo echo "/usr/local/bin/fish" >> /etc/shells
+    echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
 fi
 
 case "$SHELL" in
