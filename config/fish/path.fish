@@ -7,5 +7,6 @@ set PATH $PATH \
          /usr/local/bin \
          ./node_modules/.bin \
          ~/.cargo/bin \
-         $GOPATH
+         $GOPATH \
+         $GOPATH/bin
 
