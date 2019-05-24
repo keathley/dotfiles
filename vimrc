@@ -12,7 +12,6 @@ call plug#begin('~/.vim/plugged')
 
 " Colors and styles
 Plug 'altercation/vim-colors-solarized'
-Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
 
 " Productivity
@@ -28,31 +27,22 @@ Plug 'w0rp/ale', { 'for': 'rust' }
 
 " Writing
 Plug 'vimwiki/vimwiki'
-Plug 'reedes/vim-pencil'
-Plug 'junegunn/goyo.vim'
+Plug 'reedes/vim-pencil', { 'for': 'markdown' }
+Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 
 " Languages and syntax
-Plug 'tpope/vim-cucumber'
-Plug 'vim-ruby/vim-ruby'
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'elixir-lang/vim-elixir'
-Plug 'pangloss/vim-javascript'
-Plug 'kchmck/vim-coffee-script'
-Plug 'mxw/vim-jsx'
-Plug 'fatih/vim-go'
-Plug 'raichoo/haskell-vim'
-Plug 'moll/vim-node'
-Plug 'slim-template/vim-slim'
-Plug 'elzr/vim-json'
-Plug 'elmcast/elm-vim'
-Plug 'dag/vim-fish'
-Plug 'b4b4r07/vim-hcl'
-Plug 'rust-lang/rust.vim'
-Plug 'hwayne/tla.vim'
-Plug 'cespare/vim-toml'
-Plug 'dleonard0/pony-vim-syntax'
-Plug 'mattn/emmet-vim'
-Plug 'tpope/vim-markdown'
-" Plug 'vim-latex/vim-latex'
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'raichoo/haskell-vim', { 'for': 'haskell' }
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'dag/vim-fish', { 'for': 'fish' }
+Plug 'b4b4r07/vim-hcl', { 'for': 'hcl' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'hwayne/tla.vim', { 'for': 'tla' }
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'dleonard0/pony-vim-syntax', { 'for': 'pony' }
+Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 
 call plug#end()
 
@@ -128,6 +118,8 @@ set showcmd
 " #justneckbeardthings
 set list
 set listchars=tab:\|\ ,trail:-
+" set fillchars+=vert:\|\
+autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Green ctermbg=NONE
 
 " Splits
 set splitbelow
@@ -201,6 +193,10 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+" Toggle previous buffer if we're in a crappy terminal that doesn't
+" understand C-6
+nnoremap gb <c-^>
+
 " Insert a hash rocket with <c-l>
 imap <c-l> <space>=><space>
 
@@ -254,6 +250,7 @@ augroup pencil
   autocmd!
   " autocmd FileType markdown,wiki call pencil#init()
 augroup END
+let g:pencil#map#suspend_af = 'K'
 
 " Vimwiki
 let g:vimwiki_global_ext=0
@@ -261,6 +258,22 @@ let g:vimwiki_list = [
     \{'path': '~/Desktop/research/notes',
     \ 'syntax': 'markdown', 'ext': '.md'}
   \]
+au BufRead,BufNewFile *.wiki set filetype=vimwiki
+" :autocmd FileType vimwiki map d :VimwikiMakeDiaryNote
+function! ToggleCalendar()
+  execute ":Calendar"
+  if exists("g:calendar_open")
+    if g:calendar_open == 1
+      execute "q"
+      unlet g:calendar_open
+    else
+      g:calendar_open = 1
+    end
+  else
+    let g:calendar_open = 1
+  end
+endfunction
+" :autocmd FileType vimwiki map c :call ToggleCalendar()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
