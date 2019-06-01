@@ -30,6 +30,7 @@ Plug 'w0rp/ale', { 'for': 'rust' }
 Plug 'vimwiki/vimwiki'
 Plug 'reedes/vim-pencil', { 'for': 'markdown' }
 Plug 'junegunn/goyo.vim'
+Plug 'Alok/notational-fzf-vim'
 
 " Languages and syntax
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
@@ -239,6 +240,11 @@ augroup pencil
   " autocmd FileType markdown,wiki call pencil#init()
 augroup END
 let g:pencil#map#suspend_af = 'K'
+
+" Notational
+let g:nv_main_directory = '~/Desktop/research/notes'
+let g:nv_search_paths = ['~/Desktop/research/notes', '~/Desktop/research/diary']
+" let g:nv_search_paths = ['~/Desktop/research/notes', '~/writing', '~/code', 'docs.md' , './notes.md']
 
 " Vimwiki
 let g:vimwiki_global_ext=0
