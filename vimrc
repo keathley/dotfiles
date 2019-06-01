@@ -156,7 +156,7 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 let g:sh_noisk=1
 
 " Folding
-set foldmethod=syntax
+set foldmethod=manual
 set nofoldenable
 
 " Insert only one space when joining lines that contain sentence-terminating
