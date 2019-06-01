@@ -18,15 +18,83 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
-   (vector "#c5c8c6" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#8abeb7" "#373b41"))
- '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
+   ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#657b83"])
+ '(compilation-message-face (quote default))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#839496")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
  '(custom-safe-themes
    (quote
-    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
+    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(fci-rule-color "#073642")
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#002b36" 0.25)
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#93a1a1")
+ '(highlight-tail-colors
+   (quote
+    (("#073642" . 0)
+     ("#546E00" . 20)
+     ("#00736F" . 30)
+     ("#00629D" . 50)
+     ("#7B6000" . 60)
+     ("#8B2C02" . 70)
+     ("#93115C" . 85)
+     ("#073642" . 100))))
+ '(hl-bg-colors
+   (quote
+    ("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00")))
+ '(hl-fg-colors
+   (quote
+    ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
+ '(hl-paren-colors (quote ("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900")))
+ '(magit-diff-use-overlays nil)
+ '(nrepl-message-colors
+   (quote
+    ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (rainbow-mode tabbar racer elixir-mode color-theme-sanityinc-solarized go-mode company-distel erlang evil-surround writegood-mode ace-jump-mode helm-ag helm-projectile helm dockerfile-mode cargo flycheck-flow flycheck-haskell flycheck-rust rust-mode toml-mode solarized-theme terraform-mode fish-mode js2-mode web-mode ob-elixir graphviz-dot-mode evil-paredit spacemacs-theme eyebrowse info+ powerline-evil spaceline all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil)))
- '(tabbar-separator (quote (0.5))))
+    (evil-leader color-theme-sanityinc-solarized rainbow-mode tabbar racer elixir-mode go-mode company-distel erlang evil-surround writegood-mode ace-jump-mode helm-ag helm-projectile helm dockerfile-mode cargo flycheck-flow flycheck-haskell flycheck-rust rust-mode toml-mode solarized-theme terraform-mode fish-mode js2-mode web-mode ob-elixir graphviz-dot-mode evil-paredit spacemacs-theme eyebrowse info+ powerline-evil spaceline all-the-icons neotree yaml-mode markdown-mode haskell-mode flycheck-elm flycheck elixir-yasnippets elm-mode elm-yasnippets yasnippet exec-path-from-shell magit ag company emmet-mode grizzl tagedit rainbow-delimiters paredit org evil-escape ample-theme color-theme-sanityinc-tomorrow cyberpunk-theme projectile alchemist evil)))
+ '(pos-tip-background-color "#073642")
+ '(pos-tip-foreground-color "#93a1a1")
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
+ '(tabbar-separator (quote (0.5)))
+ '(term-default-bg-color "#002b36")
+ '(term-default-fg-color "#839496")
+ '(vc-annotate-background nil)
+ '(vc-annotate-background-mode nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#dc322f")
+     (40 . "#ffff7fff0000")
+     (60 . "#ffffbfff0000")
+     (80 . "#b58900")
+     (100 . "#ffffffff0000")
+     (120 . "#ffffffff0000")
+     (140 . "#ffffffff0000")
+     (160 . "#ffffffff0000")
+     (180 . "#859900")
+     (200 . "#aaaaffff5555")
+     (220 . "#7fffffff7fff")
+     (240 . "#5555ffffaaaa")
+     (260 . "#2aaaffffd554")
+     (280 . "#2aa198")
+     (300 . "#0000ffffffff")
+     (320 . "#0000ffffffff")
+     (340 . "#0000ffffffff")
+     (360 . "#268bd2"))))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   (quote
+    (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83")))
+ '(xterm-color-names
+   ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#eee8d5"])
+ '(xterm-color-names-bright
+   ["#002b36" "#cb4b16" "#586e75" "#657b83" "#839496" "#6c71c4" "#93a1a1" "#fdf6e3"]))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -67,6 +135,13 @@
 (require 'evil)
 (require 'evil-surround)
 (require 'evil-escape)
+(require 'evil-leader)
+
+;; Set evil leader first
+(global-evil-leader-mode)
+(evil-leader/set-leader ",")
+(evil-leader/set-key "f" 'projectile-find-file)
+
 (setq-default evil-escape-key-sequence "kj")
 (evil-mode 1)
 (evil-escape-mode 1)
@@ -195,30 +270,30 @@
                              (set-fill-column 80)))
 
 ;; Spaceline config
-(require 'spaceline-config)
-(setq ns-use-srgb-colorspace nil)
+;; (require 'spaceline-config)
+;; (setq ns-use-srgb-colorspace nil)
 ;; (setq powerline-default-separator 'wave)
-(setq powerline-height '20)
-(setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-(setq spaceline-window-numbers-unicode t)
-(spaceline-spacemacs-theme)
-(spaceline-toggle-workspace-number-on)
-(spaceline-toggle-remote-host-off)
-(spaceline-toggle-minor-modes-off)
-(spaceline-toggle-remote-host-off)
-(spaceline-toggle-version-control-on)
-(spaceline-toggle-battery-off)
-(spaceline-toggle-buffer-size-off)
-(spaceline-toggle-buffer-position-off)
-(spaceline-toggle-hud-off)
+;; (setq powerline-height '20)
+;; (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+;; (setq spaceline-window-numbers-unicode t)
+;; (spaceline-spacemacs-theme)
+;; (spaceline-toggle-workspace-number-on)
+;; (spaceline-toggle-remote-host-off)
+;; (spaceline-toggle-minor-modes-off)
+;; (spaceline-toggle-remote-host-off)
+;; (spaceline-toggle-version-control-on)
+;; (spaceline-toggle-battery-off)
+;; (spaceline-toggle-buffer-size-off)
+;; (spaceline-toggle-buffer-position-off)
+;; (spaceline-toggle-hud-off)
 
 ;; Keyboard configurations.
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-;") 'toggle-comment-on-line)
-(global-set-key (kbd "s-p") 'projectile-find-file)
-(global-set-key (kbd "s-t") 'projectile-find-file)
-(global-set-key (kbd "s-r") 'projectile-find-tag)
-(global-set-key (kbd "s-S-F") 'projectile-ag)
+;; (global-set-key (kbd "s-p") 'projectile-find-file)
+;; (global-set-key (kbd "s-t") 'projectile-find-file)
+;; (global-set-key (kbd "s-r") 'projectile-find-tag)
+;; (global-set-key (kbd "s-S-F") 'projectile-ag)
 (global-set-key (kbd "C-x a") 'align-regexp)
 (global-set-key (kbd "s-\/") 'smart-comment)
 (global-set-key (kbd "C-x <up>") 'windmove-up)
@@ -332,16 +407,18 @@
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 
 ;; Make things look kinda nice
-
+(require 'color-theme)
+(require 'color-theme-solarized)
+(color-theme-initialize)
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (add-to-list 'load-path "~/.emacs.d/themes")
-;; (load-theme 'solarized t)
 ;; (load-theme 'tomorrow-night-bright t)
 ;; (require 'color-theme-sanityinc-tomorrow)
-;; (load-theme 'spacemacs-dark)
+(load-theme 'spacemacs-dark)
 
 ;; Solarized theme for when I'm feeling weird
 ;; (require 'solarized-theme)
+;; (require 'color-theme-solarized)
 ;; (setq solarized-scale-org-headlines nil)
 ;; (setq solarized-height-minus-1 1.0)
 ;; (setq solarized-height-plus-1 1.0)
@@ -349,14 +426,16 @@
 ;; (setq solarized-height-plus-3 1.0)
 ;; (setq solarized-height-plus-4 1.0)
 ;; (setq solarized-use-variable-pitch nil)
+;; (load-theme 'solarized-dark t)
 ;; (load-theme 'solarized-light)
+;; (load-theme 'solarized-dark t)
 
 (setq inhibit-splash-screen t)
 
 ; (global-linum-mode t)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(scroll-bar-mode -1)
+;; (scroll-bar-mode -1)
 
 (add-to-list 'default-frame-alist '(font . "Monaco-14" ))
 (set-face-attribute 'default t :font "Monaco-14" )

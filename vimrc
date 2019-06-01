@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
 " Colors and styles
 Plug 'altercation/vim-colors-solarized'
 Plug 'itchyny/lightline.vim'
+Plug 'luochen1990/rainbow'
 
 " Productivity
 Plug 'tpope/vim-commentary'
@@ -28,7 +29,7 @@ Plug 'w0rp/ale', { 'for': 'rust' }
 " Writing
 Plug 'vimwiki/vimwiki'
 Plug 'reedes/vim-pencil', { 'for': 'markdown' }
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'junegunn/goyo.vim'
 
 " Languages and syntax
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
@@ -42,16 +43,14 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'hwayne/tla.vim', { 'for': 'tla' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'dleonard0/pony-vim-syntax', { 'for': 'pony' }
-Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+Plug 'tpope/vim-markdown'
+Plug 'wlangstroth/vim-racket'
 
 call plug#end()
 
 filetype on
 filetype indent on
 filetype plugin on
-
-set hidden
-set history=10000
 
 " Tabs and such
 set expandtab
@@ -66,21 +65,12 @@ set laststatus=2
 set showmatch
 set incsearch
 set hlsearch
-"" Searching
-"set ignorecase
-"set smartcase
-"set incsearch
-"set hlsearch
-"set magic
-"set showmatch
-"set mat=2
+set ignorecase " make sure that both ignore and smart are set so that we use
+set smartcase  " smart case sensitive searching
 
 if has('nvim')
   set inccommand=nosplit
 endif
-
-" make searches case-sensitive only if they contain upper-case characters
-set ignorecase smartcase
 
 " highlight current line
 set cursorline
@@ -102,12 +92,10 @@ set scrolloff=3
 set autoread
 set nobackup
 set nowritebackup
+set noswapfile
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-"set nobackup
-"set nowritebackup
-"set noswapfile
-"set history=50
+set history=10000
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -118,12 +106,14 @@ set showcmd
 " #justneckbeardthings
 set list
 set listchars=tab:\|\ ,trail:-
-" set fillchars+=vert:\|\
-autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Green ctermbg=NONE
 
 " Splits
+" Ensure these open the way I'm used to
 set splitbelow
 set splitright
+
+" Buffers
+set hidden
 
 " Ruler and display
 set colorcolumn=80
@@ -133,15 +123,13 @@ if has('nvim')
   set clipboard=unnamed
 endif
 
-"" Make backspace not suck
-"set backspace=eol,start,indent
-"set backspace=2
-
 " Syntax highlighting and colors
 syntax on
 set t_Co=256
 set background=dark
 colorscheme solarized
+autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Green ctermbg=NONE
+let g:rainbow_active = 1
 
 " Omnicomplete
 set wildmode=longest,list
@@ -156,7 +144,7 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 let g:sh_noisk=1
 
 " Folding
-set foldmethod=manual
+set foldmethod=manual " manual by default otherwise it can make vim slow as fuck.
 set nofoldenable
 
 " Insert only one space when joining lines that contain sentence-terminating
@@ -169,25 +157,25 @@ set re=1
 " Set tags
 set tags=tags,.git/tags,.tags
 
-" Status bar and modelines
-set modeline
-set modelines=3
+" Status bar and tablines
 set showtabline=2
 set laststatus=2
-set noshowmode
+set noshowmode " don't show this since lightline will do it for us
 let g:lightline = {
       \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'fileencoding', 'filetype' ] ]
+      \ }
       \ }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MISC KEY MAPS
+" KEY MAPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let mapleader=","
 
 " Move around splits with <c-hjkl>
-" let g:BASH_Ctrl_j = 'off'
-" let g:C_Ctrl_j = 'off'
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
@@ -222,12 +210,12 @@ nnoremap <silent> <Down> :resize +10<CR>
 nnoremap <silent> <Left> :vertical resize +10<CR>
 nnoremap <silent> <Right> :vertical resize -10<CR>
 
-augroup vimrcEx
-  autocmd BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal g`\"" |
-        \ endif
-augroup END
+" augroup vimrcEx
+"   autocmd BufReadPost *
+"         \ if line("'\"") > 0 && line("'\"") <= line("$") |
+"         \   exe "normal g`\"" |
+"         \ endif
+" augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
