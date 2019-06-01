@@ -127,8 +127,8 @@ endif
 syntax on
 set t_Co=256
 set background=dark
-colorscheme solarized
 autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Green ctermbg=NONE
+colorscheme solarized
 let g:rainbow_active = 1
 
 " Omnicomplete
