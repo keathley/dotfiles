@@ -49,6 +49,7 @@
   untracked = cyan
 [commit]
   template = ~/.gitmessage
+	gpgsign = true
 [diff]
   compactionHeuristic = true
 [rebase]
