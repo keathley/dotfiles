@@ -28,14 +28,15 @@ Plug 'w0rp/ale', { 'for': 'rust' }
 
 " Writing
 Plug 'vimwiki/vimwiki'
-Plug 'reedes/vim-pencil', { 'for': 'markdown' }
+Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 Plug 'Alok/notational-fzf-vim'
 
 " Languages and syntax
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'vim-ruby/vim-ruby'
+Plug 'rhysd/vim-crystal'
 Plug 'elixir-lang/vim-elixir'
-Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'fatih/vim-go'
 Plug 'raichoo/haskell-vim', { 'for': 'haskell' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'dag/vim-fish', { 'for': 'fish' }
@@ -187,7 +188,7 @@ nnoremap <c-l> <c-w>l
 nnoremap gb <c-^>
 
 " Insert a hash rocket with <c-l>
-imap <c-l> <space>=><space>
+imap <c-l> \|><space>
 
 " Make ctrl-c work correctly
 imap <c-c> <esc>
@@ -230,6 +231,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 
 nnoremap <leader>f :FZF<CR>
 nnoremap <leader>r :Tags<CR>
+nnoremap <leader>g :Rg<CR>
 
 " Find command
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
