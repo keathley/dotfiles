@@ -38,6 +38,8 @@ alias bl="bundle list"
 alias bu="bundle update"
 alias bi="bundle install"
 
+alias fixcam="sudo killall AppleCameraAssistant;sudo killall VDCAssistant"
+
 # alias pubkey="pbcopy < ~/.ssh/id_rsa.pub"
 # alias p="cd $PROJECTS"
 # alias tea="tc start 3 --growl --beep"
