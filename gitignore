@@ -3,5 +3,4 @@
 *.swp
 *.todo
 npm-debug.log
-config/fish/functions/private/*
 

@@ -7,3 +7,5 @@ atom/storage
 atom/themes
 atom/blob-store
 lists/*.todo
+
+config/fish/functions/private
