@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+USAGE = <<EOS
+Usage: git changelog [range]
+
+Generates changelog text, formatted as markdown. If no range is specified than
+git-changelog will default to the latest tag and the current HEAD offset.
+
+Example usage:
+  git changelog >> CHANGELOG.md
+EOS
+
+if ARGV.delete("--help") || ARGV.delete("-h")
+  puts USAGE
+  exit
+end
+
+def repo_url
+  origin = `git remote get-url origin`
+  cleaned = origin.strip.sub('git@', '').sub(':', '/').sub('.git', '')
+  "https://#{cleaned}"
+end
+
+def latest_tag
+  `git tag --list`.split.sort.reverse[0]
+end
+
+FORMAT = "* [%h](#{repo_url}/commit/%H) %s - %an"
+
+def commits(first, last)
+  `git log #{first}..#{last} --pretty=format:'#{FORMAT}' --reverse`
+end
+
+puts commits(latest_tag, "HEAD")
+
