@@ -21,7 +21,7 @@ def repo_url
 end
 
 def latest_tag
-  `git tag --list`.split.sort.reverse[0]
+  `git tag --list --sort=version:refname`.split.reverse[0]
 end
 
 FORMAT = "* [%h](#{repo_url}/commit/%H) %s - %an"
