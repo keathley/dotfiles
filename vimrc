@@ -24,7 +24,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
-Plug 'w0rp/ale', { 'for': 'rust' }
+" Plug 'w0rp/ale'
+" Plug 'w0rp/ale', { 'for': 'rust' }
+Plug 'dense-analysis/ale', { 'for': 'rust' }
 
 " Writing
 Plug 'vimwiki/vimwiki'
@@ -132,6 +134,9 @@ set background=dark
 autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Green ctermbg=NONE
 colorscheme solarized
 let g:rainbow_active = 1
+
+" Ale
+" let g:ale_linters = {'rust': ['rls']}
 
 " Omnicomplete
 set wildmode=longest,list
