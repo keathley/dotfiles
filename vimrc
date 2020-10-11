@@ -24,15 +24,17 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
-" Plug 'w0rp/ale'
-" Plug 'w0rp/ale', { 'for': 'rust' }
-Plug 'dense-analysis/ale', { 'for': 'rust' }
+Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
 
 " Writing
 Plug 'vimwiki/vimwiki'
+" Plug 'lervag/wiki.vim'
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 Plug 'Alok/notational-fzf-vim'
+Plug 'michal-h21/vim-zettel'
 
 " Languages and syntax
 Plug 'vim-ruby/vim-ruby'
@@ -253,7 +255,11 @@ let g:nv_main_directory = '~/Desktop/research/notes'
 let g:nv_search_paths = ['~/Desktop/research/notes', '~/Desktop/research/diary']
 " let g:nv_search_paths = ['~/Desktop/research/notes', '~/writing', '~/code', 'docs.md' , './notes.md']
 
-" Vimwiki
+" Wiki
+" let g:wiki_root = '~/Desktop/research/wiki'
+" let g:wiki_filetypes = ['wiki', 'markdown', 'md']
+" nnoremap <leader>wi :e ~/Desktop/research/wiki/journal/journal.md<CR>
+" nnoremap <leader>w<leader>i :WikiJournalIndex!<CR>
 let g:vimwiki_global_ext=0
 let g:vimwiki_list = [
     \{'path': '~/Desktop/research/notes',
@@ -261,19 +267,19 @@ let g:vimwiki_list = [
   \]
 au BufRead,BufNewFile *.wiki set filetype=vimwiki
 " :autocmd FileType vimwiki map d :VimwikiMakeDiaryNote
-function! ToggleCalendar()
-  execute ":Calendar"
-  if exists("g:calendar_open")
-    if g:calendar_open == 1
-      execute "q"
-      unlet g:calendar_open
-    else
-      g:calendar_open = 1
-    end
-  else
-    let g:calendar_open = 1
-  end
-endfunction
+" function! ToggleCalendar()
+"   execute ":Calendar"
+"   if exists("g:calendar_open")
+"     if g:calendar_open == 1
+"       execute "q"
+"       unlet g:calendar_open
+"     else
+"       g:calendar_open = 1
+"     end
+"   else
+"     let g:calendar_open = 1
+"   end
+" endfunction
 " :autocmd FileType vimwiki map c :call ToggleCalendar()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
