@@ -5,6 +5,7 @@
 [core]
   editor = /usr/local/bin/nvim
   pager = diff-so-fancy | less --tabs=4 -RFX
+	attributesfile = ~/.gitattributes
 [alias]
   r = !GIT_NO_PAGER=1 git l -30
   ra = !git r --all
