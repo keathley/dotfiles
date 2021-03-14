@@ -31,6 +31,11 @@ Plug 'mtth/scratch.vim'
 " Plug 'prabirshrestha/async.vim'
 " Plug 'lighttiger2505/sqls.vim'
 
+if !has('nvim')
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
+end
+
 " Writing
 Plug 'vimwiki/vimwiki'
 Plug 'reedes/vim-pencil'
