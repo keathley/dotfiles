@@ -25,8 +25,10 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
 Plug 'dense-analysis/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
+if !has('nvim')
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
+end
 
 " Writing
 Plug 'vimwiki/vimwiki'
