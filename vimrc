@@ -57,6 +57,12 @@ Plug 'wlangstroth/vim-racket'
 " Lisp stuff
 Plug 'jpalardy/vim-slime'
 
+if has("nvim")
+  " Assumes you're using Neovim nightly
+  Plug "neovim/nvim-lspconfig"
+  Plug "nvim-lua/completion-nvim"
+endif
+
 call plug#end()
 
 if executable('rls')
@@ -416,4 +422,7 @@ if has('nvim')
   nnoremap <M-j> <c-w>j
   nnoremap <M-k> <c-w>k
   nnoremap <M-l> <c-w>l
+
+  " for nvim-completion
+  set completeopt="menuone,noinsert,noselect"
 endif
