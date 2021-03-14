@@ -52,6 +52,12 @@ Plug 'dleonard0/pony-vim-syntax', { 'for': 'pony' }
 Plug 'tpope/vim-markdown'
 Plug 'wlangstroth/vim-racket'
 
+if has("nvim")
+  " Assumes you're using Neovim nightly
+  Plug "neovim/nvim-lspconfig"
+  Plug "nvim-lua/completion-nvim"
+endif
+
 call plug#end()
 
 filetype on
@@ -352,4 +358,7 @@ if has('nvim')
   nnoremap <M-j> <c-w>j
   nnoremap <M-k> <c-w>k
   nnoremap <M-l> <c-w>l
+
+  " for nvim-completion
+  set completeopt="menuone,noinsert,noselect"
 endif
