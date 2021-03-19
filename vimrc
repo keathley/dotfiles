@@ -1,7 +1,15 @@
-if empty(glob('~/.vim/autoload/plug.vim'))
+if has("nvim")
+  if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
+else
+  if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
 endif
 
 set nocompatible
@@ -25,10 +33,10 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
 Plug 'dense-analysis/ale'
-if !has('nvim')
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
-end
+" if !has('nvim')
+"   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"   Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
+" endif
 
 " Writing
 Plug 'vimwiki/vimwiki'
@@ -56,8 +64,8 @@ Plug 'wlangstroth/vim-racket'
 
 if has("nvim")
   " Assumes you're using Neovim nightly
-  Plug "neovim/nvim-lspconfig"
-  Plug "nvim-lua/completion-nvim"
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
 endif
 
 call plug#end()
