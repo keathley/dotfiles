@@ -27,6 +27,11 @@ Plug 'mtth/scratch.vim'
 Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'lighttiger2505/sqls.vim'
 
 " Writing
 Plug 'vimwiki/vimwiki'
@@ -34,6 +39,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 Plug 'Alok/notational-fzf-vim'
+Plug 'junegunn/limelight.vim'
 Plug 'michal-h21/vim-zettel'
 
 " Languages and syntax
@@ -49,10 +55,18 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'hwayne/tla.vim', { 'for': 'tla' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'dleonard0/pony-vim-syntax', { 'for': 'pony' }
-Plug 'tpope/vim-markdown'
+Plug 'plasticboy/vim-markdown'
 Plug 'wlangstroth/vim-racket'
 
 call plug#end()
+
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
 
 filetype on
 filetype indent on
@@ -139,6 +153,8 @@ let g:rainbow_active = 1
 
 " Ale
 " let g:ale_linters = {'rust': ['rls']}
+" Limelight
+let g:limelight_conceal_ctermfg = 'green'
 
 " Omnicomplete
 set wildmode=longest,list
@@ -243,6 +259,51 @@ nnoremap <leader>g :Rg<CR>
 " Find command
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
+"
+" Writing "
+"
+
+function! MakeNote(...)
+  let s:sanitized_name = join(a:000, '-') . '.md'
+  let s:time = strftime("%Y%m%d%H%M%S")
+
+  execute 'e ' . fnameescape($HOME . '/research/notes/' . s:time. '-' . s:sanitized_name)
+endfunction
+
+command! -nargs=+ NewNote :call MakeNote(<f-args>)
+" command! -bang -nargs=? NoteSearch
+"       \ call fzf#vim#grep(
+"       \'rg --line-number --column --color=always --smart-case -- '.shellescape(<q-args>),
+"       \1,
+"       \<bang>0)
+command! -bang -nargs=? NoteSearch
+      \ call fzf#vim#grep(
+      \'rg --line-number --column --color=always --smart-case -- '.shellescape(<q-args>), 1,
+      \fzf#vim#with_preview({'dir': $HOME . '/research/notes', 'options': '--tiebreak=end'}), <bang>0)
+
+" Treat all .md files as markdown
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+
+" Hide and format markdown elements like **bold**
+autocmd FileType markdown set conceallevel=2
+
+nnoremap <leader>zn :NewNote<space>
+nnoremap <leader>zs :NoteSearch<CR>
+
+"" Yank filenames
+nnoremap <leader>yf :let @" = expand('%')<CR>
+
+" configuration for vim-markdown
+let g:vim_markdown_conceal = 2
+let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_math = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_autowrite = 1
+let g:vim_markdown_edit_url_in = 'tab'
+let g:vim_markdown_follow_anchor = 1
+
 " Vim Pencil
 augroup pencil
   autocmd!
@@ -281,6 +342,7 @@ au BufRead,BufNewFile *.wiki set filetype=vimwiki
 "   end
 " endfunction
 " :autocmd FileType vimwiki map c :call ToggleCalendar()
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
