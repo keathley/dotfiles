@@ -34,7 +34,7 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 0
+    x: 5
     y: 0
 
   # Spread additional padding evenly around the terminal content.
@@ -101,7 +101,8 @@ tabspaces: 8
 # Font configuration (changes require restart)
 font:
   normal:
-    family: IBM Plex Mono Medium
+    family: IBM Plex Mono
+    style: Regular
   # Normal (roman) font face
   #normal:
     # Font family
@@ -222,7 +223,7 @@ colors:
 #   - Linear
 #
 # Specifying a `duration` of `0` will disable the visual bell.
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
   color: '0xffffff'
