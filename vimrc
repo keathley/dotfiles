@@ -25,8 +25,6 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
 Plug 'dense-analysis/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -35,10 +33,8 @@ Plug 'lighttiger2505/sqls.vim'
 
 " Writing
 Plug 'vimwiki/vimwiki'
-" Plug 'lervag/wiki.vim'
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
-Plug 'Alok/notational-fzf-vim'
 Plug 'junegunn/limelight.vim'
 Plug 'michal-h21/vim-zettel'
 
