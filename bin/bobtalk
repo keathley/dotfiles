@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+input = ARGF.read
+
+output = input.split('')
+  .each_with_index
+  .map { |char, i| if i % 2 == 0 then char.upcase else char.downcase end }
+  .join
+
+puts output
