@@ -24,12 +24,12 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
-Plug 'dense-analysis/ale'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'lighttiger2505/sqls.vim'
+" Plug 'dense-analysis/ale'
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'prabirshrestha/asyncomplete.vim'
+" Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Plug 'prabirshrestha/async.vim'
+" Plug 'lighttiger2505/sqls.vim'
 
 " Writing
 Plug 'vimwiki/vimwiki'
@@ -53,6 +53,9 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'dleonard0/pony-vim-syntax', { 'for': 'pony' }
 Plug 'plasticboy/vim-markdown'
 Plug 'wlangstroth/vim-racket'
+
+" Lisp stuff
+Plug 'jpalardy/vim-slime'
 
 call plug#end()
 
