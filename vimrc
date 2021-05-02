@@ -258,6 +258,14 @@ nnoremap <leader>g :Rg<CR>
 " Find command
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
+" Vim sime
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
+let g:slime_no_mappings = 1
+xmap <c-c><c-c> <Plug>SlimeRegionSend
+nmap <c-c><c-c> <Plug>SlimeParagraphSend
+nmap <c-c>v     <Plug>SlimeConfig
+
 "
 " Writing "
 "
@@ -270,11 +278,6 @@ function! MakeNote(...)
 endfunction
 
 command! -nargs=+ NewNote :call MakeNote(<f-args>)
-" command! -bang -nargs=? NoteSearch
-"       \ call fzf#vim#grep(
-"       \'rg --line-number --column --color=always --smart-case -- '.shellescape(<q-args>),
-"       \1,
-"       \<bang>0)
 command! -bang -nargs=? NoteSearch
       \ call fzf#vim#grep(
       \'rg --line-number --column --color=always --smart-case -- '.shellescape(<q-args>), 1,
