@@ -5,6 +5,9 @@ function ..... ; cd ../../../.. ; end
 
 function grep     ; command grep --color=auto $argv ; end
 
+# Try out neovim for a bit
+# alias vim='nvim'
+
 alias i='iex'
 alias im='iex -S mix'
 alias m='mix'

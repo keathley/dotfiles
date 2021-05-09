@@ -1,7 +1,7 @@
 if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+              \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 set nocompatible
@@ -24,12 +24,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
-" Plug 'dense-analysis/ale'
-" Plug 'prabirshrestha/vim-lsp'
-" Plug 'prabirshrestha/asyncomplete.vim'
-" Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" Plug 'prabirshrestha/async.vim'
-" Plug 'lighttiger2505/sqls.vim'
+Plug 'dense-analysis/ale'
 
 " Writing
 Plug 'vimwiki/vimwiki'
@@ -56,6 +51,12 @@ Plug 'wlangstroth/vim-racket'
 
 " Lisp stuff
 Plug 'jpalardy/vim-slime'
+
+if has("nvim")
+  " Assumes you're using Neovim nightly
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
+endif
 
 call plug#end()
 
@@ -416,4 +417,7 @@ if has('nvim')
   nnoremap <M-j> <c-w>j
   nnoremap <M-k> <c-w>k
   nnoremap <M-l> <c-w>l
+
+  " for nvim-completion
+  set completeopt="menuone,noinsert,noselect"
 endif
