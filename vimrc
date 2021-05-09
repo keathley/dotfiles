@@ -153,6 +153,12 @@ let g:rainbow_active = 1
 
 " Ale
 " let g:ale_linters = {'rust': ['rls']}
+let g:ale_linters = { 'rust': ['rls'], 'elixir': ['elixir-ls', 'credo'] }
+let g:ale_elixir_elixir_ls_release = expand("~/.elixir-ls")
+let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:true, 'fetchDeps': v:false}}
+set completeopt=menu,menuone,preview,noselect,noinsert
+let g:ale_completion_enabled = 1
+
 " Limelight
 let g:limelight_conceal_ctermfg = 'green'
 
