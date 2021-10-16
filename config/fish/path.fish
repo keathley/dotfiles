@@ -7,6 +7,7 @@ if test -d $java_path
 end
 
 set PATH $PATH \
+         ~/.local/bin \
          ./bin \
          ~/.bin \
          ~/bin \

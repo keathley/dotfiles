@@ -29,5 +29,8 @@ set -g fish_user_paths "/usr/local/opt/gettext/bin" $fish_user_paths
 export ERL_AFLAGS="-kernel shell_history enabled"
 export FZF_DEFAULT_OPTS='--height 30%'
 
-# Add llvm to path in order to use llvm utils
-set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /opt/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<
+
