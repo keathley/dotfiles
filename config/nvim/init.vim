@@ -391,7 +391,7 @@ lspconfig.elixirls.setup(
       completion.on_attach()
 
       -- format the file. If the LS doesn't do formatting its a noop
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "df", "<cmd>lua vim.lsp.buf.formatting()<cr>", {noremap = true, silent = true})
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "df", "<cmd>lua vim.lsp.buf.formatting()<cr>", {noremap = true, silent = true})
 
       -- Show the current diagnostic in a floating window
       -- Helpful when the error is too long and falls off the edge of the buffer.
@@ -404,7 +404,7 @@ lspconfig.elixirls.setup(
       )
 
       -- Go to definition.
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "dt", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "dt", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
 
       -- Shows documentation for the given function or module. You should be able to scroll with the
       -- mouse if it doesn't fit in the floating window
