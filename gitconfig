@@ -2,6 +2,7 @@
   path = ~/.gitconfig.local
 [init]
   templatedir = ~/.git_template
+	defaultBranch = main
 [core]
   editor = ~/.asdf/shims/nvim
   ; editor = /usr/local/bin/nvim
