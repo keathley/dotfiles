@@ -24,7 +24,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
-" Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 
 " Writing
 Plug 'vimwiki/vimwiki'
@@ -49,7 +49,7 @@ Plug 'dleonard0/pony-vim-syntax', { 'for': 'pony' }
 Plug 'plasticboy/vim-markdown'
 Plug 'wlangstroth/vim-racket'
 Plug 'ziglang/zig.vim'
-
+Plug 'zah/nim.vim'
 
 " Lisp stuff
 Plug 'jpalardy/vim-slime'
