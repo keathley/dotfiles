@@ -35,7 +35,6 @@ Plug 'junegunn/limelight.vim'
 
 " Languages and syntax
 Plug 'vim-ruby/vim-ruby'
-Plug 'rhysd/vim-crystal'
 Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'raichoo/haskell-vim', { 'for': 'haskell' }
@@ -45,7 +44,6 @@ Plug 'b4b4r07/vim-hcl', { 'for': 'hcl' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'hwayne/tla.vim', { 'for': 'tla' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'dleonard0/pony-vim-syntax', { 'for': 'pony' }
 Plug 'plasticboy/vim-markdown'
 Plug 'wlangstroth/vim-racket'
 Plug 'ziglang/zig.vim'
@@ -53,12 +51,6 @@ Plug 'zah/nim.vim'
 
 " Lisp stuff
 Plug 'jpalardy/vim-slime'
-
-if has("nvim")
-  " Assumes you're using Neovim nightly
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'nvim-lua/completion-nvim'
-endif
 
 call plug#end()
 
@@ -139,11 +131,6 @@ set hidden
 
 " Ruler and display
 set colorcolumn=80
-
-" Copy to clipboard
-if has('nvim')
-  set clipboard=unnamed
-endif
 
 " Syntax highlighting and colors
 syntax on
@@ -278,6 +265,23 @@ nmap <c-c>v     <Plug>SlimeConfig
 "
 " Writing "
 "
+"
+" Treat all .md files as markdown
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+
+" configuration for vim-markdown
+let g:vim_markdown_conceal = 2
+let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_math = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_autowrite = 1
+let g:vim_markdown_edit_url_in = 'tab'
+let g:vim_markdown_follow_anchor = 1
+
+" Hide and format markdown elements like **bold**
+autocmd FileType markdown set conceallevel=1
 
 function! MakeNote(...)
   let s:sanitized_name = join(a:000, '-') . '.md'
@@ -292,28 +296,11 @@ command! -bang -nargs=? NoteSearch
       \'rg --line-number --column --color=always --smart-case -- '.shellescape(<q-args>), 1,
       \fzf#vim#with_preview({'dir': $HOME . '/research/notes', 'options': '--tiebreak=end'}), <bang>0)
 
-" Treat all .md files as markdown
-autocmd BufNewFile,BufRead *.md set filetype=markdown
-
-" Hide and format markdown elements like **bold**
-autocmd FileType markdown set conceallevel=2
-
 nnoremap <leader>zn :NewNote<space>
 nnoremap <leader>zs :NoteSearch<CR>
 
 "" Yank filenames
 nnoremap <leader>yf :let @" = expand('%')<CR>
-
-" configuration for vim-markdown
-let g:vim_markdown_conceal = 2
-let g:vim_markdown_conceal_code_blocks = 0
-let g:vim_markdown_math = 1
-let g:vim_markdown_toml_frontmatter = 1
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_strikethrough = 1
-let g:vim_markdown_autowrite = 1
-let g:vim_markdown_edit_url_in = 'tab'
-let g:vim_markdown_follow_anchor = 1
 
 " Vim Pencil
 augroup pencil
@@ -321,11 +308,6 @@ augroup pencil
   " autocmd FileType markdown,wiki call pencil#init()
 augroup END
 let g:pencil#map#suspend_af = 'K'
-
-" Notational
-let g:nv_main_directory = '~/Desktop/research/notes'
-let g:nv_search_paths = ['~/Desktop/research/notes', '~/Desktop/research/diary']
-" let g:nv_search_paths = ['~/Desktop/research/notes', '~/writing', '~/code', 'docs.md' , './notes.md']
 
 " Wiki
 " let g:wiki_root = '~/Desktop/research/wiki'
@@ -398,34 +380,3 @@ function! AlignLine(line, sep, maxpos, extra)
   let spaces = repeat(' ', a:maxpos - strlen(m[1]) + a:extra)
   return m[1] . spaces . m[2]
 endfunction
-
-" Terminal mode nonsense
-if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-  tnoremap <M-[> <Esc>
-  tnoremap <C-v><Esc> <Esc>
-
-  " Terminal mode:
-  tnoremap <M-h> <c-\><c-n><c-w>h
-  tnoremap <M-j> <c-\><c-n><c-w>j
-  tnoremap <M-k> <c-\><c-n><c-w>k
-  tnoremap <M-l> <c-\><c-n><c-w>l
-  " Insert mode:
-  inoremap <M-h> <Esc><c-w>h
-  inoremap <M-j> <Esc><c-w>j
-  inoremap <M-k> <Esc><c-w>k
-  inoremap <M-l> <Esc><c-w>l
-  " Visual mode:
-  vnoremap <M-h> <Esc><c-w>h
-  vnoremap <M-j> <Esc><c-w>j
-  vnoremap <M-k> <Esc><c-w>k
-  vnoremap <M-l> <Esc><c-w>l
-  " Normal mode:
-  nnoremap <M-h> <c-w>h
-  nnoremap <M-j> <c-w>j
-  nnoremap <M-k> <c-w>k
-  nnoremap <M-l> <c-w>l
-
-  " for nvim-completion
-  set completeopt="menuone,noinsert,noselect"
-endif
