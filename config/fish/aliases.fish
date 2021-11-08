@@ -32,6 +32,10 @@ alias bl="bundle list"
 alias bu="bundle update"
 alias bi="bundle install"
 
+# Renode stuff
+alias renode='mono /Applications/Renode.app/Contents/MacOS/bin/Renode.exe'
+alias renode-test='/Applications/Renode.app/Contents/MacOS/tests/test.sh'
+
 # alias pubkey="pbcopy < ~/.ssh/id_rsa.pub"
 # alias p="cd $PROJECTS"
 # alias tea="tc start 3 --growl --beep"

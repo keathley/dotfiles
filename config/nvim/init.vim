@@ -18,6 +18,7 @@ Plug 'tpope/vim-commentary'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'TimUntersberger/neogit'
 
 " IDE type stuff
 Plug 'neovim/nvim-lspconfig'
@@ -34,8 +35,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 Plug 'dhruvasagar/vim-table-mode'
-" Plug 'godlygeek/tabular'
-" Plug 'preservim/vim-markdown'
 Plug 'mickael-menu/zk-nvim'
 
 " Languages and syntax
@@ -51,10 +50,13 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'wlangstroth/vim-racket'
 Plug 'ziglang/zig.vim'
 Plug 'zah/nim.vim'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'zah/nim.vim'
 
 " Rust stuff
 Plug 'rust-lang/rust.vim'
 Plug 'simrat39/rust-tools.nvim'
+Plug 'nvim-lua/plenary.nvim'
 
 call plug#end()
 
@@ -160,11 +162,13 @@ set nofoldenable
 " punctuation like `.`.
 set nojoinspaces
 
-" Use the old regex
-set re=1
+" I prefer the old regex syntax but it breaks some language syntax
+" highlighting so we're using the new one.
+" set re=1
+set re=2
 
 " Set tags
-set tags=tags,.git/tags,.tags
+" set tags=tags,.git/tags,.tags
 
 " Status bar and tablines
 set showtabline=2
@@ -355,6 +359,7 @@ nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 " have a fixed column for the diagnostics to appear in
 " this removes the jitter when warnings/errors flow in
 " set signcolumn=yes
+set signcolumn=auto
 
 " nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 " nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
@@ -363,13 +368,18 @@ nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 " nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 
 lua <<EOF
-local nvim_lsp = require("lspconfig")
 
-vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", {noremap = true, silent = true})
--- vim.api.nvim_set_keymap("n", "dt", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "K",  "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", {noremap = true, silent = true})
+local nvim_lsp = require("lspconfig")
+local opts = { noremap=true, silent=true }
+vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", opts)
+vim.api.nvim_set_keymap("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+vim.api.nvim_set_keymap("n", "K",  "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+vim.api.nvim_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 
 require('rust-tools').setup({
   tools = { -- rust-tools options
@@ -405,19 +415,6 @@ require('rust-tools').setup({
   },
 })
 
--- Ruby LSP support
-nvim_lsp.solargraph.setup({
-  settings = {
-    solargraph = {
-      diagnostics = false,
-    }
-  }
-})
-
--- nvim_lsp.zls.setup({
---   cmd = { "~/zls/zls" }
--- })
-
 -- You'll need to install the LS somewhere and you can set the path here.
 -- I use the cache dir because the lspconfig plugin used to have auto installers
 -- but they removed it because it was too much maintenance.
@@ -446,20 +443,73 @@ nvim_lsp.elixirls.setup({
   capabilities = capabilities,
 })
 
--- require("zk").setup({
---   picker = "fzf",
--- })
-
 -- ZK Setup
--- nvim_lsp.zk.setup({
---   on_attach = function(_, bufnr)
---     vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
---   end,
---   capabilities = capabilities,
--- })
+local zk = require("zk")
+zk.setup({
+  picker = "fzf",
+  auto_attach = {
+    enabled = true,
+    filetypes = { "markdown" },
+  },
+})
+
+local commands = require("zk.commands")
+
+local opts = { noremap=true, silent=false }
+-- Create a new note after asking for its title.
+vim.api.nvim_set_keymap("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opts)
+-- Open notes.
+vim.api.nvim_set_keymap("n", "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", opts)
+-- Open notes associated with the selected tags.
+vim.api.nvim_set_keymap("n", "<leader>zt", "<Cmd>ZkTags<CR>", opts)
+-- Search for the notes matching a given query.
+vim.api.nvim_set_keymap("n", "<leader>zf", "<Cmd>ZkNotes { sort = { 'modified' }, match = vim.fn.input('Search: ') }<CR>", opts)
+-- Search for the notes matching the current visual selection.
+vim.api.nvim_set_keymap("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opts)
+
+commands.add("ZkOrphans", function(options)
+  options = vim.tbl_extend("force", { orphan = true }, options or {})
+  zk.edit(options, { title = "Zk Orphans" })
+end)
+
+vim.api.nvim_set_keymap("n", "<leader>zzo", ":'<,'>ZkOrphans<CR>", opts)
 
 vim.opt.spell = true
 vim.opt.spelllang = { 'en_us' }
+
+-- EFM setup
+nvim_lsp.efm.setup({
+  capabilities = capabilities,
+  -- on_attach = on_attach,
+  filetypes = {"elixir"}
+})
+
+nvim_lsp.tailwindcss.setup({
+  capabilities = capabilities,
+})
+
+nvim_lsp.html.setup({
+  capabilities = capabilities,
+  filetypes = { "html", "heex", "eex" },
+})
+
+nvim_lsp.zls.setup({
+  capabilities = capabilities,
+  -- cmd = { "~/zls/zls" }
+})
+
+-- Ruby LSP support
+nvim_lsp.solargraph.setup({
+  capabilities = capabilities,
+  settings = {
+    solargraph = {
+      diagnostics = false,
+    }
+  }
+})
+
+-- typescript LSP support
+nvim_lsp.tsserver.setup{}
 
 local cmp = require('cmp')
 cmp.setup({
@@ -487,12 +537,16 @@ cmp.setup({
 
   -- Installed sources
   sources = {
+    { name = 'buffer', keyword_length = 5 },
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
     { name = 'nvim_lua' },
-    { name = 'buffer', keyword_length = 5 },
     { name = 'path' },
     { name = 'spell', keyword_length = 6 },
   },
 })
+
+-- neogit
+local neogit = require('neogit')
+neogit.setup {}
 EOF

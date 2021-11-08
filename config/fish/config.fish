@@ -1,12 +1,6 @@
 source ~/.asdf/asdf.fish
 source ~/.config/fish/path.fish
 source ~/.config/fish/aliases.fish
-# source ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
-# eval (opam config env)
-
-if test -e ~/.localenv
-  source ~/.localenv
-end
 
 set fish_greeting ""
 
@@ -24,13 +18,15 @@ set -gx LESS_TERMCAP_so \e'[38;5;246m'    # begin standout-mode - info box
 set -gx LESS_TERMCAP_ue \e'[0m'           # end underline
 set -gx LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 
-export EDITOR="vim"
+export EDITOR="nvim"
 set -g fish_user_paths "/usr/local/opt/gettext/bin" $fish_user_paths
 export ERL_AFLAGS="-kernel shell_history enabled"
 export FZF_DEFAULT_OPTS='--height 30%'
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# eval /opt/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<
+if test -e ~/.localenv
+  source ~/.localenv
+end
+
+
+export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 

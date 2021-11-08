@@ -24,14 +24,18 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mtth/scratch.vim'
 
-Plug 'dense-analysis/ale'
-
 " Writing
 Plug 'vimwiki/vimwiki'
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-" Plug 'michal-h21/vim-zettel'
+
+" Language servers and linters
+Plug 'dense-analysis/ale'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Languages and syntax
 Plug 'vim-ruby/vim-ruby'
@@ -41,9 +45,9 @@ Plug 'raichoo/haskell-vim', { 'for': 'haskell' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'dag/vim-fish', { 'for': 'fish' }
 Plug 'b4b4r07/vim-hcl', { 'for': 'hcl' }
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'rust-lang/rust.vim'
 Plug 'hwayne/tla.vim', { 'for': 'tla' }
-Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'cespare/vim-toml'
 Plug 'plasticboy/vim-markdown'
 Plug 'wlangstroth/vim-racket'
 Plug 'ziglang/zig.vim'
@@ -141,11 +145,15 @@ colorscheme solarized
 let g:rainbow_active = 1
 
 " Ale
-let g:ale_linters = { 'rust': ['rls'], 'elixir': ['elixir-ls', 'credo'] }
+let g:ale_linters = { 'rust': ['rls', 'analyzer'], 'elixir': ['elixir-ls', 'credo'], 'nim': ['nimlsp'] }
 let g:ale_elixir_elixir_ls_release = expand("~/.elixir-ls")
 let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:true, 'fetchDeps': v:false}}
+
+let g:ale_fixers = { 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'] }
+
 set completeopt=menu,menuone,preview,noselect,noinsert
 let g:ale_completion_enabled = 1
+nnoremap <C-LeftMouse> :ALEGoToDefinition<CR>
 
 " Limelight
 let g:limelight_conceal_ctermfg = 'green'
