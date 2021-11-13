@@ -141,7 +141,6 @@ colorscheme solarized
 let g:rainbow_active = 1
 
 " Ale
-" let g:ale_linters = {'rust': ['rls']}
 let g:ale_linters = { 'rust': ['rls'], 'elixir': ['elixir-ls', 'credo'] }
 let g:ale_elixir_elixir_ls_release = expand("~/.elixir-ls")
 let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:true, 'fetchDeps': v:false}}

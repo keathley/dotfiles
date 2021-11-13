@@ -15,16 +15,21 @@ Plug 'luochen1990/rainbow'
 
 " Productivity
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-endwise'
+" Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-endwise'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'mtth/scratch.vim'
+" Plug 'mtth/scratch.vim'
 
-" Plug 'dense-analysis/ale'
+" IDE type stuff
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-buffer'
 
 " Writing
 Plug 'vimwiki/vimwiki'
@@ -33,19 +38,20 @@ Plug 'junegunn/goyo.vim'
 
 " Languages and syntax
 Plug 'vim-ruby/vim-ruby'
-Plug 'rhysd/vim-crystal'
 Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
-Plug 'raichoo/haskell-vim', { 'for': 'haskell' }
+" Plug 'raichoo/haskell-vim', { 'for': 'haskell' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'dag/vim-fish', { 'for': 'fish' }
 Plug 'b4b4r07/vim-hcl', { 'for': 'hcl' }
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'hwayne/tla.vim', { 'for': 'tla' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'dleonard0/pony-vim-syntax', { 'for': 'pony' }
 Plug 'tpope/vim-markdown'
 Plug 'wlangstroth/vim-racket'
+
+" Rust stuff
+Plug 'rust-lang/rust.vim'
+Plug 'simrat39/rust-tools.nvim'
 
 call plug#end()
 
@@ -69,9 +75,7 @@ set hlsearch
 set ignorecase " make sure that both ignore and smart are set so that we use
 set smartcase  " smart case sensitive searching
 
-if has('nvim')
-  set inccommand=nosplit
-endif
+set inccommand=nosplit
 
 " highlight current line
 set cursorline
@@ -123,9 +127,7 @@ set hidden
 set colorcolumn=80
 
 " Copy to clipboard
-if has('nvim')
-  set clipboard=unnamed
-endif
+set clipboard=unnamed
 
 " Syntax highlighting and colors
 syntax on
@@ -134,9 +136,6 @@ set background=dark
 autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Green ctermbg=NONE
 colorscheme solarized
 let g:rainbow_active = 1
-
-" Ale
-" let g:ale_linters = {'rust': ['rls']}
 
 " Omnicomplete
 set wildmode=longest,list
@@ -192,7 +191,7 @@ nnoremap <c-l> <c-w>l
 " understand C-6
 nnoremap gb <c-^>
 
-" Insert a hash rocket with <c-l>
+" Insert a pipe with ctrl-l
 imap <c-l> \|><space>
 
 " Make ctrl-c work correctly
@@ -217,19 +216,13 @@ nnoremap <silent> <Down> :resize +10<CR>
 nnoremap <silent> <Left> :vertical resize +10<CR>
 nnoremap <silent> <Right> :vertical resize -10<CR>
 
-" augroup vimrcEx
-"   autocmd BufReadPost *
-"         \ if line("'\"") > 0 && line("'\"") <= line("$") |
-"         \   exe "normal g`\"" |
-"         \ endif
-" augroup END
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Nerd Tree
 map <C-\> :NERDTreeToggle<CR>
+nnoremap <silent> <leader>nf :NERDTreeFind<CR>
 
 " FZF
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
@@ -295,16 +288,16 @@ au BufRead,BufNewFile *.wiki set filetype=vimwiki
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <expr> <tab> InsertTabWrapper()
-inoremap <s-tab> <c-n>
+" function! InsertTabWrapper()
+"     let col = col('.') - 1
+"     if !col || getline('.')[col - 1] !~ '\k'
+"         return "\<tab>"
+"     else
+"         return "\<c-p>"
+"     endif
+" endfunction
+" inoremap <expr> <tab> InsertTabWrapper()
+" inoremap <s-tab> <c-n>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Align text
@@ -336,90 +329,164 @@ function! AlignLine(line, sep, maxpos, extra)
 endfunction
 
 " Terminal mode nonsense
-if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-  tnoremap <M-[> <Esc>
-  tnoremap <C-v><Esc> <Esc>
+" tnoremap <Esc> <C-\><C-n>
+" tnoremap <M-[> <Esc>
+" tnoremap <C-v><Esc> <Esc>
 
-  " Terminal mode:
-  tnoremap <M-h> <c-\><c-n><c-w>h
-  tnoremap <M-j> <c-\><c-n><c-w>j
-  tnoremap <M-k> <c-\><c-n><c-w>k
-  tnoremap <M-l> <c-\><c-n><c-w>l
-  " Insert mode:
-  inoremap <M-h> <Esc><c-w>h
-  inoremap <M-j> <Esc><c-w>j
-  inoremap <M-k> <Esc><c-w>k
-  inoremap <M-l> <Esc><c-w>l
-  " Visual mode:
-  vnoremap <M-h> <Esc><c-w>h
-  vnoremap <M-j> <Esc><c-w>j
-  vnoremap <M-k> <Esc><c-w>k
-  vnoremap <M-l> <Esc><c-w>l
-  " Normal mode:
-  nnoremap <M-h> <c-w>h
-  nnoremap <M-j> <c-w>j
-  nnoremap <M-k> <c-w>k
-  nnoremap <M-l> <c-w>l
+" " Terminal mode:
+" tnoremap <M-h> <c-\><c-n><c-w>h
+" tnoremap <M-j> <c-\><c-n><c-w>j
+" tnoremap <M-k> <c-\><c-n><c-w>k
+" tnoremap <M-l> <c-\><c-n><c-w>l
+" " Insert mode:
+" inoremap <M-h> <Esc><c-w>h
+" inoremap <M-j> <Esc><c-w>j
+" inoremap <M-k> <Esc><c-w>k
+" inoremap <M-l> <Esc><c-w>l
+" " Visual mode:
+" vnoremap <M-h> <Esc><c-w>h
+" vnoremap <M-j> <Esc><c-w>j
+" vnoremap <M-k> <Esc><c-w>k
+" vnoremap <M-l> <Esc><c-w>l
+" " Normal mode:
+" nnoremap <M-h> <c-w>h
+" nnoremap <M-j> <c-w>j
+" nnoremap <M-k> <c-w>k
+" nnoremap <M-l> <c-w>l
 
-  " for nvim-completion
-  set completeopt=menuone,noinsert,noselect
-endif
+" for nvim-completion
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
 
 " Setup the builtin LS client.
 " You can read more about it here: https://neovim.discourse.group/t/how-to-use-and-contribute-to-neovims-built-in-language-server-client-and-nvim-lspconfig/30
+"
+" " Set updatetime for CursorHold
+" 300ms of no cursor movement to trigger CursorHold
+" set updatetime=300
+" Show diagnostic popup on cursor hold
+" autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
-lua << EOL
-local lspconfig = require("lspconfig")
-local completion = require("completion")
+" Goto previous/next diagnostic warning/error
+nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
+" have a fixed column for the diagnostics to appear in
+" this removes the jitter when warnings/errors flow in
+set signcolumn=yes
+
+" nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+" nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+" nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+" nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+
+lua <<EOF
+local nvim_lsp = require("lspconfig")
+
+vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "dt", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "K",  "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", {noremap = true, silent = true})
+
+require('rust-tools').setup({
+  tools = { -- rust-tools options
+    autoSetHints = true,
+    hover_with_actions = true,
+    inlay_hints = {
+      show_parameter_hints = false,
+      parameter_hints_prefix = "",
+      other_hints_prefix = "",
+    },
+  },
+
+  -- all the opts to send to nvim-lspconfig
+  -- these override the defaults set by rust-tools.nvim
+  -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
+  server = {
+    -- on_attach is a callback called when the language server attaches to the buffer
+    on_attach = function(_, bufnr)
+      -- mouse if it doesn't fit in the floating window
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
+      vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
+    end,
+    settings = {
+      -- to enable rust-analyzer settings visit:
+      -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+      ["rust-analyzer"] = {
+        -- enable clippy on save
+        checkOnSave = {
+          command = "clippy"
+        },
+      }
+    }
+  },
+})
+
+-- Ruby LSP support
+nvim_lsp.solargraph.setup({})
 
 -- You'll need to install the LS somewhere and you can set the path here.
 -- I use the cache dir because the lspconfig plugin used to have auto installers
 -- but they removed it because it was too much maintenance.
 -- It should be as easy as cloning and running these instructions
 -- https://github.com/elixir-lsp/elixir-ls#building-and-running
-local path_to_elixirls = vim.fn.expand("~/.cache/nvim/lspconfig/elixirls/elixir-ls/release/language_server.sh")
+local path_to_elixirls = vim.fn.expand("~/.elixir-ls/language_server.sh")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-lspconfig.rust_analyzer.setup({})
+nvim_lsp.elixirls.setup({
+  on_attach = function(_, bufnr)
+    -- Shows documentation for the given function or module. You should be able to scroll with the
+    -- mouse if it doesn't fit in the floating window
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
+  end,
+  settings = {
+    elixirLS = {
+      -- Turn off dialyzer. This disables some LS features, I think workspace symbols
+      dialyzerEnabled = true,
+      -- Turn off automatic dep fetching. Sometimes it get's stuck, easier to just run it myself. They might be making the default `false` soon.
+      fetchDeps = false
+    }
+  },
+  cmd = {path_to_elixirls},
+  capabilities = capabilities,
+})
 
-vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", {noremap = true, silent = true})
-
-lspconfig.elixirls.setup(
-  {
-    on_attach = function(_, bufnr)
-      completion.on_attach()
-
-      -- format the file. If the LS doesn't do formatting its a noop
-      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "df", "<cmd>lua vim.lsp.buf.formatting()<cr>", {noremap = true, silent = true})
-
-      -- Show the current diagnostic in a floating window
-      -- Helpful when the error is too long and falls off the edge of the buffer.
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "gd",
-        "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>",
-        {noremap = true, silent = true}
-      )
-
-      -- Go to definition.
-      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "dt", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
-
-      -- Shows documentation for the given function or module. You should be able to scroll with the
-      -- mouse if it doesn't fit in the floating window
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
-
+local cmp = require('cmp')
+cmp.setup({
+  -- Enable LSP Snippets
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
     end,
-    settings = {
-      elixirLS = {
-        -- Turn off dialyzer. This disables some LS features, I think workspace symbols
-        dialyzerEnabled = true,
-        -- Turn off automatic dep fetching. Sometimes it get's stuck, easier to just run it myself. They might be making the default `false` soon.
-        fetchDeps = false
-      }
-    },
-    cmd = {path_to_elixirls}
-  }
-)
-EOL
+  },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    -- Add tab support
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    })
+  },
+
+  -- Installed sources
+  sources = {
+    { name = 'vsnip' },
+    { name = 'nvim_lua' },
+    { name = 'nvim_lsp' },
+    { name = 'path' },
+    { name = 'spell', keyword_length = 5 },
+    { name = 'buffer', keyword_length = 5 },
+  },
+})
+EOF
