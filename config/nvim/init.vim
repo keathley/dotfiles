@@ -15,12 +15,9 @@ Plug 'luochen1990/rainbow'
 
 " Productivity
 Plug 'tpope/vim-commentary'
-" Plug 'tpope/vim-surround'
-" Plug 'tpope/vim-endwise'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-" Plug 'mtth/scratch.vim'
 
 " IDE type stuff
 Plug 'neovim/nvim-lspconfig'
@@ -30,6 +27,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
+Plug 'f3fora/cmp-spell'
 
 " Writing
 Plug 'vimwiki/vimwiki'
@@ -385,7 +383,7 @@ lua <<EOF
 local nvim_lsp = require("lspconfig")
 
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "dt", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "dt", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "K",  "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", {noremap = true, silent = true})
@@ -455,6 +453,9 @@ nvim_lsp.elixirls.setup({
   capabilities = capabilities,
 })
 
+vim.opt.spell = true
+vim.opt.spelllang = { 'en_us' }
+
 local cmp = require('cmp')
 cmp.setup({
   -- Enable LSP Snippets
@@ -485,7 +486,7 @@ cmp.setup({
     { name = 'nvim_lua' },
     { name = 'nvim_lsp' },
     { name = 'path' },
-    { name = 'spell', keyword_length = 5 },
+    { name = 'spell' },
     { name = 'buffer', keyword_length = 5 },
   },
 })

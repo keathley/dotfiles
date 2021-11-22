@@ -9,3 +9,5 @@ atom/blob-store
 lists/*.todo
 
 config/fish/functions/private
+
+.DS_Store
