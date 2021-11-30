@@ -46,7 +46,7 @@
       "solarized-dark-syntax"
     ]
   editor:
-    fontFamily: "\"FiraCode-Regular\""
+    fontFamily: "\"IBM Plex Mono\""
     invisibles: {}
     scrollPastEnd: true
     showIndentGuide: true
