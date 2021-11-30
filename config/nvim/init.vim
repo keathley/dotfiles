@@ -423,7 +423,13 @@ require('rust-tools').setup({
 })
 
 -- Ruby LSP support
-nvim_lsp.solargraph.setup({})
+nvim_lsp.solargraph.setup({
+  settings = {
+    solargraph = {
+      diagnostics = false,
+    }
+  }
+})
 
 -- You'll need to install the LS somewhere and you can set the path here.
 -- I use the cache dir because the lspconfig plugin used to have auto installers
@@ -444,7 +450,7 @@ nvim_lsp.elixirls.setup({
   settings = {
     elixirLS = {
       -- Turn off dialyzer. This disables some LS features, I think workspace symbols
-      dialyzerEnabled = true,
+      dialyzerEnabled = false,
       -- Turn off automatic dep fetching. Sometimes it get's stuck, easier to just run it myself. They might be making the default `false` soon.
       fetchDeps = false
     }
