@@ -28,6 +28,7 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'f3fora/cmp-spell'
+Plug 'ryanoasis/vim-devicons'
 
 " Writing
 Plug 'vimwiki/vimwiki'
@@ -46,6 +47,8 @@ Plug 'hwayne/tla.vim', { 'for': 'tla' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'tpope/vim-markdown'
 Plug 'wlangstroth/vim-racket'
+Plug 'ziglang/zig.vim'
+Plug 'zah/nim.vim'
 
 " Rust stuff
 Plug 'rust-lang/rust.vim'
@@ -371,7 +374,7 @@ nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 " have a fixed column for the diagnostics to appear in
 " this removes the jitter when warnings/errors flow in
-set signcolumn=yes
+" set signcolumn=yes
 
 " nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 " nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
@@ -431,6 +434,10 @@ nvim_lsp.solargraph.setup({
   }
 })
 
+-- nvim_lsp.zls.setup({
+--   cmd = { "~/zls/zls" }
+-- })
+
 -- You'll need to install the LS somewhere and you can set the path here.
 -- I use the cache dir because the lspconfig plugin used to have auto installers
 -- but they removed it because it was too much maintenance.
@@ -488,12 +495,12 @@ cmp.setup({
 
   -- Installed sources
   sources = {
+    { name = 'nvim_lsp' },
     { name = 'vsnip' },
     { name = 'nvim_lua' },
-    { name = 'nvim_lsp' },
-    { name = 'path' },
-    { name = 'spell' },
     { name = 'buffer', keyword_length = 5 },
+    { name = 'path' },
+    { name = 'spell', keyword_length = 6 },
   },
 })
 EOF
