@@ -31,9 +31,12 @@ Plug 'f3fora/cmp-spell'
 Plug 'ryanoasis/vim-devicons'
 
 " Writing
-Plug 'vimwiki/vimwiki'
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
+Plug 'dhruvasagar/vim-table-mode'
+" Plug 'godlygeek/tabular'
+" Plug 'preservim/vim-markdown'
+Plug 'mickael-menu/zk-nvim'
 
 " Languages and syntax
 Plug 'vim-ruby/vim-ruby'
@@ -45,7 +48,6 @@ Plug 'dag/vim-fish', { 'for': 'fish' }
 Plug 'b4b4r07/vim-hcl', { 'for': 'hcl' }
 Plug 'hwayne/tla.vim', { 'for': 'tla' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'tpope/vim-markdown'
 Plug 'wlangstroth/vim-racket'
 Plug 'ziglang/zig.vim'
 Plug 'zah/nim.vim'
@@ -251,54 +253,15 @@ nnoremap <leader>g :Rg<CR>
 " Find command
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
+" Markdown
+let g:vim_markdown_frontmatter = 1
+
 " Vim Pencil
 augroup pencil
   autocmd!
   " autocmd FileType markdown,wiki call pencil#init()
 augroup END
 let g:pencil#map#suspend_af = 'K'
-
-" Wiki
-" let g:wiki_root = '~/Desktop/research/wiki'
-" let g:wiki_filetypes = ['wiki', 'markdown', 'md']
-" nnoremap <leader>wi :e ~/Desktop/research/wiki/journal/journal.md<CR>
-" nnoremap <leader>w<leader>i :WikiJournalIndex!<CR>
-let g:vimwiki_global_ext=0
-let g:vimwiki_list = [
-    \{'path': '~/Desktop/research/notes',
-    \ 'syntax': 'markdown', 'ext': '.md'}
-  \]
-au BufRead,BufNewFile *.wiki set filetype=vimwiki
-" :autocmd FileType vimwiki map d :VimwikiMakeDiaryNote
-" function! ToggleCalendar()
-"   execute ":Calendar"
-"   if exists("g:calendar_open")
-"     if g:calendar_open == 1
-"       execute "q"
-"       unlet g:calendar_open
-"     else
-"       g:calendar_open = 1
-"     end
-"   else
-"     let g:calendar_open = 1
-"   end
-" endfunction
-" :autocmd FileType vimwiki map c :call ToggleCalendar()
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MULTIPURPOSE TAB KEY
-" Indent if we're at the beginning of a line. Else, do completion.
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" function! InsertTabWrapper()
-"     let col = col('.') - 1
-"     if !col || getline('.')[col - 1] !~ '\k'
-"         return "\<tab>"
-"     else
-"         return "\<c-p>"
-"     endif
-" endfunction
-" inoremap <expr> <tab> InsertTabWrapper()
-" inoremap <s-tab> <c-n>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Align text
@@ -328,6 +291,23 @@ function! AlignLine(line, sep, maxpos, extra)
   let spaces = repeat(' ', a:maxpos - strlen(m[1]) + a:extra)
   return m[1] . spaces . m[2]
 endfunction
+
+
+" Table Mode
+let g:table_mode_corner='|'
+function! s:isAtStartOfLine(mapping)
+  let text_before_cursor = getline('.')[0 : col('.')-1]
+  let mapping_pattern = '\V' . escape(a:mapping, '\')
+  let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
+  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
+endfunction
+
+inoreabbrev <expr> <bar><bar>
+          \ <SID>isAtStartOfLine('\|\|') ?
+          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+inoreabbrev <expr> __
+          \ <SID>isAtStartOfLine('__') ?
+          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
 
 " Terminal mode nonsense
 " tnoremap <Esc> <C-\><C-n>
@@ -465,6 +445,18 @@ nvim_lsp.elixirls.setup({
   cmd = {path_to_elixirls},
   capabilities = capabilities,
 })
+
+-- require("zk").setup({
+--   picker = "fzf",
+-- })
+
+-- ZK Setup
+-- nvim_lsp.zk.setup({
+--   on_attach = function(_, bufnr)
+--     vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
+--   end,
+--   capabilities = capabilities,
+-- })
 
 vim.opt.spell = true
 vim.opt.spelllang = { 'en_us' }
