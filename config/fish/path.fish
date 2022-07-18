@@ -6,14 +6,17 @@ if test -d $java_path
   export JAVA_HOME=$java_path
 end
 
-set PATH $PATH \
+set PATH /opt/homebrew/bin \
+         /opt/homebrew/sbin \
          ~/.local/bin \
          ./bin \
          ~/.bin \
          ~/bin \
+         ~/zls \
          /usr/local/bin \
          /usr/local/sbin \
          ./node_modules/.bin \
          ~/.cargo/bin \
          $GOPATH \
-         $GOPATH/bin
+         $GOPATH/bin \
+         $PATH

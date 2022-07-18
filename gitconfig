@@ -1,11 +1,7 @@
-[include]
-  path = ~/.gitconfig.local
 [init]
   templatedir = ~/.git_template
 	defaultBranch = main
 [core]
-  editor = ~/.asdf/shims/nvim
-  ; editor = /usr/local/bin/nvim
   pager = diff-so-fancy | less --tabs=4 -RFX
 	attributesfile = ~/.gitattributes
 [alias]
@@ -52,11 +48,12 @@
   untracked = cyan
 [commit]
   template = ~/.gitmessage
-	gpgsign = true
 [diff]
   compactionHeuristic = true
 [rebase]
   autosquash = true
+[user]
+	email = c@keathley.io
 [pager]
   log  = diff-highlight | less
   diff = diff-so-fancy | less --tabs=4 -RFX
@@ -73,3 +70,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[log]
+	showSignature = false
+[include]
+  path = ~/.gitconfig.local
