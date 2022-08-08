@@ -27,6 +27,4 @@ if test -e ~/.localenv
   source ~/.localenv
 end
 
-
-export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
-
+# export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh

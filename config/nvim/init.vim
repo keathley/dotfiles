@@ -10,15 +10,19 @@ filetype off
 call plug#begin('~/.nvim/plugged')
 
 Plug 'altercation/vim-colors-solarized'
+" Plug 'nvim-lualine/lualine.nvim'
 Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-gitbranch'
 Plug 'luochen1990/rainbow'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Productivity
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'TimUntersberger/neogit'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'phaazon/hop.nvim'
 
 " IDE type stuff
 Plug 'neovim/nvim-lspconfig'
@@ -29,7 +33,8 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'f3fora/cmp-spell'
-Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'tpope/vim-fugitive'
 
 " Writing
 Plug 'reedes/vim-pencil'
@@ -39,9 +44,8 @@ Plug 'mickael-menu/zk-nvim'
 
 " Languages and syntax
 Plug 'vim-ruby/vim-ruby'
-Plug 'elixir-lang/vim-elixir'
+" Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
-" Plug 'raichoo/haskell-vim', { 'for': 'haskell' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'dag/vim-fish', { 'for': 'fish' }
 Plug 'b4b4r07/vim-hcl', { 'for': 'hcl' }
@@ -89,7 +93,7 @@ set switchbuf=useopen
 
 " Always show tab bar at the top
 set showtabline=2
-set winwidth=79
+" set winwidth=79
 
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
@@ -177,9 +181,14 @@ set noshowmode " don't show this since lightline will do it for us
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ 'active': {
+      \   'left': [ ['mode', 'paste' ],
+      \             [ 'gitbranch', 'filename', 'modified' ] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'fileencoding', 'filetype' ] ]
-      \ }
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
       \ }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -228,8 +237,8 @@ nnoremap <silent> <Right> :vertical resize -10<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Nerd Tree
-map <C-\> :NERDTreeToggle<CR>
-nnoremap <silent> <leader>nf :NERDTreeFind<CR>
+map <C-\> :NvimTreeToggle<CR>
+nnoremap <silent> <leader>nf :NvimTreeFindFile<CR>
 
 " FZF
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
@@ -369,6 +378,27 @@ set signcolumn=auto
 
 lua <<EOF
 
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "c", "lua", "rust", "elixir" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  auto_install = true,
+
+  highlight = {
+    enable = true,
+  }
+}
+
+-- require('lualine').setup {
+--   options = {
+--     theme = 'auto'
+--   },
+-- }
+
 local nvim_lsp = require("lspconfig")
 local opts = { noremap=true, silent=true }
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", opts)
@@ -434,7 +464,7 @@ nvim_lsp.elixirls.setup({
   settings = {
     elixirLS = {
       -- Turn off dialyzer. This disables some LS features, I think workspace symbols
-      dialyzerEnabled = false,
+      dialyzerEnabled = true,
       -- Turn off automatic dep fetching. Sometimes it get's stuck, easier to just run it myself. They might be making the default `false` soon.
       fetchDeps = false
     }
@@ -549,4 +579,32 @@ cmp.setup({
 -- neogit
 local neogit = require('neogit')
 neogit.setup {}
+
+-- hop
+require'hop'.setup()
+-- vim.api.nvim_set_keymap('', 'e', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
+-- vim.api.nvim_set_keymap('', 'e', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
+-- vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>", {})
+-- vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>", {})
+
+-- OR setup with some options
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+    adaptive_size = true,
+    side = "left",
+    mappings = {
+      list = {
+        { key = "u", action = "dir_up" },
+      },
+    },
+  },
+  renderer = {
+    group_empty = true,
+    full_name = false,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
 EOF
