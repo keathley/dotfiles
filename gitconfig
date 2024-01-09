@@ -52,8 +52,6 @@
   compactionHeuristic = true
 [rebase]
   autosquash = true
-[user]
-	email = c@keathley.io
 [pager]
   log  = diff-highlight | less
   diff = diff-so-fancy | less --tabs=4 -RFX
@@ -70,7 +68,12 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[user]
+	name = Chris Keathley
+	email = c@keathley.io
 [log]
 	showSignature = false
-[include]
-  path = ~/.gitconfig.local
+; [include]
+;     path = ~/.git-personal.conf
+[includeIf "gitdir:~/work/"]
+    path = ~/.git-work.conf

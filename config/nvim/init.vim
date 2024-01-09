@@ -20,12 +20,18 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'TimUntersberger/neogit'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'phaazon/hop.nvim'
+
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'kristijanhusak/vim-dadbod-completion'
 
 " IDE type stuff
 Plug 'neovim/nvim-lspconfig'
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'sindrets/diffview.nvim'
+Plug 'TimUntersberger/neogit'
+Plug 'gfanto/fzf-lsp.nvim'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -34,6 +40,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'f3fora/cmp-spell'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'tpope/vim-fugitive'
 
 " Writing
@@ -43,7 +50,7 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'mickael-menu/zk-nvim'
 
 " Languages and syntax
-Plug 'vim-ruby/vim-ruby'
+" Plug 'vim-ruby/vim-ruby'
 " Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'elzr/vim-json', { 'for': 'json' }
@@ -54,8 +61,10 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'wlangstroth/vim-racket'
 Plug 'ziglang/zig.vim'
 Plug 'zah/nim.vim'
-Plug 'ekalinin/Dockerfile.vim'
+" Plug 'ekalinin/Dockerfile.vim'
 Plug 'zah/nim.vim'
+Plug 'dcharbon/vim-flatbuffers'
+Plug 'elixir-tools/elixir-tools.nvim'
 
 " Rust stuff
 Plug 'rust-lang/rust.vim'
@@ -191,6 +200,11 @@ let g:lightline = {
       \ },
       \ }
 
+" DB Setup
+let g:dbs = [
+\ { 'name': 'pg', 'url': 'postgres://postgres:postgres@localhost:5432' }
+\ ]
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -236,6 +250,9 @@ nnoremap <silent> <Right> :vertical resize -10<CR>
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Commentary
+autocmd FileType sql setlocal commentstring=--\ %s
+
 " Nerd Tree
 map <C-\> :NvimTreeToggle<CR>
 nnoremap <silent> <leader>nf :NvimTreeFindFile<CR>
@@ -244,8 +261,11 @@ nnoremap <silent> <leader>nf :NvimTreeFindFile<CR>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 
 nnoremap <leader>f :FZF<CR>
-nnoremap <leader>r :Tags<CR>
+nnoremap <leader>r :References<CR>
+" nnoremap <leader>t :DocumentSymbols<cr>
 nnoremap <leader>g :Rg<CR>
+nnoremap <leader>d :Diagnostics<cr>
+nnoremap <leader>da :DiagnosticsAll<cr>
 
 " let g:fzf_layout = { 'down': '30%' }
 " let g:fzf_colors =
@@ -267,14 +287,14 @@ nnoremap <leader>g :Rg<CR>
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " Markdown
-let g:vim_markdown_frontmatter = 1
+" let g:vim_markdown_frontmatter = 1
 
 " Vim Pencil
-augroup pencil
-  autocmd!
-  " autocmd FileType markdown,wiki call pencil#init()
-augroup END
-let g:pencil#map#suspend_af = 'K'
+" augroup pencil
+"   autocmd!
+"   " autocmd FileType markdown,wiki call pencil#init()
+" augroup END
+" let g:pencil#map#suspend_af = 'K'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Align text
@@ -307,20 +327,20 @@ endfunction
 
 
 " Table Mode
-let g:table_mode_corner='|'
-function! s:isAtStartOfLine(mapping)
-  let text_before_cursor = getline('.')[0 : col('.')-1]
-  let mapping_pattern = '\V' . escape(a:mapping, '\')
-  let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
-  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
-endfunction
+" let g:table_mode_corner='|'
+" function! s:isAtStartOfLine(mapping)
+"   let text_before_cursor = getline('.')[0 : col('.')-1]
+"   let mapping_pattern = '\V' . escape(a:mapping, '\')
+"   let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
+"   return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
+" endfunction
 
-inoreabbrev <expr> <bar><bar>
-          \ <SID>isAtStartOfLine('\|\|') ?
-          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
-inoreabbrev <expr> __
-          \ <SID>isAtStartOfLine('__') ?
-          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
+" inoreabbrev <expr> <bar><bar>
+"           \ <SID>isAtStartOfLine('\|\|') ?
+"           \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+" inoreabbrev <expr> __
+"           \ <SID>isAtStartOfLine('__') ?
+"           \ '<c-o>:silent! TableModeDisable<cr>' : '__'
 
 " Terminal mode nonsense
 " tnoremap <Esc> <C-\><C-n>
@@ -380,7 +400,7 @@ lua <<EOF
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "c", "lua", "rust", "elixir" },
+  ensure_installed = { "c", "lua", "rust", "elixir", "heex", "eex", "python" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -390,6 +410,10 @@ require'nvim-treesitter.configs'.setup {
 
   highlight = {
     enable = true,
+  },
+
+  indent = {
+    enable = true
   }
 }
 
@@ -401,20 +425,26 @@ require'nvim-treesitter.configs'.setup {
 
 local nvim_lsp = require("lspconfig")
 local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", opts)
+vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
 vim.api.nvim_set_keymap("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 vim.api.nvim_set_keymap("n", "K",  "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
 vim.api.nvim_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+vim.keymap.set('n', '<space>wl', function()
+  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+end, bufopts)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, opts)
+vim.keymap.set('n', '<space>f', vim.lsp.buf.format, opts)
+-- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
 
-require('rust-tools').setup({
+local rt = require('rust-tools')
+rt.setup({
   tools = { -- rust-tools options
     autoSetHints = true,
-    hover_with_actions = true,
     inlay_hints = {
       show_parameter_hints = false,
       parameter_hints_prefix = "",
@@ -429,8 +459,10 @@ require('rust-tools').setup({
     -- on_attach is a callback called when the language server attaches to the buffer
     on_attach = function(_, bufnr)
       -- mouse if it doesn't fit in the floating window
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
+      vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
+      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
     end,
     settings = {
       -- to enable rust-analyzer settings visit:
@@ -450,28 +482,62 @@ require('rust-tools').setup({
 -- but they removed it because it was too much maintenance.
 -- It should be as easy as cloning and running these instructions
 -- https://github.com/elixir-lsp/elixir-ls#building-and-running
-local path_to_elixirls = vim.fn.expand("~/.elixir-ls/language_server.sh")
+-- local path_to_elixirls = vim.fn.expand("~/.elixir-ls/language_server.sh")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-nvim_lsp.elixirls.setup({
-  on_attach = function(_, bufnr)
-    -- Shows documentation for the given function or module. You should be able to scroll with the
-    -- mouse if it doesn't fit in the floating window
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
-  end,
-  settings = {
-    elixirLS = {
-      -- Turn off dialyzer. This disables some LS features, I think workspace symbols
-      dialyzerEnabled = true,
-      -- Turn off automatic dep fetching. Sometimes it get's stuck, easier to just run it myself. They might be making the default `false` soon.
-      fetchDeps = false
-    }
+local elixir = require("elixir")
+
+elixir.setup {
+  nextls = {
+    enable = true
   },
-  cmd = {path_to_elixirls},
-  capabilities = capabilities,
-})
+
+  credo = {
+    enable = true
+  },
+
+  elixirls = {
+    enable = false
+  }
+
+  -- elixirls = {
+  --   settings = elixirls.settings {
+  --     dialyzerEnabled = true,
+  --     enableTestLenses = true,
+  --     suggestSpecs = true,
+  --     fetchDeps = false,
+  --   },
+
+  --   on_attach = function(client, bufnr)
+  --     local map_opts = { buffer = true, noremap = true}
+
+  --     vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
+  --     vim.keymap.set("n", "<leader>s",  vim.lsp.codelens.run, map_opts)
+  --   end
+  -- }
+}
+
+--  nvim_lsp.elixirls.setup({
+--    on_attach = function(_, bufnr)
+--      -- Shows documentation for the given function or module. You should be able to scroll with the
+--      -- mouse if it doesn't fit in the floating window
+--      vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
+--    end,
+--    settings = {
+--      elixirLS = {
+--        dialyzerEnabled = true,
+--        -- Turn off automatic dep fetching. Sometimes it get's stuck, easier to just run it myself. They might be making the default `false` soon.
+--        fetchDeps = false
+--      }
+--    },
+--    cmd = {path_to_elixirls},
+--    capabilities = capabilities,
+--  })
+
+nvim_lsp.erlangls.setup({})
+
+nvim_lsp.julials.setup{}
 
 -- ZK Setup
 local zk = require("zk")
@@ -507,12 +573,17 @@ vim.api.nvim_set_keymap("n", "<leader>zzo", ":'<,'>ZkOrphans<CR>", opts)
 vim.opt.spell = true
 vim.opt.spelllang = { 'en_us' }
 
+-- Setup ccls for C and C++
+nvim_lsp.ccls.setup{}
+nvim_lsp.clangd.setup{}
+
 -- EFM setup
-nvim_lsp.efm.setup({
-  capabilities = capabilities,
-  -- on_attach = on_attach,
-  filetypes = {"elixir"}
-})
+-- nvim_lsp.efm.setup({
+--   init_options = {documentFormatting = true},
+--   capabilities = capabilities,
+--   -- on_attach = on_attach,
+--   filetypes = {"elixir"}
+-- })
 
 nvim_lsp.tailwindcss.setup({
   capabilities = capabilities,
@@ -520,7 +591,7 @@ nvim_lsp.tailwindcss.setup({
 
 nvim_lsp.html.setup({
   capabilities = capabilities,
-  filetypes = { "html", "heex", "eex" },
+  filetypes = { "html", "heex", "eex", "leex" },
 })
 
 nvim_lsp.zls.setup({
@@ -539,7 +610,19 @@ nvim_lsp.solargraph.setup({
 })
 
 -- typescript LSP support
-nvim_lsp.tsserver.setup{}
+nvim_lsp.tsserver.setup({
+  filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsx" },
+  cmd = { "typescript-language-server", "--stdio" }
+})
+
+-- null_ls setup
+local null_ls = require("null-ls")
+
+null_ls.setup {
+  sources = {
+    null_ls.builtins.formatting.pg_format
+  }
+}
 
 local cmp = require('cmp')
 cmp.setup({
@@ -568,6 +651,7 @@ cmp.setup({
   -- Installed sources
   sources = {
     { name = 'buffer', keyword_length = 5 },
+    { name = 'vim-dadbod-completion' },
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
     { name = 'nvim_lua' },
@@ -580,24 +664,23 @@ cmp.setup({
 local neogit = require('neogit')
 neogit.setup {}
 
--- hop
-require'hop'.setup()
--- vim.api.nvim_set_keymap('', 'e', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
--- vim.api.nvim_set_keymap('', 'e', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
--- vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>", {})
--- vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>", {})
-
 -- OR setup with some options
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
+  on_attach = function (bufnr)
+      local api = require('nvim-tree.api')
+
+      local function opts(desc)
+        return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+      end
+
+      api.config.mappings.default_on_attach(bufnr)
+
+      vim.keymap.set('n', 'u', api.tree.change_root_to_parent, opts('Up'))
+  end,
   view = {
     adaptive_size = true,
     side = "left",
-    mappings = {
-      list = {
-        { key = "u", action = "dir_up" },
-      },
-    },
   },
   renderer = {
     group_empty = true,

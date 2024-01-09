@@ -6,8 +6,8 @@ set fish_greeting ""
 
 # Add private functions for work related things to my functions directory
 set fish_function_path \
-  ~/.config/fish/functions/private \
-  $fish_function_path
+  $fish_function_path \
+  ~/.config/fish/functions/private
 
 # highlighting inside manpages and elsewhere
 set -gx LESS_TERMCAP_mb \e'[01;31m'       # begin blinking
@@ -27,4 +27,11 @@ if test -e ~/.localenv
   source ~/.localenv
 end
 
-# export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+set gcloud_path /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
+
+if test -e $gcloud_path
+  # source $gcloud_path
+end
+
+export KERL_BUILD_DOCS=yes
+export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh

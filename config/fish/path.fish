@@ -19,4 +19,5 @@ set PATH /opt/homebrew/bin \
          ~/.cargo/bin \
          $GOPATH \
          $GOPATH/bin \
+         ~/.juliaup/bin \
          $PATH
