@@ -6,7 +6,7 @@ if test -d $java_path
   export JAVA_HOME=$java_path
 end
 
-set PATH /opt/homebrew/bin \
+fish_add_path /opt/homebrew/bin \
          /opt/homebrew/sbin \
          ~/.local/bin \
          ./bin \
@@ -20,4 +20,4 @@ set PATH /opt/homebrew/bin \
          $GOPATH \
          $GOPATH/bin \
          ~/.juliaup/bin \
-         $PATH
+         /Applications/Obsidian.app/Contents/MacOS

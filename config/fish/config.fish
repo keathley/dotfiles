@@ -1,6 +1,20 @@
-source ~/.asdf/asdf.fish
 source ~/.config/fish/path.fish
 source ~/.config/fish/aliases.fish
+
+# ASDF configuration code
+if test -z $ASDF_DATA_DIR
+    set _asdf_shims "$HOME/.asdf/shims"
+else
+    set _asdf_shims "$ASDF_DATA_DIR/shims"
+end
+
+# Do not use fish_add_path (added in Fish 3.2) because it
+# potentially changes the order of items in PATH
+# if not contains $_asdf_shims $PATH
+#     set -gx --prepend PATH $_asdf_shims
+# end
+fish_add_path -m -p $_asdf_shims
+set --erase _asdf_shims
 
 set fish_greeting ""
 
@@ -22,15 +36,14 @@ export EDITOR="nvim"
 set -g fish_user_paths "/usr/local/opt/gettext/bin" $fish_user_paths
 export ERL_AFLAGS="-kernel shell_history enabled"
 export FZF_DEFAULT_OPTS='--height 30%'
+export HOMEBREW_NO_ENV_HINTS=1
 
 if test -e ~/.localenv
   source ~/.localenv
 end
 
-set gcloud_path /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
-
-if test -e $gcloud_path
-  # source $gcloud_path
+if test -e ~/.localenv.fish
+  source ~/.localenv.fish
 end
 
 export KERL_BUILD_DOCS=yes

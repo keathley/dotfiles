@@ -3,4 +3,5 @@
 *.swp
 *.todo
 npm-debug.log
+.env
 

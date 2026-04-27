@@ -9,9 +9,13 @@ filetype off
 
 call plug#begin('~/.nvim/plugged')
 
-Plug 'altercation/vim-colors-solarized'
-" Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-lua/plenary.nvim'
+
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'shaunsingh/solarized.nvim'
+Plug 'overcache/NeoSolarized'
 Plug 'itchyny/lightline.vim'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'luochen1990/rainbow'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -27,27 +31,29 @@ Plug 'kristijanhusak/vim-dadbod-completion'
 
 " IDE type stuff
 Plug 'neovim/nvim-lspconfig'
-Plug 'jose-elias-alvarez/null-ls.nvim'
-Plug 'nvim-lua/plenary.nvim'
 Plug 'sindrets/diffview.nvim'
 Plug 'TimUntersberger/neogit'
 Plug 'gfanto/fzf-lsp.nvim'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/nvim-cmp'
+Plug 'f3fora/cmp-spell'
 Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
-Plug 'f3fora/cmp-spell'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'tpope/vim-fugitive'
+Plug 'mfussenegger/nvim-dap'
 
 " Writing
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'mickael-menu/zk-nvim'
+Plug 'nvim-orgmode/orgmode'
 
 " Languages and syntax
 " Plug 'vim-ruby/vim-ruby'
@@ -64,12 +70,14 @@ Plug 'zah/nim.vim'
 " Plug 'ekalinin/Dockerfile.vim'
 Plug 'zah/nim.vim'
 Plug 'dcharbon/vim-flatbuffers'
-Plug 'elixir-tools/elixir-tools.nvim'
+Plug 'mhanberg/output-panel.nvim'
+Plug 'elixir-tools/elixir-tools.nvim', { 'tag': 'stable' }
 
 " Rust stuff
 Plug 'rust-lang/rust.vim'
-Plug 'simrat39/rust-tools.nvim'
-Plug 'nvim-lua/plenary.nvim'
+" Plug 'simrat39/rust-tools.nvim'
+Plug 'mrcjkb/rustaceanvim'
+Plug 'chrisgrieser/nvim-lsp-endhints'
 
 call plug#end()
 
@@ -99,10 +107,6 @@ set inccommand=nosplit
 set cursorline
 set cmdheight=1
 set switchbuf=useopen
-
-" Always show tab bar at the top
-set showtabline=2
-" set winwidth=79
 
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
@@ -151,9 +155,31 @@ set clipboard=unnamed
 syntax on
 set t_Co=256
 set background=dark
-autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Green ctermbg=NONE
-colorscheme solarized
+" autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Green ctermbg=NONE
 let g:rainbow_active = 1
+set termguicolors
+
+" Status bar and tablines
+set showtabline=2
+set laststatus=2
+set noshowmode " don't show this since lightline will do it for us
+" let g:lightline = {
+"       \ 'colorscheme': 'solarized',
+"       \ 'active': {
+"       \   'left': [ ['mode', 'paste' ],
+"       \             [ 'relativepath', 'modified' ] ],
+"       \   'right': [ [ 'lineinfo' ],
+"       \              [ 'fileencoding', 'filetype' ] ]
+"       \ },
+"       \ 'component_function': {
+"       \   'gitbranch': 'gitbranch#name'
+"       \ },
+"       \ }
+
+" colorscheme solarized
+colorscheme NeoSolarized
+
+" let g:neosolarized_contrast = "high"
 
 " Omnicomplete
 set wildmode=longest,list
@@ -182,23 +208,6 @@ set re=2
 
 " Set tags
 " set tags=tags,.git/tags,.tags
-
-" Status bar and tablines
-set showtabline=2
-set laststatus=2
-set noshowmode " don't show this since lightline will do it for us
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ 'active': {
-      \   'left': [ ['mode', 'paste' ],
-      \             [ 'gitbranch', 'filename', 'modified' ] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'gitbranch#name'
-      \ },
-      \ }
 
 " DB Setup
 let g:dbs = [
@@ -294,7 +303,13 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 "   autocmd!
 "   " autocmd FileType markdown,wiki call pencil#init()
 " augroup END
-" let g:pencil#map#suspend_af = 'K'
+
+" Vsnip setup
+"" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>' let g:pencil#map#suspend_af = 'K'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Align text
@@ -343,9 +358,18 @@ endfunction
 "           \ '<c-o>:silent! TableModeDisable<cr>' : '__'
 
 " Terminal mode nonsense
-" tnoremap <Esc> <C-\><C-n>
-" tnoremap <M-[> <Esc>
-" tnoremap <C-v><Esc> <Esc>
+tnoremap <Esc> <C-\><C-n>
+tnoremap <M-[> <Esc>
+tnoremap <C-v><Esc> <Esc>
+
+" sending blocks (clearing previous output)
+noremap <leader>tb (y)<C-w>wpa<C-l><CR><C-\><C-n><C-w>p)
+
+" sending lines
+noremap <leader>tl Vy<C-w>wpa<CR><C-\><C-n><C-w>pj
+
+" sending visual selection
+noremap <leader>ts y<C-w>wpa<CR><C-\><C-n><C-w>p
 
 " " Terminal mode:
 " tnoremap <M-h> <c-\><c-n><c-w>h
@@ -382,8 +406,8 @@ set shortmess+=c
 " autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
 " Goto previous/next diagnostic warning/error
-nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+" nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+" nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 " have a fixed column for the diagnostics to appear in
 " this removes the jitter when warnings/errors flow in
@@ -398,6 +422,38 @@ set signcolumn=auto
 
 lua <<EOF
 
+require('lualine').setup {
+  options = {
+    theme = 'solarized',
+    always_show_tabline = true,
+    section_separators = '',
+    component_separators = '',
+  },
+  tabline = {
+    lualine_a = {
+      {
+          'tabs',
+          tab_max_length = 40,
+          max_length = vim.o.columns / 3,
+          mode = 2,
+      }
+    },
+    -- lualine_b = {'windows'},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {'tabs'}
+  }
+}
+
+-- require('orgmode').setup_ts_grammar()
+
+require('orgmode').setup({
+  org_agenda_files = {'~/notes/org/*'},
+  org_default_notes_file = '~/notes/org/refile.org',
+})
+
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = { "c", "lua", "rust", "elixir", "heex", "eex", "python" },
@@ -410,6 +466,10 @@ require'nvim-treesitter.configs'.setup {
 
   highlight = {
     enable = true,
+
+    -- Required for spellcheck, some LaTex highlights and
+    -- code block highlights that do not have ts grammar
+    additional_vim_regex_highlighting = {'org'},
   },
 
   indent = {
@@ -417,13 +477,12 @@ require'nvim-treesitter.configs'.setup {
   }
 }
 
--- require('lualine').setup {
---   options = {
---     theme = 'auto'
---   },
--- }
+-- diagnostics
+vim.diagnostic.config({
+  virtual_text = true,
+})
 
-local nvim_lsp = require("lspconfig")
+-- local nvim_lsp = require("lspconfig")
 local opts = { noremap=true, silent=true }
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
 vim.api.nvim_set_keymap("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
@@ -441,41 +500,92 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, opts)
 vim.keymap.set('n', '<space>f', vim.lsp.buf.format, opts)
 -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
 
-local rt = require('rust-tools')
-rt.setup({
-  tools = { -- rust-tools options
-    autoSetHints = true,
-    inlay_hints = {
-      show_parameter_hints = false,
-      parameter_hints_prefix = "",
-      other_hints_prefix = "",
-    },
+-- nvim_lsp.rust_analyzer.setup {
+--   settings = {
+--     ['rust-analyzer'] = {},
+--   },
+-- }
+
+-- local rt = require('rust-tools')
+--  rt.setup({
+--    tools = { -- rust-tools options
+--      autoSetHints = true,
+--      inlay_hints = {
+--        show_parameter_hints = false,
+--        parameter_hints_prefix = "",
+--        other_hints_prefix = "",
+--      },
+--    },
+-- 
+--    -- all the opts to send to nvim-lspconfig
+--    -- these override the defaults set by rust-tools.nvim
+--    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
+--    server = {
+--      -- on_attach is a callback called when the language server attaches to the buffer
+--      on_attach = function(_, bufnr)
+--        -- mouse if it doesn't fit in the floating window
+--        vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+--        -- vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
+--        -- vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
+--        -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
+--      end,
+--      settings = {
+--        -- to enable rust-analyzer settings visit:
+--        -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+--        ["rust-analyzer"] = {
+--          -- enable clippy on save
+--          checkOnSave = {
+--            command = "clippy"
+--          },
+--        }
+--      }
+--    },
+--  })
+
+local cmp = require('cmp')
+cmp.setup({
+  -- Enable LSP Snippets
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    -- Add tab support
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    })
   },
 
-  -- all the opts to send to nvim-lspconfig
-  -- these override the defaults set by rust-tools.nvim
-  -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
-  server = {
-    -- on_attach is a callback called when the language server attaches to the buffer
-    on_attach = function(_, bufnr)
-      -- mouse if it doesn't fit in the floating window
-      vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
-      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
-      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {noremap = true, silent = true})
-      -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap = true, silent = true})
-    end,
-    settings = {
-      -- to enable rust-analyzer settings visit:
-      -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-      ["rust-analyzer"] = {
-        -- enable clippy on save
-        checkOnSave = {
-          command = "clippy"
-        },
-      }
-    }
+  -- Installed sources
+  sources = {
+    { name = 'vsnip' },
+    { name = 'nvim_lsp' },
+    { name = 'buffer', keyword_length = 5 },
+    { name = 'vim-dadbod-completion' },
+    { name = 'orgmode' },
+    { name = 'nvim_lua' },
+    { name = 'path' },
+    { name = 'spell', keyword_length = 6 },
   },
 })
+
+vim.lsp.config('expert', {
+  cmd = { 'expert', '--stdio' },
+  root_markers = { 'mix.exs', '.git' },
+  filetypes = { 'elixir', 'eelixir', 'heex' },
+})
+
+vim.lsp.enable 'expert'
 
 -- You'll need to install the LS somewhere and you can set the path here.
 -- I use the cache dir because the lspconfig plugin used to have auto installers
@@ -483,40 +593,54 @@ rt.setup({
 -- It should be as easy as cloning and running these instructions
 -- https://github.com/elixir-lsp/elixir-ls#building-and-running
 -- local path_to_elixirls = vim.fn.expand("~/.elixir-ls/language_server.sh")
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+-- 
+-- local elixir = require("elixir")
+-- 
+-- -- elixir -lsp
+-- elixir.setup {
+--   nextls = {
+--     enable = true,
+--     -- port = 9000,
+--     cmd = "/Users/keathley/Development/github.com/elixir-tools/next-ls/bin/start",
+--     init_options = {
+--       experimental = {
+--         completions = {
+--           enable = true
+--         }
+--       }
+--     }
+--   },
+-- 
+--   credo = {
+--     enable = false
+--   },
+-- 
+--   elixirls = {
+--     enable = false
+--   }
+-- }
+-- elixirls = {
+--   settings = elixirls.settings {
+--     dialyzerEnabled = true,
+--     enableTestLenses = true,
+--     suggestSpecs = true,
+--     fetchDeps = false,
+--   },
 
-local elixir = require("elixir")
+--   on_attach = function(client, bufnr)
+--     local map_opts = { buffer = true, noremap = true}
 
-elixir.setup {
-  nextls = {
-    enable = true
-  },
+--     vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
+--     vim.keymap.set("n", "<leader>s",  vim.lsp.codelens.run, map_opts)
+--   end
+-- }
 
-  credo = {
-    enable = true
-  },
-
-  elixirls = {
-    enable = false
-  }
-
-  -- elixirls = {
-  --   settings = elixirls.settings {
-  --     dialyzerEnabled = true,
-  --     enableTestLenses = true,
-  --     suggestSpecs = true,
-  --     fetchDeps = false,
-  --   },
-
-  --   on_attach = function(client, bufnr)
-  --     local map_opts = { buffer = true, noremap = true}
-
-  --     vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
-  --     vim.keymap.set("n", "<leader>s",  vim.lsp.codelens.run, map_opts)
-  --   end
-  -- }
-}
+-- Used for diagnosing next-ls logs and such.
+-- require("output_panel").setup({
+--   max_buffer_size = 5000
+-- })
 
 --  nvim_lsp.elixirls.setup({
 --    on_attach = function(_, bufnr)
@@ -535,9 +659,52 @@ elixir.setup {
 --    capabilities = capabilities,
 --  })
 
-nvim_lsp.erlangls.setup({})
+vim.lsp.enable('erlangls')
 
-nvim_lsp.julials.setup{}
+function julia_capabilities()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.completion.completionItem.preselectSupport = true
+    capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+    capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+    capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+    capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+    capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+    capabilities.textDocument.completion.completionItem.resolveSupport = {
+      properties = { "documentation", "detail", "additionalTextEdits" },
+    }
+    capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown" }
+    capabilities.textDocument.codeAction = {
+      dynamicRegistration = true,
+      codeActionLiteralSupport = {
+        codeActionKind = {
+          valueSet = (function()
+            local res = vim.tbl_values(vim.lsp.protocol.CodeActionKind)
+            table.sort(res)
+            return res
+          end)(),
+        },
+      },
+    }
+    return capabilities
+end
+
+vim.lsp.config('julials', {
+  capabilities = capabilities,
+  -- capabilities = julia_capabilities(),
+  on_attach = function(client, bufnr)
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+    -- This is recommended per the wiki but I'm not enabling it atm. https://github.com/julia-vscode/LanguageServer.jl/wiki/Vim-and-Neovim
+    -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    --   virtual_text = false,
+    --   underline = false,
+    --   signs = true,
+    --   update_in_insert = false,
+    -- })
+  end
+})
 
 -- ZK Setup
 local zk = require("zk")
@@ -570,37 +737,22 @@ end)
 
 vim.api.nvim_set_keymap("n", "<leader>zzo", ":'<,'>ZkOrphans<CR>", opts)
 
-vim.opt.spell = true
-vim.opt.spelllang = { 'en_us' }
-
 -- Setup ccls for C and C++
-nvim_lsp.ccls.setup{}
-nvim_lsp.clangd.setup{}
+vim.lsp.enable('ccls')
+vim.lsp.enable('clangd')
 
--- EFM setup
--- nvim_lsp.efm.setup({
---   init_options = {documentFormatting = true},
---   capabilities = capabilities,
---   -- on_attach = on_attach,
---   filetypes = {"elixir"}
--- })
-
-nvim_lsp.tailwindcss.setup({
-  capabilities = capabilities,
-})
-
-nvim_lsp.html.setup({
+vim.lsp.config('html', {
   capabilities = capabilities,
   filetypes = { "html", "heex", "eex", "leex" },
 })
 
-nvim_lsp.zls.setup({
+vim.lsp.config('zls', {
   capabilities = capabilities,
   -- cmd = { "~/zls/zls" }
 })
 
 -- Ruby LSP support
-nvim_lsp.solargraph.setup({
+vim.lsp.config('solargraph', {
   capabilities = capabilities,
   settings = {
     solargraph = {
@@ -609,56 +761,27 @@ nvim_lsp.solargraph.setup({
   }
 })
 
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+vim.lsp.config('tailwindcss', {
+  capabilities = capabilities,
+})
+
 -- typescript LSP support
-nvim_lsp.tsserver.setup({
+vim.lsp.config('ts_ls', {
   filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsx" },
-  cmd = { "typescript-language-server", "--stdio" }
+  cmd = { "typescript-language-server", "--stdio" },
+  capabilities = capabilities,
 })
 
--- null_ls setup
-local null_ls = require("null-ls")
+-- nvim_lsp.pyright.setup{}
+vim.lsp.config('jedi_language_server', {})
 
-null_ls.setup {
-  sources = {
-    null_ls.builtins.formatting.pg_format
-  }
-}
-
-local cmp = require('cmp')
-cmp.setup({
-  -- Enable LSP Snippets
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
-  },
-  mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    -- Add tab support
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-    ['<Tab>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
-    })
-  },
-
-  -- Installed sources
-  sources = {
-    { name = 'buffer', keyword_length = 5 },
-    { name = 'vim-dadbod-completion' },
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' },
-    { name = 'nvim_lua' },
-    { name = 'path' },
-    { name = 'spell', keyword_length = 6 },
-  },
-})
+-- nvim_lsp postgres setup
+vim.lsp.enable('postgres_lsp')
 
 -- neogit
 local neogit = require('neogit')
@@ -675,8 +798,8 @@ require("nvim-tree").setup({
       end
 
       api.config.mappings.default_on_attach(bufnr)
-
-      vim.keymap.set('n', 'u', api.tree.change_root_to_parent, opts('Up'))
+      vim.keymap.set("n", "?",     api.tree.toggle_help,                  opts("Help"))
+      -- vim.keymap.set('n', 'u', api.tree.change_root_to_parent, opts('Up'))
   end,
   view = {
     adaptive_size = true,
@@ -687,7 +810,10 @@ require("nvim-tree").setup({
     full_name = false,
   },
   filters = {
+    git_ignored = false,
     dotfiles = true,
   },
 })
+
+require("lsp-endhints").setup()
 EOF
